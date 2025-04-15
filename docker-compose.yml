@@ -1,26 +1,24 @@
 
 services:
-  # Laravel Application
   app:
     build:
       context: ./laravel
       dockerfile: Dockerfile
-    container_name: laravel-app
+    container_name: petify-app
     volumes:
       - ./laravel:/var/www/html
     ports:
       - "8000:80"
     environment:
-      - APACHE_DOCUMENT_ROOT=/var/www/html/public
+      - APACHE_DOCUMENT_ROOT=/var/www/html
     depends_on:
       - mysql
     networks:
       - laravel-net
 
-  # MySQL Database
   mysql:
     image: mysql:8
-    container_name: laravel-mysql
+    container_name: mysql
     ports:
       - "3306:3306"
     environment:

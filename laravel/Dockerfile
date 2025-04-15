@@ -3,7 +3,6 @@ FROM php:8.2-apache
 
 # Set environment variables.
 ENV ACCEPT_EULA=Y
-LABEL maintainer="er.avinashrathod@gmail.com"
 
 # Install system dependencies.
 RUN apt-get update && apt-get install -y \
@@ -19,10 +18,11 @@ RUN apt-get update && apt-get install -y \
 RUN a2enmod rewrite
 
 # Set the Apache document root
-ENV APACHE_DOCUMENT_ROOT /var/www/html/public
+ENV APACHE_DOCUMENT_ROOT=/var/www/html
 
-# Update the default Apache site configuration
-COPY apache-config.conf /etc/apache2/sites-available/000-default.conf
+# Copy and enable custom Apache config
+COPY apache-config.conf /etc/apache2/sites-available/apache-config.conf
+RUN a2ensite apache-config.conf && a2dissite 000-default.conf
 
 # Install PHP extensions.
 RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
