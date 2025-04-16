@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 
 //register and login in one ui
+Route::get('/', function () {return view('login'); });
 Route::get('/login', function () {return view('login'); });
 Route::get('/register', function () {return view('login'); });
 

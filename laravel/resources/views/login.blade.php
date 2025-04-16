@@ -13,6 +13,7 @@
     <div class="container" id="container">
         {{-- Sign Up Form --}}
         <div class="form-container sign-up-container">
+
             <form method="POST" action="{{ route('register') }}">
                 @csrf
                 <h1>Create Account</h1>
@@ -72,5 +73,32 @@
         </div>
     </div>
 	<script src="{{ asset('js/login.js') }}"></script>
+
+    @if (session('registered'))
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        Swal.fire({
+            title: "Account Created!",
+            text: "You can now log in.",
+            icon: "success",
+            customClass: {
+                popup: 'swal2-popup'
+            }
+        });
+    </script>
+    @endif
+
+    @if ($errors->has('email'))
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        document.getElementById('container').classList.add('right-panel-active');
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops!',
+            text: '{{ $errors->first('email') }}',
+            confirmButtonColor: '#d33',
+        });
+    </script>
+    @endif
 </body>
 </html>

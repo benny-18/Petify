@@ -26,14 +26,18 @@ class UserController extends Controller
         'password.min' => 'Password must be at least 8 characters',
        ]);
 
-       $user = User::create([
-        'firstname' => $request->firstname,
-        'lastname' => $request->lastname,
-        'email' => $request->email,
-        'password' => Hash::make($request->password),
-       ]);
+       try {
+        $user = User::create([
+            'firstname' => $request->firstname,
+            'lastname' => $request->lastname,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+        ]);
 
-       return redirect('/dashboard');
+        return redirect()->route('login')->with('registered', true);
+       } catch (QueryException $e) {
+        return back()->with('emailExists', true);
+       }
     }
 
     public function login(Request $request)
