@@ -5,6 +5,6 @@
 </head>
 <body>
     <h1>Welcome, {{ Auth::user()->firstname }} {{ Auth::user()->lastname }}!</h1>
-    <p>You are now logged in.</p>
+    <p>You are now logged in!</p>
 </body>
 </html>

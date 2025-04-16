@@ -28,7 +28,7 @@ RUN a2ensite apache-config.conf && a2dissite 000-default.conf
 RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install -j$(nproc) gd pdo pdo_mysql
 
-# # Install Composer globally.
+# # Install Composer globally...
 # RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 # Install Composer

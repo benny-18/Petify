@@ -94,7 +94,7 @@
                 <div class="overlay-panel overlay-left">
                     <img style="max-width: 55%; padding-bottom: 40px; padding-top: 40px" src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExdXh1anpnMjdmdWlnZDcxd2dtZmx6aHg1bHpjejM2M2RmODJ2dWhzMSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/AM0vh25MfVxTgL8UeR/giphy.gif"></img>
                     <h1>Welcome Back!</h1>
-                    <p>To stay connected with us, please log in using your personal information</p>
+                    <p>To stay connected with us, please log in using your personal information.</p>
                     <button class="ghost" id="signIn">Sign In</button>
                 </div>
                 <div class="overlay-panel overlay-right">
