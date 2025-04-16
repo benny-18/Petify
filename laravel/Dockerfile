@@ -28,14 +28,20 @@ RUN a2ensite apache-config.conf && a2dissite 000-default.conf
 RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install -j$(nproc) gd pdo pdo_mysql
 
-# Install Composer globally.
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+# # Install Composer globally.
+# RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
+# Install Composer
+RUN curl -sS https://getcomposer.org/installer | php \
+    && mv composer.phar /usr/local/bin/composer
 
 # Create a directory for your Laravel application.
 WORKDIR /var/www/html
 
 # Copy the Laravel application files into the container.
 COPY . .
+
+RUN ls -a
 
 # Install Laravel dependencies using Composer.
 RUN composer install --no-interaction --optimize-autoloader
