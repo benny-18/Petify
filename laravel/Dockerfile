@@ -52,5 +52,3 @@ RUN chown -R www-data:www-data storage bootstrap/cache
 # Expose port 80 for Apache.
 EXPOSE 80
 
-# Let Apache start
-CMD ["apache2-foreground"]
