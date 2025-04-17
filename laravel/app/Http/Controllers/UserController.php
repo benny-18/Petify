@@ -6,38 +6,50 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Database\QueryException;
+use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
- 
     public function auth()
     {
-       return view('auth');
+        return view('auth');
     }
- 
+
     public function register(Request $request)
     {
-       $request->validate([
-        'firstname' => 'required|string|max:255',
-        'lastname' => 'required|string|max:255',
-        'email' => 'required|string|email|max:255|unique:users',
-        'password' => 'required|string|min:8',
-       ], [
-        'password.min' => 'Password must be at least 8 characters',
-       ]);
-
-       try {
-        $user = User::create([
-            'firstname' => $request->firstname,
-            'lastname' => $request->lastname,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
+        $validator = Validator::make($request->all(), [
+            'firstname' => 'required|string|max:255',
+            'lastname' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users,email',
+            'password' => 'required|string|min:8',
+        ], [
+            'password.min' => 'Password must be at least 8 characters',
+            'email.unique' => 'This email is already taken.',
         ]);
 
-        return redirect()->route('login')->with('registered', true);
-       } catch (QueryException $e) {
-        return back()->with('emailExists', true);
-       }
+        if ($validator->fails()) {
+            if ($validator->errors()->has('email')) {
+                return back()
+                    ->withErrors(['emailExists' => $validator->errors()->first('email')])
+                    ->withInput();
+            }
+
+            return back()->withErrors($validator)->withInput();
+        }
+
+        try {
+            User::create([
+                'firstname' => $request->firstname,
+                'lastname' => $request->lastname,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+            ]);
+
+            return redirect()->route('login')->with('registered', true);
+        } catch (QueryException $e) {
+            return back()->withErrors(['emailExists' => 'An unexpected error occurred.'])->withInput();
+        }
     }
 
     public function login(Request $request)
@@ -61,6 +73,6 @@ class UserController extends Controller
 
     public function dashboard()
     {
-        
+        return view('dashboard');
     }
 }

@@ -107,7 +107,7 @@
         </div>
     </div>
 
-    <p style="margin-top: 50px">Made with 🩷 by Hiyaranari</p>
+    <p style="margin-top: 50px">Made with 🩷 by Swifties</p>
 
 	<script src="{{ asset('js/login.js') }}"></script>
 
@@ -134,14 +134,14 @@
     </script>
     @endif
 
-    @if ($errors->has('email'))
+    @if ($errors->has('emailExists'))
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         document.getElementById('container').classList.add('right-panel-active');
         Swal.fire({
             icon: 'error',
-            title: 'Oops!',
-            text: '{{ $errors->first('email') }}',
+            title: 'Registration Error!',
+            text: '{{ $errors->first('emailExists') }}',
             confirmButtonColor: '#d33',
         });
     </script>
