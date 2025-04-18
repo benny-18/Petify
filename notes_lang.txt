@@ -27,10 +27,12 @@
 
 > git add .
 
-> git commit -m "Updated code for poyit-finding functionality; ako nala kase"
+> git commit -m "Updated code for poyit-finding functionality; ako nalang kase"
 
 > git push -u origin main
 
 - - - - - - - - - - - -
 
 > yawa
+
+> LESGAURRRR

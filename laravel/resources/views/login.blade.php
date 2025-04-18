@@ -99,7 +99,7 @@
                 </div>
                 <div class="overlay-panel overlay-right">
                     <img src="https://i.pinimg.com/originals/18/f5/66/18f566fa5cf046c1e81fc6c61ce5dc53.gif"></img>
-                    <h1>Ohh Fur Parent!</h1>
+                    <h1>Oh, Fur Parent!</h1>
                     <p>Provide your personal information and begin your journey with us.</p>
                     <button class="ghost" id="signUp">Sign Up</button>
                 </div>

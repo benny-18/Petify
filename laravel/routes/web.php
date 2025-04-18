@@ -9,10 +9,12 @@ Route::get('/', function () {return view('login'); });
 Route::get('/login', function () {return view('login'); });
 Route::get('/register', function () {return view('login'); });
 
+Route::get('/editor', function () {return view('editor'); });
+
 Route::post('/login', [UserController::class, 'login'])->name('login');
 Route::post('/register', [UserController::class, 'register'])->name('register');
 
-//show dashbaord per user 
+//show dashbaord per user
 Route::get('/dashboard', function() {
     return view('dashboard');
 })->middleware('auth');

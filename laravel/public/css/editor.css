@@ -1,0 +1,412 @@
+/* Base styles */
+
+@font-face {
+    font-family: 'Instagram Sans';
+    src: url('/fonts/Instagram Sans.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Instagram Sans';
+    src: url('/fonts/Instagram Sans Light.woff2') format('woff2');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Instagram Sans';
+    src: url('/fonts/Instagram Sans Medium.woff2') format('woff2');
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Instagram Sans';
+    src: url('/fonts/Instagram Sans Bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    background-color: #000;
+    font-family:
+      "Almarai",
+      -apple-system,
+      Roboto,
+      Helvetica,
+      sans-serif;
+    color: #999999;
+    font-size: 18px;
+    overflow: hidden;
+  }
+
+  h1 {
+    font-family: 'Oleo Script Swash Caps', cursive;
+    font-size: 30px;
+    margin-top: 0px;
+    /* margin-bottom: 40px; */
+  }
+
+  .app-container {
+    background: linear-gradient(to top, #C50565, #000000);
+    width: 100%;
+    padding: 24px 24px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Header styles */
+  .app-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-left: 20px;
+    margin-bottom: 20px;
+  }
+
+  .logo-container {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .logo-image {
+    width: 30px;
+    aspect-ratio: 1;
+    object-fit: contain;
+    margin-bottom: 3px;
+  }
+
+  .logo-text {
+    font-family: "Oleo Script Swash Caps", cursive;
+    font-size: 40px;
+    color: #c50565;
+    font-weight: 400;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  }
+
+  .profile-image {
+    width: 45px;
+    aspect-ratio: 1;
+    object-fit: contain;
+    border-radius: 86px;
+    margin-right: 20px;
+  }
+
+  /* Main content layout */
+  .main-content {
+    display: flex;
+    gap: 20px;
+    flex: 1;
+    overflow: hidden;
+  }
+
+  /* Sidebar styles */
+  .sidebar {
+    width: 24%;
+    background-color: #fbfbfb;
+    border-radius: 40px;
+    box-shadow: 0px 9px 24px 4px rgba(0, 0, 0, 0.25);
+    border: 1px solid #cfcfcf;
+    padding: 44px 45px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  .sidebar-title {
+    color: #6e6e6e;
+    font-size: 20px;
+    font-family: "instagram Sans", sans-serif;
+    font-weight: 700;
+  }
+
+  .sidebar-divider {
+    height: 3px;
+    background-color: #dedede;
+    margin-top: 29px;
+    border: none;
+  }
+
+  .template-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 27px;
+    padding: 12px 59px;
+    border-radius: 20px;
+    background-color: #dedede;
+    border: 2px solid #c50565;
+  }
+
+  .template-image {
+    width: 119px;
+    aspect-ratio: 0.71;
+    object-fit: contain;
+  }
+
+  .template-name {
+    margin-top: 17px;
+    font-size: 18px;
+    text-align: center;
+  }
+
+  /* Content area styles */
+  .content-area {
+    width: 76%;
+    height: 100%;
+  }
+
+  .content-container {
+    display: flex;
+    height: 100%;
+  }
+
+  /* Preview section */
+  .preview-section {
+    width: 50%;
+    background-color: #fbfbfb;
+    border-radius: 40px 0 0 40px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border: 1px solid #cfcfcf;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 80px;
+  }
+
+  .pet-image {
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 0.71;
+    object-fit: cover;
+    box-shadow: 0px 9px 24px 4px rgba(0, 0, 0, 0.25);
+  }
+
+  /* Form section */
+  .form-section {
+    width: 50%;
+    background-color: #fbfbfb;
+    border-radius: 0 40px 40px 0;
+    box-shadow: 0px 9px 24px rgba(0, 0, 0, 0.25);
+    border: 1px solid #cfcfcf;
+    padding: 40px 30px 32px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: scroll;
+    scrollbar-width: none;
+  }
+
+  .project-title {
+    color: #c50565;
+    font-size: 40px;
+    font-family: "instagram Sans", sans-serif;
+    font-weight: 700;
+    margin-left: 18px;
+  }
+
+  .project-description {
+    color: #6e6e6e;
+    font-family: "instagram Sans", sans-serif;
+    font-size: 20px;
+    font-weight: 500;
+    margin-top: 15px;
+    margin-left: 18px;
+    margin-right: 13px;
+  }
+
+  .project-meta {
+    color: #6e6e6e;
+    font-size: 16px;
+    font-family: "instagram Sans", sans-serif;
+    font-weight: 500;
+    margin-top: 15px;
+    margin-left: 18px;
+  }
+
+  .form-divider {
+    height: 1px;
+    background-color: #dedede;
+    border: 1px solid #dedede;
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 18px;
+    margin-bottom: 12px;
+  }
+
+  .form-row {
+    display: flex;
+    gap: 15px;
+    /* margin-bottom: 8px; */
+  }
+
+  .import-image-button {
+    width: 96px;
+    aspect-ratio: 1.5;
+    object-fit: contain;
+  }
+
+  .input-field {
+	background-color: #edebeb;
+	border-radius: 20px;
+	border: 1px solid #ddd;
+	/* padding: 12px 15px; */
+	margin: 8px 0;
+	width: 100%;
+  }
+
+  .input-field input,
+  .input-field textarea {
+    width: 100%;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-family: "Instagram Sans", sans-serif;
+    font-size: 18px;
+    color: #999;
+  }
+
+  .pet-name-field {
+    flex: 1;
+    padding: 24px 22px;
+  }
+
+  .age-field {
+    width: 20%;
+    padding: 21px;
+  }
+
+  .breed-field {
+    width: 80%;
+    padding: 22px 25px;
+  }
+
+  .contact-person-field,
+  .contact-number-field {
+    flex: 1;
+    padding: 18px 18px 28px;
+  }
+
+  .description-field {
+    margin-bottom: 10px;
+    padding: 16px 21px;
+  }
+
+  .description-field textarea {
+    min-height: 95px;
+    resize: none;
+  }
+
+  .reward-field {
+    margin-bottom: 15px;
+    padding: 21px;
+  }
+
+  .save-button {
+    background-color: #c50565;
+    border: 1px solid #888;
+    border-radius: 20px;
+    padding: 24px 70px;
+    color: #fff;
+    font-family: "instagram Sans", sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+    text-align: center;
+    cursor: pointer;
+    align-self: stretch;
+  }
+
+  /* Media queries for responsiveness */
+  @media (max-width: 1080px) {
+    .app-container {
+      padding: 20px;
+      max-width: 100%;
+      height: auto;
+      overflow-y: auto;
+    }
+
+    .app-header {
+      /* margin-bottom: 40px; */
+    }
+
+    .logo-text {
+      font-size: 40px;
+    }
+
+    .main-content {
+      flex-direction: column;
+    }
+
+    .sidebar {
+      width: 100%;
+      margin-top: 26px;
+      padding: 20px;
+    }
+
+    .template-item {
+      padding: 12px 20px;
+    }
+
+    .content-area {
+      width: 100%;
+      margin-top: 26px;
+    }
+
+    .content-container {
+      flex-direction: column;
+    }
+
+    .preview-section {
+      width: 100%;
+      border-radius: 40px 40px 0 0;
+      padding: 100px 20px;
+    }
+
+    .form-section {
+      width: 100%;
+      border-radius: 0 0 40px 40px;
+      padding: 20px;
+    }
+
+    .project-title {
+      margin-left: 10px;
+    }
+
+    .project-description {
+      margin-right: 10px;
+    }
+
+    .project-meta {
+      margin-left: 10px;
+    }
+
+    .form-row {
+      flex-wrap: wrap;
+    }
+
+    .pet-name-field,
+    .age-field,
+    .breed-field,
+    .contact-person-field,
+    .contact-number-field {
+      padding: 20px;
+    }
+
+    .description-field {
+      padding: 15px;
+      padding-bottom: 110px;
+    }
+
+    .save-button {
+      padding: 24px 20px;
+    }
+  }
