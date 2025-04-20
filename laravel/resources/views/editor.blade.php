@@ -22,7 +22,10 @@
 
       <main class="main-content">
         <aside class="sidebar">
-          <h2 class="sidebar-title">TEMPLATES</h2>
+          <div class="horizontal-sidebar-title">
+            <!-- <h2 class="sidebar-title-appname">Petify</h2> -->
+            <h2 class="sidebar-title">Project Templates</h2>
+          </div>
           <div class="sidebar-divider"></div>
           <div class="template-item selected">
             <img
@@ -51,20 +54,20 @@
 
               <div class="form-divider"></div>
 
-              <div class="form-row">
-                <img
-                  src="https://cdn.builder.io/api/v1/image/assets/3cc4bc3e52714dc98afd866a406b78dd/76b9b3ea20d08d85f9e28e134e83d10434f8f3c6?placeholderIfAbsent=true"
-                  alt="Import Image"
-                  class="import-image-button"
-                />
+            <div class="form-row">
+                <div class="button-container">
+                    <button class="my-button"></button>
+                    <img src="https://img.icons8.com/?size=100&id=wdoEeeG1GGY6&format=png&color=757575" class="icon-overlay">
+                </div>
+
                 <div class="input-field pet-name-field">
-                  <input type="text" placeholder="Pet name" />
+                  <input type="text" required placeholder="Pet name" />
                 </div>
               </div>
 
               <div class="form-row">
                 <div class="input-field age-field">
-                  <input type="text" placeholder="Age" />
+                  <input type="number" placeholder="Age (year)" />
                 </div>
                 <div class="input-field breed-field">
                   <input type="text" placeholder="Breed, if available" />
@@ -73,10 +76,10 @@
 
               <div class="form-row">
                 <div class="input-field contact-person-field">
-                  <input type="text" placeholder="Contact Person" />
+                  <input type="text" required placeholder="Contact Person" />
                 </div>
                 <div class="input-field contact-number-field">
-                  <input type="text" placeholder="Contact Number" />
+                  <input type="tel" required placeholder="Contact Number" />
                 </div>
               </div>
 
@@ -85,7 +88,7 @@
               </div>
 
               <div class="input-field reward-field">
-                <input type="text" placeholder="Reward (leave empty if none)" />
+                <input type="number" placeholder="Reward (leave empty if none)" />
               </div>
 
               <button class="save-button">SAVE AND DOWNLOAD</button>

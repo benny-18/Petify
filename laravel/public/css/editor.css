@@ -55,12 +55,45 @@
   }
 
   .app-container {
-    background: linear-gradient(to top, #C50565, #000000);
+    background: #F6F5F7;
+    background: linear-gradient(180deg, rgba(246, 245, 247, 1) 40%, rgba(213, 82, 148, 1) 80%, rgba(197, 5, 101, 1) 100%);
     width: 100%;
-    padding: 24px 24px;
+    padding: 30px;
     height: 100vh;
     display: flex;
     flex-direction: column;
+  }
+
+  .button-container {
+    position: relative;
+    display: inline-block;
+
+  }
+
+  .my-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    position: relative;
+    z-index: 1;
+
+    background-color: #f5f5f5;
+	border-radius: 20px;
+	border: 1px solid #ddd;
+	/* padding: 12px 15px; */
+	margin: 8px 0;
+	width: 70px;
+    height: -webkit-fill-available;
+  }
+
+  .icon-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 26x; /* adjust as needed */
+    height: 26px;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    pointer-events: none; /* So clicking still goes to the button */
   }
 
   /* Header styles */
@@ -75,7 +108,7 @@
   .logo-container {
     display: flex;
     align-items: center;
-    gap: 20px;
+    gap: 25px;
   }
 
   .logo-image {
@@ -87,7 +120,7 @@
 
   .logo-text {
     font-family: "Oleo Script Swash Caps", cursive;
-    font-size: 40px;
+    font-size: 45px;
     color: #c50565;
     font-weight: 400;
     text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
@@ -107,19 +140,28 @@
     gap: 20px;
     flex: 1;
     overflow: hidden;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 20px;
   }
 
   /* Sidebar styles */
   .sidebar {
-    width: 24%;
+    width: 25%;
     background-color: #fbfbfb;
-    border-radius: 40px;
-    box-shadow: 0px 9px 24px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 20px;
+    /* box-shadow: 0px 20px 24px 0px rgba(0, 0, 0, 0.25); */
     border: 1px solid #cfcfcf;
     padding: 44px 45px;
     display: flex;
     flex-direction: column;
     height: 100%;
+  }
+
+  .horizontal-sidebar-title {
+    display: flex;
+    gap: 20px; /* spacing between elements */
+    align-items: center; /* vertically align if needed */
   }
 
   .sidebar-title {
@@ -132,7 +174,7 @@
   .sidebar-divider {
     height: 3px;
     background-color: #dedede;
-    margin-top: 29px;
+    margin-top: 20px;
     border: none;
   }
 
@@ -143,7 +185,7 @@
     margin-top: 27px;
     padding: 12px 59px;
     border-radius: 20px;
-    background-color: #dedede;
+    background-color: #f5f5f5;
     border: 2px solid #c50565;
   }
 
@@ -172,21 +214,23 @@
 
   /* Preview section */
   .preview-section {
-    width: 50%;
+    width: 60%;
     background-color: #fbfbfb;
-    border-radius: 40px 0 0 40px;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 20px 0 0 20px;
+    /* box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); */
     border: 1px solid #cfcfcf;
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 80px;
+    overflow: scroll;
+    scrollbar-width: none;
   }
 
   .pet-image {
     width: 100%;
     height: 100%;
-    aspect-ratio: 0.71;
+    /* aspect-ratio: 0.71; */
     object-fit: cover;
     box-shadow: 0px 9px 24px 4px rgba(0, 0, 0, 0.25);
   }
@@ -195,8 +239,8 @@
   .form-section {
     width: 50%;
     background-color: #fbfbfb;
-    border-radius: 0 40px 40px 0;
-    box-shadow: 0px 9px 24px rgba(0, 0, 0, 0.25);
+    border-radius: 0 20px 20px 0;
+    /* box-shadow: 0px 9px 24px rgba(0, 0, 0, 0.25); */
     border: 1px solid #cfcfcf;
     padding: 40px 30px 32px;
     display: flex;
@@ -217,9 +261,9 @@
   .project-description {
     color: #6e6e6e;
     font-family: "instagram Sans", sans-serif;
-    font-size: 20px;
+    font-size: 22px;
     font-weight: 500;
-    margin-top: 15px;
+    margin-top: 12px;
     margin-left: 18px;
     margin-right: 13px;
   }
@@ -256,7 +300,7 @@
   }
 
   .input-field {
-	background-color: #edebeb;
+	background-color: #f5f5f5;
 	border-radius: 20px;
 	border: 1px solid #ddd;
 	/* padding: 12px 15px; */
@@ -272,33 +316,33 @@
     background: transparent;
     font-family: "Instagram Sans", sans-serif;
     font-size: 18px;
-    color: #999;
+    color: #4c4c4c;
   }
 
   .pet-name-field {
     flex: 1;
-    padding: 24px 22px;
+    padding: 16px;
   }
 
   .age-field {
-    width: 20%;
-    padding: 21px;
+    width: 25%;
+    padding: 16px;
   }
 
   .breed-field {
-    width: 80%;
-    padding: 22px 25px;
+    width: 75%;
+    padding: 16px;
   }
 
   .contact-person-field,
   .contact-number-field {
     flex: 1;
-    padding: 18px 18px 28px;
+    padding: 16px;
   }
 
   .description-field {
     margin-bottom: 10px;
-    padding: 16px 21px;
+    padding: 16px;
   }
 
   .description-field textarea {
@@ -308,7 +352,7 @@
 
   .reward-field {
     margin-bottom: 15px;
-    padding: 21px;
+    padding: 16px;
   }
 
   .save-button {
@@ -323,6 +367,7 @@
     text-align: center;
     cursor: pointer;
     align-self: stretch;
+    margin-top: 5px;
   }
 
   /* Media queries for responsiveness */
