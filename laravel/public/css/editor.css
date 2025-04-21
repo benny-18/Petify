@@ -57,11 +57,17 @@
   .app-container {
     background: #F6F5F7;
     background: linear-gradient(180deg, rgba(246, 245, 247, 1) 40%, rgba(213, 82, 148, 1) 80%, rgba(197, 5, 101, 1) 100%);
+    /* background: #000000;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 1) 40%, rgba(136, 3, 70, 1) 80%, rgba(197, 5, 101, 1) 100%); */
     width: 100%;
-    padding: 30px;
+    padding: 24px;
     height: 100vh;
     display: flex;
     flex-direction: column;
+    overflow: hidden;
+    position: relative;
+    transition: all 0.5s ease;
+
   }
 
   .button-container {
@@ -70,8 +76,8 @@
 
   }
 
-  .my-button {
-    padding: 10px 20px;
+  .importimg-button {
+    padding: 27px;
     font-size: 16px;
     position: relative;
     z-index: 1;
@@ -82,7 +88,7 @@
 	/* padding: 12px 15px; */
 	margin: 8px 0;
 	width: 70px;
-    height: -webkit-fill-available;
+    /* height: -webkit-fill-available; */
   }
 
   .icon-overlay {
@@ -101,21 +107,50 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-left: 20px;
-    margin-bottom: 20px;
+    /* margin-left: 20px; */
+    margin-bottom: 24px;
+
+    background-color: #fbfbfb;
+    padding: 8px;
+    border-radius: 20px;
+    border: 1px solid #cfcfcf;
   }
 
   .logo-container {
+    margin-left: 12px;
     display: flex;
     align-items: center;
     gap: 25px;
   }
 
-  .logo-image {
+  /* .menu-icon {
     width: 30px;
     aspect-ratio: 1;
     object-fit: contain;
     margin-bottom: 3px;
+  } */
+
+  .menu-icon-container {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+  }
+
+  .menu-icon {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+  }
+
+  .menu-icon.visible {
+    opacity: 1;
+    pointer-events: auto;
   }
 
   .logo-text {
@@ -123,15 +158,16 @@
     font-size: 45px;
     color: #c50565;
     font-weight: 400;
-    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    /* text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); */
   }
 
   .profile-image {
-    width: 45px;
+    width: 52px;
     aspect-ratio: 1;
     object-fit: contain;
     border-radius: 86px;
-    margin-right: 20px;
+    border: 3px solid #c50565;
+    margin-right: 12px;
   }
 
   /* Main content layout */
@@ -140,22 +176,47 @@
     gap: 20px;
     flex: 1;
     overflow: hidden;
-    padding-left: 20px;
-    padding-right: 20px;
+    /* padding-left: 20px;
+    padding-right: 20px; */
     padding-bottom: 20px;
   }
 
   /* Sidebar styles */
-  .sidebar {
-    width: 25%;
+
+  /* .sidebar {
+    width: 20%;
     background-color: #fbfbfb;
     border-radius: 20px;
-    /* box-shadow: 0px 20px 24px 0px rgba(0, 0, 0, 0.25); */
+    box-shadow: 0px 20px 24px 0px rgba(0, 0, 0, 0.25); // commented
     border: 1px solid #cfcfcf;
     padding: 44px 45px;
     display: flex;
     flex-direction: column;
     height: 100%;
+  }
+
+  .sidebar.hidden {
+    transform: translateX(-100%);
+  } */
+
+  .sidebar {
+    width: 320px;
+    background-color: #fbfbfb;
+    /* border-radius: 20px; */
+    box-shadow: 0px 0px 24px 0px rgba(0, 0, 0, 0.25);
+    border: 1px solid #cfcfcf;
+    padding: 44px 45px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    transition: transform 0.6s ease;
+    z-index: 2;
+    transform: translateX(0); /* shown */
+  }
+
+  .sidebar.hidden {
+    transform: translateX(-100%);
   }
 
   .horizontal-sidebar-title {
@@ -204,34 +265,85 @@
   /* Content area styles */
   .content-area {
     width: 76%;
-    height: 100%;
+    height: auto;
+
+    flex: 1;
+    margin-left: 320px;
+    transition: margin-left 0.6s ease;
   }
 
   .content-container {
     display: flex;
-    height: 100%;
+    height: 90%;
+  }
+
+  .sidebar.hidden ~ .content-area {
+    margin-left: 0;
   }
 
   /* Preview section */
-  .preview-section {
+
+  /* .preview-section {
     width: 60%;
-    background-color: #fbfbfb;
+    position: relative;
+    background-color: #efefef;
     border-radius: 20px 0 0 20px;
-    /* box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); */
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border: 1px solid #cfcfcf;
     display: flex;
-    align-items: center;
+    align-items: start;
     justify-content: center;
-    padding: 80px;
+    padding: 50px;
     overflow: scroll;
     scrollbar-width: none;
+  } */
+
+  .preview-section {
+    position: relative; /* Add this so button positioning works */
+    width: 60%;
+    background-color: #efefef;
+    border-radius: 20px 0 0 20px;
+    border: 1px solid #cfcfcf;
+    display: flex;
+    align-items: start;
+    justify-content: center;
+    padding: 50px;
+    overflow: scroll;
+    scrollbar-width: none;
+    transition: all 0.6s cubic-bezier(0.68, -0.55, 0.27, 1.55);
   }
+
+  .zoom-toggle-btn {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #c50565;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    padding: 8px 16px;
+    font-size: 16px;
+    font-family: "Instagram Sans", sans-serif;
+    cursor: pointer;
+    /* box-shadow: 0px 2px 8px rgba(0,0,0,0.2); */
+    box-shadow: 0px 12px 24px 12px rgba(0, 0, 0, 0.25);
+    border: 1px solid #ddd;
+    transition: background-color 0.6s ease;
+  }
+
+  .zoom-toggle-btn:hover {
+    background-color: #a30052;
+  }
+
 
   .pet-image {
     width: 100%;
     height: 100%;
     /* aspect-ratio: 0.71; */
     object-fit: cover;
+    border: 1px solid #cfcfcf;
+    border-radius: 12px;
     box-shadow: 0px 9px 24px 4px rgba(0, 0, 0, 0.25);
   }
 
@@ -319,8 +431,36 @@
     color: #4c4c4c;
   }
 
+  .input-field select {
+    width: 100%;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-family: "Instagram Sans", sans-serif;
+    font-size: 18px;
+    color: #4c4c4c;
+    /* padding: 12px 15px; */
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23757575'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 10px 6px;
+    cursor: pointer;
+  }
+
+  .input-field select:focus {
+    border: none;
+  }
+
   .pet-name-field {
     flex: 1;
+    /* width: 25%; */
+    padding: 16px;
+  }
+
+  .pet-sex-field {
+    /* flex: 1; */
+    width: 25%;
     padding: 16px;
   }
 
@@ -454,4 +594,56 @@
     .save-button {
       padding: 24px 20px;
     }
+  }
+
+  /* custom font petify chuchu */
+.swal2-custom-font {
+    font-family: 'Instagram Sans', sans-serif;
+  }
+
+  /* dialog box kinemeroy*/
+  .swal2-custom-popup {
+    background-color: #efefef !important;
+    border: 1px solid #ddd !important;
+    border-radius: 20px !important;
+    padding: 20px !important;
+  }
+
+  /* the kuan buttons primary?? */
+  .swal2-confirm-custom {
+    background-color: #C50565 !important;
+    color: white !important;
+    border: none !important;
+    box-shadow: none !important;
+    border-radius: 10px !important;
+    padding: 10px 20px !important;
+    transition: all 0.3s ease;
+  }
+
+  .swal2-confirm-custom:hover {
+    background-color: #a90455 !important;
+    transform: scale(1.05);
+  }
+
+  .swal2-confirm-custom:active {
+    transform: scale(0.97);
+    background-color: #880446 !important;
+  }
+
+  /* an caancel button */
+  .swal2-cancel-default {
+    background-color: #ddd !important;
+    color: black !important;
+    border-radius: 10px !important;
+    padding: 10px 20px !important;
+    transition: all 0.3s ease;
+  }
+
+  .swal2-cancel-default:hover {
+    background-color: #ccc !important;
+    transform: scale(1.05);
+  }
+
+  .swal2-cancel-default:active {
+    transform: scale(0.97);
   }
