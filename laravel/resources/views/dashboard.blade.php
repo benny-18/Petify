@@ -1,46 +1,269 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
 <head>
-    <title>Dashboard</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <title>Petify</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oleo+Script+Swash+Caps&family=Poppins&display=swap" rel="stylesheet">
+
+    <!-- CSS Assets -->
+    <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/bootstrap-icons.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/magnific-popup.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/dashboard.css') }}" rel="stylesheet">
 </head>
 <body>
-    <h1>Welcome, {{ Auth::user()->firstname }} {{ Auth::user()->lastname }}!</h1>
-    <p>You are now logged in!</p>
 
-    @if (session('success'))
-        <p style="color: green;">{{ session('success') }}</p>
-    @endif
+    <section class="preloader">
+        <div class="spinner">
+            <span class="spinner-rotate"></span>    
+        </div>
+    </section>
 
-    <h2>Create New Project</h2>
-    <form action="{{ route('project.store') }}" method="POST">
-        @csrf
-        <input type="text" name="title" placeholder="Project Title" required><br>
-        <textarea name="description" placeholder="Project Description"></textarea><br>
-        <button type="submit">Create Project</button>
-    </form>
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <a href="{{ url('/') }}" class="navbar-brand mx-auto mx-lg-0">Petify</a>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-lg-5">
+                    <li class="nav-item"><a class="nav-link click-scroll" href="#section_1">Home</a></li>
+                    <li class="nav-item"><a class="nav-link click-scroll" href="#section_2">Gallery</a></li>
+                    <li class="nav-item"><a class="nav-link click-scroll" href="#section_3">About</a></li>
+                    <li class="nav-item"><a class="nav-link click-scroll" href="#section_4">Generate</a></li>
+                </ul>
+                <div class="d-flex align-items-center flex-wrap gap-2 ms-auto">
+                    <a href="#" class="profile-photo-link" data-bs-toggle="modal" data-bs-target="#profileModal">
+                        <img src="{{ asset('images/pfp.svg') }}" alt="Profile" class="profile-photo">
+                    </a>
+                </div>   
+            </div>
+        </div>
+    </nav>
 
-    <h2>Your Projects</h2>
-    @if (Auth::user()->projects->isNotEmpty())
-    <ul>
-        @foreach (Auth::user()->projects as $project)
-            <li>{{ $project->title }} - {{ $project->description }}</li>
+    <main>
+        <section class="hero d-flex justify-content-center align-items-center" id="section_1"
+                 style="background: linear-gradient(to right, #000000, #000000, #C4196D, #000000);">
+            <div class="container position-relative">
+                <div class="row align-items-center">
+                    <div class="col-lg-6 hero-text-container">
+                        <h1 class="hero-heading">Greetings Furpies!</h1>
+                        <div class="hero-body-container">
+                            <p class="hero-body">Welcome to our website, where we help you create the perfect poster for your furry friends...</p>
+                            <hr class="hero-divider">
+                            <a href="#section_4" class="btn generate-btn">Generate Now</a>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 mb-4 mb-lg-0">
+                        <div id="heroCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
+                            <div class="carousel-indicators">
+                                @for($i = 0; $i < 5; $i++)
+                                    <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="{{ $i }}" class="{{ $i == 0 ? 'active' : '' }}" aria-label="Slide {{ $i+1 }}"></button>
+                                @endfor
+                            </div>
+                            <div class="carousel-inner">
+                                @for($i = 1; $i <= 5; $i++)
+                                    <div class="carousel-item {{ $i == 1 ? 'active' : '' }}">
+                                        <img src="{{ asset("images/carousel/Pet $i.svg") }}" class="d-block w-100 rounded" alt="Slide {{ $i }}">
+                                    </div>
+                                @endfor
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="background">
+                    @for($i = 0; $i < 15; $i++)
+                        <span></span>
+                    @endfor
+                </div>
+            </div>
+        </section>
 
-        <!-- delete project -->
-         <form action="{{ route('project.destroy', $project) }}" method="POST" style="display:inline;">
-            @csrf
-            @method('DELETE')
-            <button type="submit" onclick="return confirm('Delete project?')"">Delete Project</button>
-            </form>
-        @endforeach
-    </ul>
-     @else
-        <p>You have no projects yet. Start by creating one!</p>
-    @endif
+        <section class="gallery section-padding" id="section_2">
+            <div class="container">
+                <div class="banner-wrapper mb-4">
+                    <img src="{{ asset('images/Banner.svg') }}" class="banner-image" alt="Banner">
+                </div>
+                <div class="section-title-wrap text-center mb-4">
+                    <h2 class="gallery-heading mb-0">Gallery</h2>
+                </div>
+                <div class="row">
+                    @php
+                        $gallery = [
+                            ['tag' => 'Lost / Found Templates', 'title' => 'Find Your Babies!', 'img' => 'p1.svg'],
+                            ['tag' => 'Birthday Templates', 'title' => 'Celebrate Online', 'img' => 'p2.svg'],
+                            ['tag' => 'Pet ID Templates', 'title' => 'Introduce Your Babies', 'img' => 'p3.svg'],
+                        ];
+                    @endphp
+                    @foreach ($gallery as $item)
+                        <div class="col-lg-4 col-md-6 col-12">
+                            <div class="gallery-thumb">
+                                <div class="gallery-info">
+                                    <small class="gallery-tag">{{ $item['tag'] }}</small>
+                                    <h3 class="gallery-title">{{ $item['title'] }}</h3>
+                                </div>
+                                <a href="{{ asset("images/gallery/{$item['img']}") }}" class="popup-image">
+                                    <img src="{{ asset("images/gallery/{$item['img']}") }}" class="gallery-image img-fluid" alt="">
+                                </a>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+        </section>
 
-    <!-- LOGOUT -->
-     <form action="{{ route('logout') }}" method="POST">
-        @csrf
-        <button type="submit">Logout</button>
-    </form>
+        <section class="about section-padding" id="section_3">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 col-12">
+                        <img src="{{ asset('images/About.svg') }}" class="about-image img-fluid" alt="">
+                    </div>
+                    <div class="col-lg-6 col-12 mt-5 mt-lg-0">
+                        <div class="about-thumb">
+                            <div class="section-title-wrap d-flex justify-content-end align-items-center mb-4">
+                                <h2 class="text-white me-4 mb-0">About Us</h2>
+                            </div>
+                            <h3 class="pt-2 mb-3">A glimpse of Petify.</h3>
+                            <p style="text-align: justify;">Petify is designed to help pet owners easily create lost and found posters...</p>
+                            <p style="text-align: justify;">With a variety of templates to choose from, Petify ensures your pet's information...</p>
+                            <hr class="hero-divider">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CREATE PROJECT -->
+        <section class="contact section-padding" id="section_4">
+            <div class="container">
+                <div class="section-title-wrap d-flex justify-content-center align-items-center mb-5">                       
+                    <h2 class="text-white mb-0">Create Project</h2>
+                </div>
+
+                <!-- CREATE FORM -->
+                 <form action="{{ route('project.store') }}" method="POST" class="row g-3 mb-5">
+                    @csrf
+                    <div class="col-md-4">
+                            <input type="text" name="title" class="form-control" placeholder="Project Title" required>
+                    </div>
+                    <div class="col-md-5">
+                            <input type="test" name="description" class="form-control" placeholder="Project Description">
+                    </div>
+                    <div class="col-md-3">
+                        <button type="submit" class="btn btn-primary w-100 rounded">Create Project</button>
+                    </div>
+                </form>
+
+                <!-- PROJECTS SECTION -->
+                 <div class="row">
+                    <div class="col-12">
+                            <h2 class="text-white- mb-3">Your Projects</h2>
+                            @if(Auth::user()->projects->isEmpty())
+                                <div class="alert alert-info text-center">
+                                    You have no projects yet.
+                                </div>
+                            @else
+                            <ul class="list-group">
+                                @foreach(Auth::user()->projects as $project)
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <strong>{{ $project->title }}</strong><br>
+                                            <small>{{ $project->description }}</small>
+                                        </div>
+
+                                        <!-- DELETE BUTTON FOR PROJECTS and DATE -->
+                                         <div class="d-flex align-items-center">
+                                            <small class="me-3">{{ $project->created_at->format('M d, Y') }}</span>
+
+                                        <form id="delete-form-{{ $project->id }}" action="{{ route('project.destroy', $project->id) }}#section_4" method="POST" style="display: none;">
+                                            @csrf
+                                            @method('DELETE')
+                                        </form>
+
+                                        <button type="button" class="btn btn-sm btn-outline-danger rounded"
+                                            onclick="confirmDelete({{ $project->id }})">
+                                            Delete
+                                        </button>
+                                    </li>
+                                @endforeach
+                            </ul>
+                            @endif
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer" style="background: linear-gradient(to right, #000000, #000000, #C4196D); color: white;">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <a>&copy; 2025 Petify. All Rights Reserved.</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Profile Modal -->
+    <div class="modal fade" id="profileModal" tabindex="-1" aria-labelledby="profileModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Profile</h5>
+                </div>
+                <div class="modal-body">
+                    <div class="profile-details text-center">
+                        <img src="{{ asset('images/pfp.svg') }}" alt="Profile Picture" 
+                        class="mb-3 rounded-circle" style="width: 200px; height 200px;">
+                        <p><strong>Name:</strong> {{ Auth::user()->firstname }} {{ Auth::user()->lastname }}</p>
+                        <p><strong>Email:</strong> {{ Auth::user()->email }}</p>
+                    </div>
+                </div>
+                <div class="modal-footer d-flex justify-content-between w-100">
+                    <!-- LOGOUT -->
+                     <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <button type="submit" class="btn btn-danger rounded-pill px-4">LOG OUT</button>
+                    </form>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JS Assets -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ asset('js/jquery.min.js') }}"></script>
+    <script src="{{ asset('js/jquery.magnific-popup.min.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="{{ asset('js/custom.js') }}"></script>
+
+<script>
+    function confirmDelete(projectId) {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "This project will be deleted permanently.",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#6c757d',
+            confirmButtonText: 'Yes, delete it!',
+            reverseButtons: true
+        }).then((result) => {
+            if (result.isConfirmed) {
+                document.getElementById(`delete-form-${projectId}`).submit();
+            }
+        });
+    }
+    </script>
 </body>
+
+
 </html>
