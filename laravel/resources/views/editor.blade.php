@@ -59,12 +59,15 @@
             <button id="toggleZoomBtn" class="zoom-toggle-btn">Fit to Panel</button>
           </section>
 
+            <!-- PROJECT NAME AND DESCRIPTION EDITOR -->
             <section class="form-section">
-              <h2 class="project-title">Project title</h2>
-              <p class="project-description">
-                Some description about the project...
+              <h2 class="project-title">{{ $project->title }}</h2>
+              <p class="project-description">{{ $project->description }}</p>
+
+              <p class="project-meta">
+                {{ $project->user->firstname }} {{ $project->user->lastname }} •
+                {{ $project->created_at->format('D M d, Y') }}
               </p>
-              <p class="project-meta">Marvin Masubay  •  Thu Apr 17 2025</p>
 
               <div class="form-divider"></div>
 

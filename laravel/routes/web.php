@@ -24,10 +24,16 @@ Route::post('/dashboard', [ProjectController::class, 'store'])
     ->middleware('auth')
     ->name('project.store');
 
+// Redirect to project
+Route::get('/editor/{id}', [ProjectController::class, 'edit'])->name('project.editor');
+
 // Delete project
 Route::delete('/dashboard/{project}', [ProjectController::class, 'destroy'])
     ->name('project.destroy')
     ->middleware('auth');
+
+// Save project - update 
+// Route::put('/projects/{project}', [ProjectController::class, 'update'])->name('project.update');
 
 // Logout route
 Route::post('/logout', function() {

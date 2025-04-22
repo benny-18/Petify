@@ -17,13 +17,13 @@ class ProjectController extends Controller
             'description' => 'required|string',
         ]);
 
-        Project::create([
+        $project = Project::create([
             'user_id'=>Auth::id(),
             'title'=>$request->title,
             'description'=>$request->description,
         ]);
 
-        return redirect()->back()->with('success', 'Project created successfully');
+       return redirect()->route('project.editor', $project->id);
     }
 
     public function destroy(Project $project)
@@ -34,5 +34,11 @@ class ProjectController extends Controller
         } else {
             return redirect()->back()->with('error', 'You are not authorized to delete this project');
         }
+    }
+
+    public function edit($id)
+    {
+        $project = Project::findOrFail($id);
+        return view('editor', compact('project'));
     }
 }

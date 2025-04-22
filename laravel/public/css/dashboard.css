@@ -1239,4 +1239,9 @@ strong {
   }
 }
 
+.list-group-item {
+  min-height: 80px;
+  display: flex;
+  align-items: center;
+}
 

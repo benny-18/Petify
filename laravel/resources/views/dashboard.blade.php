@@ -153,7 +153,7 @@
                             <input type="text" name="title" class="form-control" placeholder="Project Title" required>
                     </div>
                     <div class="col-md-5">
-                            <input type="test" name="description" class="form-control" placeholder="Project Description">
+                            <input type="text" name="description" class="form-control" placeholder="Project Description">
                     </div>
                     <div class="col-md-3">
                         <button type="submit" class="btn btn-primary w-100 rounded">Create Project</button>
@@ -164,6 +164,7 @@
                  <div class="row">
                     <div class="col-12">
                             <h2 class="text-white- mb-3">Your Projects</h2>
+
                             @if(Auth::user()->projects->isEmpty())
                                 <div class="alert alert-info text-center">
                                     You have no projects yet.
@@ -172,14 +173,16 @@
                             <ul class="list-group">
                                 @foreach(Auth::user()->projects as $project)
                                     <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        <a href="{{ route('project.editor', $project->id) }}" class="text-decoration-none text-dark">
                                         <div>
-                                            <strong>{{ $project->title }}</strong><br>
+                                            <strong style="font-size: 20px; font-weight: bold">{{ $project->title }}</strong><br>
                                             <small>{{ $project->description }}</small>
                                         </div>
+                                         </a>
 
                                         <!-- DELETE BUTTON FOR PROJECTS and DATE -->
-                                         <div class="d-flex align-items-center">
-                                            <small class="me-3">{{ $project->created_at->format('M d, Y') }}</span>
+                                         <div class="d-flex align-items-center ms-3">
+                                            <small class="me-3">{{ $project->created_at->format('M d, Y') }}</small>
 
                                         <form id="delete-form-{{ $project->id }}" action="{{ route('project.destroy', $project->id) }}#section_4" method="POST" style="display: none;">
                                             @csrf
@@ -187,7 +190,7 @@
                                         </form>
 
                                         <button type="button" class="btn btn-sm btn-outline-danger rounded"
-                                            onclick="confirmDelete({{ $project->id }})">
+                                            onclick="event.stopPropagation(); confirmDelete({{ $project->id }})">
                                             Delete
                                         </button>
                                     </li>
@@ -263,6 +266,16 @@
         });
     }
     </script>
+
+<!-- REFRESH DASHBOARD PAG NA BACK TIKANG HA EDITOR -->
+<script>
+    window.addEventListener('pageshow', function(event) {
+        if (event.persisted) {
+            window.location.reload();
+        }
+    });
+</script>
+
 </body>
 
 
