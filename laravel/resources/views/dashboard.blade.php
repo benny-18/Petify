@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <title>Petify</title>
-    
+
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -21,7 +21,7 @@
 
     <section class="preloader">
         <div class="spinner">
-            <span class="spinner-rotate"></span>    
+            <span class="spinner-rotate"></span>
         </div>
     </section>
 
@@ -40,9 +40,9 @@
                 </ul>
                 <div class="d-flex align-items-center flex-wrap gap-2 ms-auto">
                     <a href="#" class="profile-photo-link" data-bs-toggle="modal" data-bs-target="#profileModal">
-                        <img src="{{ asset('images/pfp.svg') }}" alt="Profile" class="profile-photo">
+                        <img src="{{ asset('images/pfp.png') }}" alt="Profile" class="profile-photo">
                     </a>
-                </div>   
+                </div>
             </div>
         </div>
     </nav>
@@ -70,7 +70,7 @@
                             <div class="carousel-inner">
                                 @for($i = 1; $i <= 5; $i++)
                                     <div class="carousel-item {{ $i == 1 ? 'active' : '' }}">
-                                        <img src="{{ asset("images/carousel/Pet $i.svg") }}" class="d-block w-100 rounded" alt="Slide {{ $i }}">
+                                        <img src="{{ asset("images/carousel/Pet $i.png") }}" class="d-block w-100 rounded" alt="Slide {{ $i }}">
                                     </div>
                                 @endfor
                             </div>
@@ -88,7 +88,7 @@
         <section class="gallery section-padding" id="section_2">
             <div class="container">
                 <div class="banner-wrapper mb-4">
-                    <img src="{{ asset('images/Banner.svg') }}" class="banner-image" alt="Banner">
+                    <img src="{{ asset('images/Banner.png') }}" class="banner-image" alt="Banner">
                 </div>
                 <div class="section-title-wrap text-center mb-4">
                     <h2 class="gallery-heading mb-0">Gallery</h2>
@@ -96,9 +96,9 @@
                 <div class="row">
                     @php
                         $gallery = [
-                            ['tag' => 'Lost / Found Templates', 'title' => 'Find Your Babies!', 'img' => 'p1.svg'],
-                            ['tag' => 'Birthday Templates', 'title' => 'Celebrate Online', 'img' => 'p2.svg'],
-                            ['tag' => 'Pet ID Templates', 'title' => 'Introduce Your Babies', 'img' => 'p3.svg'],
+                            ['tag' => 'Lost / Found Templates', 'title' => 'Find Your Babies!', 'img' => 'p1.png'],
+                            ['tag' => 'Birthday Templates', 'title' => 'Celebrate Online', 'img' => 'p2.png'],
+                            ['tag' => 'Pet ID Templates', 'title' => 'Introduce Your Babies', 'img' => 'p3.png'],
                         ];
                     @endphp
                     @foreach ($gallery as $item)
@@ -122,7 +122,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-6 col-12">
-                        <img src="{{ asset('images/About.svg') }}" class="about-image img-fluid" alt="">
+                        <img src="{{ asset('images/About.png') }}" class="about-image img-fluid" alt="">
                     </div>
                     <div class="col-lg-6 col-12 mt-5 mt-lg-0">
                         <div class="about-thumb">
@@ -142,7 +142,7 @@
         <!-- CREATE PROJECT -->
         <section class="contact section-padding" id="section_4">
             <div class="container">
-                <div class="section-title-wrap d-flex justify-content-center align-items-center mb-5">                       
+                <div class="section-title-wrap d-flex justify-content-center align-items-center mb-5">
                     <h2 class="text-white mb-0">Create Project</h2>
                 </div>
 
@@ -223,7 +223,7 @@
                 </div>
                 <div class="modal-body">
                     <div class="profile-details text-center">
-                        <img src="{{ asset('images/pfp.svg') }}" alt="Profile Picture" 
+                        <img src="{{ asset('images/pfp.png') }}" alt="Profile Picture"
                         class="mb-3 rounded-circle" style="width: 200px; height 200px;">
                         <p><strong>Name:</strong> {{ Auth::user()->firstname }} {{ Auth::user()->lastname }}</p>
                         <p><strong>Email:</strong> {{ Auth::user()->email }}</p>

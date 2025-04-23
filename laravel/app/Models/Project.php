@@ -10,9 +10,17 @@ class Project extends Model
         'user_id',
         'title',
         'description',
+        'pet_name',
+        'sex',
+        'age',
+        'breed',
+        'contact_person',
+        'contact_number',
+        'pet_description',
+        'reward'
     ];
-    
-    public function user() 
+
+    public function user()
     {
         return $this->belongsTo(User::class); // proj belong to user
     }

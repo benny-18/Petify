@@ -76,6 +76,16 @@
 
   }
 
+  /* .save-indicators > div {
+    transition: opacity 0.5s ease-in-out;
+  } */
+
+  #save-progress, #save-success {
+    transition: opacity 0.5s ease-in-out;
+    opacity: 0;
+    display: none;
+  }
+
   .importimg-button {
     padding: 27px;
     font-size: 16px;
@@ -120,7 +130,7 @@
     margin-left: 12px;
     display: flex;
     align-items: center;
-    gap: 25px;
+    gap: 20px;
   }
 
   /* .menu-icon {
@@ -427,7 +437,7 @@
     outline: none;
     background: transparent;
     font-family: "Instagram Sans", sans-serif;
-    font-size: 18px;
+    font-size: 20px;
     color: #4c4c4c;
   }
 
@@ -502,7 +512,7 @@
     padding: 24px 70px;
     color: #fff;
     font-family: "instagram Sans", sans-serif;
-    font-size: 18px;
+    font-size: 22px;
     font-weight: 500;
     text-align: center;
     cursor: pointer;

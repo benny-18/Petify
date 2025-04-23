@@ -1,10 +1,3 @@
-// const toggleBtn = document.getElementById('toggleSidebar');
-// const sidebar = document.getElementById('sidebar');
-
-// toggleBtn.addEventListener('click', () => {
-//   sidebar.classList.toggle('hidden');
-// });
-
 let sidebarOpen = true;
 let isZoomed = true;
 
@@ -54,69 +47,19 @@ function toggleSidebar() {
 
 }
 
-// document.getElementById("saveDownloadBtn").addEventListener("click", () => {
-//     Swal.fire({
-//         title: 'Choose format',
-//         text: 'Which format do you want Petify to save the file as?',
-//         icon: 'question',
-//         showCancelButton: true,
-//         showDenyButton: true,
-//         confirmButtonText: 'Save as PDF',
-//         denyButtonText: 'Save as PNG',
-//         cancelButtonText: 'Cancel',
-//         customClass: {
-//           popup: 'swal2-custom-popup swal2-custom-font',
-//           confirmButton: 'swal2-confirm-custom',
-//           denyButton: 'swal2-confirm-custom',
-//           cancelButton: 'swal2-cancel-default'
-//         },
-//         backdrop: `
-//           rgba(0, 0, 0, 0.4)
-//           blur(5px)
-//         `
-//       }).then((result) => {
-//         if (result.isConfirmed) {
-//           // simulate success PDF
-//           Swal.fire({
-//             title: 'Success!',
-//             text: 'Image exported as PDF!',
-//             icon: 'success',
-//             confirmButtonText: 'Close',
-//             customClass: {
-//               popup: 'swal2-custom-popup swal2-custom-font',
-//               confirmButton: 'swal2-confirm-custom'
-//             }
-//           });
-//         } else if (result.isDenied) {
-//           // simulate success PNG
-//           Swal.fire({
-//             title: 'Success!',
-//             text: 'Image exported as PNG!',
-//             icon: 'success',
-//             confirmButtonText: 'Close',
-//             customClass: {
-//               popup: 'swal2-custom-popup swal2-custom-font',
-//               confirmButton: 'swal2-confirm-custom'
-//             }
-//           });
-//         } else if (result.dismiss === Swal.DismissReason.cancel) {
-//           // do nothing or handle cancel
-//         }
-//       });
-//   });
+document.getElementById("saveDownloadBtn").addEventListener("click", function (e) {
+    e.preventDefault();
 
-  document.getElementById("saveDownloadBtn").addEventListener("click", function () {
-
-    const petName = document.querySelector("input[name='petName']");
-    const petSex = document.querySelector("select[name='petSex']");
-    const contactPerson = document.querySelector("input[name='contactPerson']");
-    const contactNumber = document.querySelector("input[name='contactNumber']");
+    const pet_name = document.querySelector("input[name='pet_name']");
+    const pet_sex = document.querySelector("select[name='sex']");
+    const contact_person = document.querySelector("input[name='contact_person']");
+    const contact_number = document.querySelector("input[name='contact_number']");
 
     const requiredFields = [
-      { field: petName, name: "Pet Name" },
-      { field: petSex, name: "Sex" },
-      { field: contactPerson, name: "Contact Person" },
-      { field: contactNumber, name: "Contact Number" }
+      { field: pet_name, name: "Pet Name" },
+      { field: pet_sex, name: "Sex" },
+      { field: contact_person, name: "Contact Person" },
+      { field: contact_number, name: "Contact Number" }
     ];
 
     let missingFields = [];
@@ -171,7 +114,6 @@ function toggleSidebar() {
         `
       }).then((result) => {
         if (result.isConfirmed) {
-          // simulate success PDF
           Swal.fire({
             title: 'Success!',
             text: 'Image exported as PDF!',
@@ -183,7 +125,6 @@ function toggleSidebar() {
             }
           });
         } else if (result.isDenied) {
-          // simulate success PNG
           Swal.fire({
             title: 'Success!',
             text: 'Image exported as PNG!',
@@ -194,8 +135,85 @@ function toggleSidebar() {
               confirmButton: 'swal2-confirm-custom'
             }
           });
-        } else if (result.dismiss === Swal.DismissReason.cancel) {
-          // do nothing or handle cancel
         }
       });
-  });
+});
+
+document.addEventListener('DOMContentLoaded', function () {
+    const form = document.querySelector('#editorForm');
+    const saveSuccess = document.getElementById('save-success');
+    const saveProgress = document.getElementById('save-progress');
+
+    let autosaveTimer;
+
+    document.querySelectorAll('#editorForm input, #editorForm select, #editorForm textarea').forEach(field => {
+        field.addEventListener('input', () => {
+            clearTimeout(autosaveTimer);
+
+            if (saveProgress.style.display !== 'flex') {
+                showSavingIndicator();
+            }
+
+            autosaveTimer = setTimeout(() => {
+                autosaveForm();
+            }, 5000);
+        });
+    });
+
+    function autosaveForm() {
+        const formData = new FormData(form);
+        const projectId = form.dataset.projectId;
+
+        fetch(`/projects/${projectId}`, {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value,
+                'X-Requested-With': 'XMLHttpRequest'
+            }
+        })
+        .then(response => {
+            if (response.ok) {
+                showSaved();
+            } else {
+                return response.json().then(err => {
+                    console.error("Autosave failed", err);
+                    showSaving(false);
+                });
+            }
+        })
+        .catch(error => {
+            console.error("Autosave failed", error);
+            showSaving(false);
+        });
+    }
+
+    function showSavingIndicator() {
+        fadeOut(saveSuccess);
+        fadeIn(saveProgress);
+    }
+
+    function showSaved() {
+        const now = new Date();
+        const formattedTime = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+        const timeHTML = `Changes saved to cloud <span style="font-weight: normal; font-size: 13px;">(at ${formattedTime})</span>`;
+        saveSuccess.querySelector('h2').innerHTML = timeHTML;
+
+        fadeOut(saveProgress);
+
+        setTimeout(() => {
+            fadeIn(saveSuccess);
+        }, 1000);
+    }
+
+
+    function fadeIn(el) {
+        el.style.display = 'flex';
+        setTimeout(() => el.style.opacity = 1, 10);
+    }
+
+    function fadeOut(el) {
+        el.style.opacity = 0;
+        setTimeout(() => el.style.display = 'none', 500);
+    }
+});
