@@ -217,3 +217,37 @@ document.addEventListener('DOMContentLoaded', function () {
         setTimeout(() => el.style.display = 'none', 500);
     }
 });
+
+// breed selector 
+document.addEventListener('DOMContentLoaded', function () {
+    fetch('/data/breeds.json')
+        .then(response => response.json())
+        .then(breeds => {
+            const select = document.getElementById('breed');
+            const selectedBreed = "{{ old('breed', $project->breed) }}";
+
+            breeds.forEach(breed => {
+                const option = document.createElement('option');
+                option.value = breed;
+                option.textContent = breed;
+
+                if (breed === selectedBreed) {
+                    option.selected = true;
+                }
+
+                select.appendChild(option);
+            });
+        })
+        .catch(error => {
+            console.error('Error loading breeds:', error);
+        });
+});
+
+// upload file
+function handleImageImport(event) {
+  const file = event.target.files[0];
+  if (file) {
+      console.log('Selected file:', file.name);
+      // You can upload it or process it here later
+  }
+}

@@ -430,6 +430,34 @@
 	width: 100%;
   }
 
+  .desc-field {
+    background: transparent;
+    padding: 10px 10px;
+	  border-radius: 10px;
+	  border: 1px solid #ddd;
+	  margin: 10px 0;
+	  width: 100%;
+  }
+
+  .title-field {
+    background-color: transparent;
+    padding: 10px 10px;
+	  border-radius: 10px;
+	  border: 1px solid #ddd;
+	  margin: 10px 0;
+	  width: 100%;
+  }
+
+  .title-field input {
+    width: 100%;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-family: "Instagram Sans", sans-serif;
+    font-size: 16px;
+    color: #4c4c4c;
+  }
+
   .input-field input,
   .input-field textarea {
     width: 100%;
@@ -657,3 +685,70 @@
   .swal2-cancel-default:active {
     transform: scale(0.97);
   }
+
+  .btn-back-dashboard {
+      background-color: #C50565;
+      color: white;
+      padding: 6px 14px;
+      font-size: 14px;
+      border: 2px solid #C50565; /* 2px border */
+      border-radius: 6px;
+      text-decoration: none;
+      margin-left: 16px;
+      transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  .btn-back-dashboard:hover {
+      background-color: white;
+      color: #C50565;
+      text-decoration: none;
+  }
+
+  /* Optional custom styling for form inputs */
+.form-control {
+    background-color: #f8f9fa;  /* Lighter background to match the design */
+    border-radius: 10px;         /* Rounded corners */
+    border: 1px solid #ddd;      /* Subtle border */
+    padding: 10px;               /* Consistent padding */
+    font-size: 1rem;             /* Uniform text size */
+}
+
+.form-label {
+    font-weight: bold;
+    color: #333;                 /* Darker color for the labels */
+}
+
+textarea.form-control {
+    font-family: 'Arial', sans-serif;  /* Matching font for consistency */
+    resize: vertical;                 /* Allow vertical resizing */
+}
+
+button[type="submit"] {
+    background-color: #c50565;      /* Matching button color */
+    border: none;
+    color: white;
+    font-size: 1rem;
+    padding: 12px 24px;
+    border-radius: 25px;           /* Rounded button */
+    width: auto;
+}
+
+button[type="submit"]:hover {
+    background-color: #9e1d45;      /* Darker shade on hover */
+}
+
+importimg-button {
+  width: 48px;
+  height: 48px;
+  background-color: transparent;
+  border: 2px solid transparent; /* Start with no visible border */
+  cursor: pointer;
+  position: relative;
+  z-index: 2;
+  transition: border 0.2s ease-in-out;
+}
+
+.importimg-button:hover {
+  border: 2px solid #961c39; /* Grey border on hover */
+  border-radius: 8px; /* Optional: rounded corners */
+}

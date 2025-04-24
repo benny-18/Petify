@@ -47,6 +47,10 @@
                 </div>
 
                 <h1 class="logo-text">Petify</h2>
+
+                <a href="{{ route('dashboard') }}" class="btn-back-dashboard"> 
+                  Back to Dashboard
+                </a>
             </div>
                 <div style="display: flex; align-items: center; gap: 30px">
                     <div class="save-indicators">
@@ -61,7 +65,7 @@
                         </div>
                     </div>
 
-                    <img src="{{ asset('images/pfp.png') }}" alt="User Profile" class="profile-image" />
+                    <img src="{{ Auth::user()->profile_picture ? asset('storage/' . Auth::user()->profile_picture) : asset('images/pfp.jpg') }}" alt="User Profile" class="profile-image" />
                 </div>
 
           </header>
@@ -80,9 +84,12 @@
 
                 @csrf
                 @method('PUT')
+              
+              <!-- editable title -->
+              <input type="text" name="title" value="{{ old('title', $project->title) }}" class="title-field project-title" />
 
-              <h2 class="project-title">{{ $project->title }}</h2>
-              <p class="project-description">{{ $project->description }}</p>
+              <!--editable desc -->
+              <textarea name="description" ows="4" class="desc-field project description">{{ old('description', $project->description) }}</textarea>
 
               <p class="project-meta">
                 {{ $project->user->firstname }} {{ $project->user->lastname }} •
@@ -94,16 +101,18 @@
                 <div class="form-row">
 
                     <div class="button-container">
-                        <button class="importimg-button"></button>
+                        <button class="importimg-button" onclick="document.getElementById('file-input').click()"></button>
+                        <input type="file" id="file-input" style="display:none;" accept="image/*" onchange="handleImageImport(event)" />
                         <img src="https://img.icons8.com/?size=100&id=wdoEeeG1GGY6&format=png&color=757575" class="icon-overlay">
                     </div>
 
+
                     <div class="input-field pet-name-field">
-                    <input type="text" name="pet_name" value="{{ old('pet_name', $project->pet_name) }}" required placeholder="Pet name" />
+                    <input type="text" name="pet_name" value="{{ old('pet_name', $project->pet_name) }}" placeholder="Pet name" />
                     </div>
 
                     <div class="input-field pet-sex-field">
-                        <select name="sex" required>
+                        <select name="sex">
                             <option value="" disabled selected hidden>Sex</option>
                             <option value="Male" {{ $project->sex == 'Male' ? 'selected' : '' }}>Male</option>
                             <option value="Female" {{ $project->sex == 'Female' ? 'selected' : '' }}>Female</option>
@@ -114,19 +123,22 @@
 
                 <div class="form-row">
                     <div class="input-field age-field">
-                    <input type="number" name="age" value="{{ old('age', $project->age) }}" placeholder="Age (years)" />
+                    <input type="number" name="age" value="{{ old('age', $project->age) }}" placeholder="Age" />
                     </div>
+
                     <div class="input-field breed-field">
-                    <input type="text" name="breed" value="{{ old('breed', $project->breed) }}" placeholder="Breed, if available" />
+                    <select id="breed" value="{{ old('breed', $project->breed) }}" class="form-control" placeholder="Breed" />
+                      <option value="" disabled selected>Select a breed</option>
+                    </select>
                     </div>
                 </div>
 
                 <div class="form-row">
                     <div class="input-field contact-person-field">
-                    <input type="text" name="contact_person" value="{{ old('contact_person', $project->contact_person) }}" required placeholder="Contact Person" />
+                    <input type="text" name="contact_person" value="{{ old('contact_person', $project->contact_person) }}" placeholder="Contact Person" />
                     </div>
                     <div class="input-field contact-number-field">
-                    <input type="tel" name="contact_number" value="{{ old('contact_number', $project->contact_number) }}" required placeholder="Contact Number" />
+                    <input type="tel" name="contact_number" value="{{ old('contact_number', $project->contact_number) }}" placeholder="Contact Number" />
                     </div>
                 </div>
 

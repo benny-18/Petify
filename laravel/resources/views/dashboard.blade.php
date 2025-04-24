@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <title>Petify</title>
-
+    
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -22,7 +22,7 @@
 
     <section class="preloader">
         <div class="spinner">
-            <span class="spinner-rotate"></span>
+            <span class="spinner-rotate"></span>    
         </div>
     </section>
 
@@ -41,9 +41,9 @@
                 </ul>
                 <div class="d-flex align-items-center flex-wrap gap-2 ms-auto">
                     <a href="#" class="profile-photo-link" data-bs-toggle="modal" data-bs-target="#profileModal">
-                        <img src="{{ asset('images/pfp.svg') }}" alt="Profile" class="profile-photo">
+                        <img src="{{ Auth::user()->profile_picture ? asset('storage/' . Auth::user()->profile_picture) : asset('images/pfp.jpg') }}" alt="Profile" class="profile-photo">
                     </a>
-                </div>
+                </div>   
             </div>
         </div>
     </nav>
@@ -141,7 +141,7 @@
         <!-- CREATE PROJECT -->
         <section class="contact section-padding" id="section_4">
             <div class="container">
-                <div class="section-title-wrap d-flex justify-content-center align-items-center mb-5">
+                <div class="section-title-wrap d-flex justify-content-center align-items-center mb-5">                       
                     <h2 class="text-white mb-0">Create Project</h2>
                 </div>
 
@@ -226,11 +226,67 @@
             <form method="POST" action="{{ route('profile.update') }}" enctype="multipart/form-data">
                 @csrf
                 <div class="modal-body">
-                    <div class="profile-details text-center">
-                        <img src="{{ asset('images/pfp.svg') }}" alt="Profile Picture" 
-                        class="mb-3 rounded-circle" style="width: 200px; height 200px;">
-                        <p><strong>Name:</strong> {{ Auth::user()->firstname }} {{ Auth::user()->lastname }}</p>
-                        <p><strong>Email:</strong> {{ Auth::user()->email }}</p>
+                    <div class="row g-4">
+                        <!-- Left: Profile Picture -->
+                        <div class="col-md-4 text-center mb-3 mb-md-0">
+                            <img src="{{ Auth::user()->profile_picture ? asset('storage/' . Auth::user()->profile_picture) : asset('images/pfp.jpg') }}" 
+                                alt="Profile Picture"
+                                class="rounded-circle img-fluid"
+                                style="width: 200px; height: 200px; object-fit: cover;">
+                            <input type="file" name="profile_picture" class="form-control mt-2" id="profilePictureInput">
+                            <p id="picError" style="color: red; font-size: 14px; display:none;">File is too large. Maximum size is 2MB.</p>
+                        </div>
+
+                        <!-- Right: Form -->
+                        <div class="col-md-8">
+                            <div class="row mb-3">
+                                <div class="col">
+                                    <label for="firstname" class="form-label">First Name</label>
+                                    <input type="text" id="firstname" name="firstname" class="form-control"
+                                           value="{{ Auth::user()->firstname }}">
+                                </div>
+                                <div class="col">
+                                    <label for="lastname" class="form-label">Last Name</label>
+                                    <input type="text" id="lastname" name="lastname" class="form-control"
+                                           value="{{ Auth::user()->lastname }}">
+                                </div>
+                            </div>
+
+                            <div class="mb-4">
+                                <label class="form-label">Email</label>
+                                <input type="email" class="form-control" value="{{ Auth::user()->email }}" disabled>
+                            </div>
+
+                            <!-- Change Password Fields -->
+                            <h6 class="fw-bold">Change Password</h6>
+
+                            <!-- Old password -->
+                            <div class="mb-3 position-relative">
+                                <input type="password" name="old_password" id="old_password" class="form-control pe-5" placeholder="Enter Old Password">
+                                <span id="password-status-icon" class="position-absolute top-50 end-0 translate-middle-y me-3">
+                                </span>
+                            </div>
+
+                            <!-- New password -->
+                            <div class="mb-3">
+                                <input type="password" name="new_password" class="form-control pe-5" placeholder="Enter New Password">
+                            </div>
+
+                            <!-- Re-enter password -->
+                            <div class="mb-4 position-relative">
+                                <input type="password" name="new_password_confirmation" id="new_password_confirmation" class="form-control" placeholder="Re-enter Password" oninput="checkPasswordMatch()">
+                                
+                                <span id="match-icon" class="position-absolute top-50 end-0 translate-middle-y me-3" style="display: none;">
+                                    <div class="spinner-border spinner-border-sm text-secondary" role="status" id="match-loading" style="display: none;"></div>
+                                    <i class="bi bi-check-circle-fill text-success" id="match-success" style="display: none;"></i>
+                                    <i class="bi bi-x-circle-fill text-danger" id="match-error" style="display: none;"></i>
+                                </span>
+                            </div>
+
+                            <div>
+                                <button type="submit" class="btn btn-primary rounded-pill px-4" id="saveButton">Save Changes</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </form>
@@ -256,106 +312,6 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="{{ asset('js/custom.js') }}"></script>
 
-<script>
-    function confirmDelete(projectId) {
-        Swal.fire({
-            title: 'Are you sure?',
-            text: "This project will be deleted permanently.",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#d33',
-            cancelButtonColor: '#6c757d',
-            confirmButtonText: 'Yes, delete it!',
-            reverseButtons: true
-        }).then((result) => {
-            if (result.isConfirmed) {
-                document.getElementById(`delete-form-${projectId}`).submit();
-            }
-        });
-    }
-    </script>
-
-<!-- REFRESH DASHBOARD PAG NA BACK TIKANG HA EDITOR -->
-<script>
-    window.addEventListener('pageshow', function(event) {
-        if (event.persisted) {
-            window.location.reload();
-        }
-    });
-</script>
-
-<!-- old password confirmation -->
-<script>
-let typingTimer;
-const delay = 600;
-const input = document.getElementById('old_password');
-const icon = document.getElementById('password-status-icon');
-
-input.addEventListener('input', () => {
-    clearTimeout(typingTimer);
-    icon.innerHTML = `<div class="spinner-border spinner-border-sm text-secondary" role="status"></div>`;
-
-    typingTimer = setTimeout(() => {
-        checkOldPassword(input.value);
-    }, delay);
-});
-
-function checkOldPassword(password) {
-    fetch('{{ route('check.password') }}', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'X-CSRF-TOKEN': '{{ csrf_token() }}'
-        },
-        body: JSON.stringify({ password })
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.match) {
-            icon.innerHTML = `<i class="bi bi-check-circle-fill text-success"></i>`;
-        } else {
-            icon.innerHTML = `<i class="bi bi-x-circle-fill text-danger"></i>`;
-        }
-    })
-    .catch(() => {
-        icon.innerHTML = `<i class="bi bi-exclamation-circle-fill text-warning"></i>`;
-    });
-}
-</script>
-
-<!-- check new password and re entered confirmation -->
-<script>
-    let matchTimer;
-
-    function checkPasswordMatch() {
-        const newPassword = document.querySelector('input[name="new_password"]').value;
-        const confirmation = document.getElementById('new_password_confirmation').value;
-        const loading = document.getElementById('match-loading');
-        const success = document.getElementById('match-success');
-        const error = document.getElementById('match-error');
-        const icon = document.getElementById('match-icon');
-
-        // Show spinner
-        icon.style.display = 'block';
-        loading.style.display = 'inline-block';
-        success.style.display = 'none';
-        error.style.display = 'none';
-
-        clearTimeout(matchTimer);
-        matchTimer = setTimeout(() => {
-            loading.style.display = 'none';
-            if (confirmation === '') {
-                icon.style.display = 'none';
-            } else if (newPassword === confirmation) {
-                success.style.display = 'inline-block';
-                error.style.display = 'none';
-            } else {
-                success.style.display = 'none';
-                error.style.display = 'inline-block';
-            }
-        }, 500);
-    }
-</script>
 
 <!-- save changes -->
 <script>
@@ -377,21 +333,6 @@ function checkOldPassword(password) {
     @endif
 </script>
 
-<!-- show password -->
-<script>
-function togglePassword(inputId, btn) {
-    const input = document.getElementById(inputId);
-    if (input.type === "password") {
-        input.type = "text";
-        btn.textContent = "Hide";
-    } else {
-        input.type = "password";
-        btn.textContent = "Show";
-    }
-}
-</script>
 
 </body>
-
-
 </html>

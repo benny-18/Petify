@@ -16,14 +16,15 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->string('title');
             $table->string('description');
-            $table->string('pet_name');
-            $table->string('sex');
-            $table->string('age');
+            $table->string('pet_name')->nullable();;
+            $table->string('sex')->nullable();;
+            $table->string('age')->nullable();;
             $table->string('breed')->nullable();
-            $table->string('contact_person');
-            $table->string('contact_number');
-            $table->text('pet_description');
+            $table->string('contact_person')->nullable();;
+            $table->string('contact_number')->nullable();;
+            $table->text('pet_description')->nullable();;
             $table->decimal('reward', 10, 2)->nullable();
+            $table->string('pet_photo')->nullable();
             $table->timestamps();
         });
     }
