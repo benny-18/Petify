@@ -15,7 +15,15 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->string('title');
-            $table->string('description')->nullable();
+            $table->string('description');
+            $table->string('pet_name');
+            $table->string('sex');
+            $table->string('age');
+            $table->string('breed')->nullable();
+            $table->string('contact_person');
+            $table->string('contact_number');
+            $table->text('pet_description');
+            $table->decimal('reward', 10, 2)->nullable();
             $table->timestamps();
         });
     }

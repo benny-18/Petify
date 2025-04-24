@@ -40,8 +40,8 @@ Route::delete('/dashboard/{project}', [ProjectController::class, 'destroy'])
     ->name('project.destroy')
     ->middleware('auth');
 
-// Save project - update 
-// Route::put('/projects/{project}', [ProjectController::class, 'update'])->name('project.update');
+// Save project - update
+Route::put('/projects/{project}', [ProjectController::class, 'update'])->name('project.update');
 
 // Logout route
 Route::post('/logout', function() {

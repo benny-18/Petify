@@ -71,10 +71,7 @@
                     </span>
                 </div>
 
-                <!--
                 <a href="#">Forgot your password?</a>
-                -->
-
                 <button type="submit">Login</button>
             </form>
         </div>
