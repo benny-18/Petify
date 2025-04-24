@@ -449,3 +449,35 @@ input {
     bottom: -127px;
     animation-delay: 22s;
 }
+
+/* Prevent the page from scrolling when SweetAlert is visible */
+body.swal2-no-scroll {
+    overflow: hidden !important;  /* Disable body scrolling */
+    position: fixed !important;   /* Lock the body position */
+    width: 100% !important;       /* Fix body width to prevent shifting */
+}
+
+/* Ensure that Swal's container and backdrop stay on top */
+.swal2-container {
+    z-index: 999999 !important;  /* Make sure Swal stays on top of all other content */
+    position: fixed !important;  /* Position it relative to the viewport */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+/* Make sure the backdrop doesn't shift layout when Swal is visible */
+.swal2-overlay {
+    z-index: 999998 !important;  /* Overlay just below the popup */
+    position: fixed;             /* Fix the backdrop position */
+    top: 0;                      /* Ensure it's covering the entire screen */
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+/* Optional: You can adjust this if you want to change the backdrop color */
+.swal2-overlay {
+    background-color: rgba(0, 0, 0, 0.5) !important; /* Semi-transparent backdrop */
+}

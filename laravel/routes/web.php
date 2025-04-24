@@ -19,6 +19,14 @@ Route::get('/dashboard', function() {
     return view('dashboard');
 })->middleware('auth');
 
+//profile update
+Route::middleware('auth')->group(function () {
+    Route::post('/dashboard/profile', [UserController::class, 'update'])->name('profile.update');
+});
+
+//password checker
+Route::post('/check-password', [UserController::class, 'checkPassword'])->name('check.password');
+
 //create project route
 Route::post('/dashboard', [ProjectController::class, 'store'])
     ->middleware('auth')

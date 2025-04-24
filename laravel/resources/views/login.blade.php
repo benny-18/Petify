@@ -39,7 +39,7 @@
                 <input type="checkbox" id="termsCheckbox" name="terms" style="display: none;">
                 <label for="termsCheckbox" id="termsLabel" style="font-size: 11px; cursor: pointer;">
                     <span id="termsCheckmark" style="display: none; color: green; font-weight: bold; margin-right: 5px;">✔</span>
-                    <span id="termsText" style="text-decoration: underline; color: black;">
+                    <span id="termsText" style="font-size: 14px; text-decoration: underline; color: black;">
                         I agree to the Terms and Conditions
                     </span>
                 </label><br>
@@ -71,7 +71,10 @@
                     </span>
                 </div>
 
+                <!--
                 <a href="#">Forgot your password?</a>
+                -->
+
                 <button type="submit">Login</button>
             </form>
         </div>
@@ -139,7 +142,9 @@
 
         // Prevent registration if terms not accepted
         document.getElementById('registrationForm').addEventListener('submit', function (e) {
-            if (!document.getElementById('termsCheckbox').checked) {
+            const checkbox = document.getElementById('termsCheckbox');
+
+            if (chekbox.checked) {
                 e.preventDefault();
                 Swal.fire({
                     icon: 'error',
