@@ -311,6 +311,7 @@
     <script src="{{ asset('js/jquery.magnific-popup.min.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="{{ asset('js/custom.js') }}"></script>
+    <script src="{{ asset('js/click-scroll.js') }}"></script>
 
 
 <!-- save changes -->

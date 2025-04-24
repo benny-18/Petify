@@ -30,6 +30,15 @@
     
   })(window.jQuery);
 
+//sticky nav
+  window.addEventListener('scroll', function () {
+    const wrapper = document.querySelector('.sticky-wrapper');
+    if (window.scrollY > 50) {
+      wrapper.classList.add('is-sticky');
+    } else {
+      wrapper.classList.remove('is-sticky');
+    }
+  });
 
 // dashboard
 
