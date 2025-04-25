@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <title>Petify</title>
-    
+
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -22,7 +22,7 @@
 
     <section class="preloader">
         <div class="spinner">
-            <span class="spinner-rotate"></span>    
+            <span class="spinner-rotate"></span>
         </div>
     </section>
 
@@ -43,7 +43,7 @@
                     <a href="#" class="profile-photo-link" data-bs-toggle="modal" data-bs-target="#profileModal">
                         <img src="{{ Auth::user()->profile_picture ? asset('storage/' . Auth::user()->profile_picture) : asset('images/pfp.jpg') }}" alt="Profile" class="profile-photo">
                     </a>
-                </div>   
+                </div>
             </div>
         </div>
     </nav>
@@ -52,13 +52,29 @@
         <section class="hero d-flex justify-content-center align-items-center" id="section_1"
                  style="background: linear-gradient(to right, #000000, #000000, #C4196D, #000000);">
             <div class="container position-relative">
-                <div class="row align-items-center">
+
+                <div class="background">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+
+                <div style="position: relative" class="row align-items-center">
                     <div class="col-lg-6 hero-text-container">
-                        <h1 class="hero-heading">Greetings Furpies!</h1>
+                        <h1 class="hero-heading">Generate posters with Petify</h1>
                         <div class="hero-body-container">
-                            <p class="hero-body">Welcome to our website, where we help you create the perfect poster for your furry friends...</p>
+                            <p class="hero-body">Use Petify to easily create beautiful, ready-to-print pet posters that help spread the word fast. Easily customize and download missing pet posters—no design skills needed.</p>
                             <hr class="hero-divider">
-                            <a href="#section_4" class="btn generate-btn">Generate Now</a>
+                            <a href="#section_4" class="btn generate-btn">Generate now</a>
                         </div>
                     </div>
                     <div class="col-lg-6 mb-4 mb-lg-0">
@@ -78,11 +94,13 @@
                         </div>
                     </div>
                 </div>
-                <div class="background">
-                    @for($i = 0; $i < 15; $i++)
+
+                <!-- <div class="background">
+                    @for($i = 0; $i < 12; $i++)
                         <span></span>
                     @endfor
-                </div>
+                </div> -->
+
             </div>
         </section>
 
@@ -129,8 +147,8 @@
                                 <h2 class="text-white me-4 mb-0">About Us</h2>
                             </div>
                             <h3 class="pt-2 mb-3">A glimpse of Petify.</h3>
-                            <p style="text-align: justify;">Petify is designed to help pet owners easily create lost and found posters...</p>
-                            <p style="text-align: justify;">With a variety of templates to choose from, Petify ensures your pet's information...</p>
+                            <p style="text-align: justify;">Petify is designed to help pet owners quickly create lost and found posters using a simple and user-friendly editor. Whether it’s for a missing pet or adoption, making a poster takes just minutes.</p>
+                            <p style="text-align: justify;">With a variety of customizable templates, Petify ensures your pet’s details are clear and easy to spot—helping you reach the right people fast.</p>
                             <hr class="hero-divider">
                         </div>
                     </div>
@@ -141,7 +159,7 @@
         <!-- CREATE PROJECT -->
         <section class="contact section-padding" id="section_4">
             <div class="container">
-                <div class="section-title-wrap d-flex justify-content-center align-items-center mb-5">                       
+                <div class="section-title-wrap d-flex justify-content-center align-items-center mb-5">
                     <h2 class="text-white mb-0">Create Project</h2>
                 </div>
 
@@ -174,7 +192,7 @@
                                     <li class="list-group-item d-flex justify-content-between align-items-center">
                                         <a href="{{ route('project.editor', $project->id) }}" class="text-decoration-none text-dark">
                                         <div>
-                                            <strong style="font-size: 20px; font-weight: bold">{{ $project->title }}</strong><br>
+                                            <strong style="font-size: 22px; font-weight: bold">{{ $project->title }}</strong><br>
                                             <small>{{ $project->description }}</small>
                                         </div>
                                          </a>
@@ -203,7 +221,7 @@
         </section>
     </main>
 
-    <footer class="site-footer" style="background: linear-gradient(to right, #000000, #000000, #C4196D); color: white;">
+    <footer class="site-footer" style="background: linear-gradient(to right, #430021, #C4196D); color: white;">
         <div class="container">
             <div class="row">
                 <div class="col-12 text-center">
@@ -213,13 +231,13 @@
         </div>
     </footer>
 
-  
+
  <!-- Profile Modal -->
 <div class="modal fade" id="profileModal" tabindex="-1" aria-labelledby="profileModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header justify-content-center">
-                <h5 class="modal-title text-center w-100 mb-3">Profile</h5>
+                <h5 style="font-size: 40px" class="modal-title text-center">Profile</h5>
             </div>
 
             <!-- Profile Update Form -->
@@ -229,7 +247,7 @@
                     <div class="row g-4">
                         <!-- Left: Profile Picture -->
                         <div class="col-md-4 text-center mb-3 mb-md-0">
-                            <img src="{{ Auth::user()->profile_picture ? asset('storage/' . Auth::user()->profile_picture) : asset('images/pfp.jpg') }}" 
+                            <img src="{{ Auth::user()->profile_picture ? asset('storage/' . Auth::user()->profile_picture) : asset('images/pfp.jpg') }}"
                                 alt="Profile Picture"
                                 class="rounded-circle img-fluid"
                                 style="width: 200px; height: 200px; object-fit: cover;">
@@ -275,7 +293,7 @@
                             <!-- Re-enter password -->
                             <div class="mb-4 position-relative">
                                 <input type="password" name="new_password_confirmation" id="new_password_confirmation" class="form-control" placeholder="Re-enter Password" oninput="checkPasswordMatch()">
-                                
+
                                 <span id="match-icon" class="position-absolute top-50 end-0 translate-middle-y me-3" style="display: none;">
                                     <div class="spinner-border spinner-border-sm text-secondary" role="status" id="match-loading" style="display: none;"></div>
                                     <i class="bi bi-check-circle-fill text-success" id="match-success" style="display: none;"></i>
@@ -303,7 +321,7 @@
 
         </div>
     </div>
-</div> 
+</div>
 
     <!-- JS Assets -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
@@ -352,29 +370,29 @@
       }
     });
   }
-  
+
   // RELOAD ON BACK BUTTON
   window.addEventListener('pageshow', function (event) {
     if (event.persisted) {
       window.location.reload();
     }
   });
-  
+
   // PASSWORD CHECKING SECTION
   let typingTimer;
   const delay = 600;
   const input = document.getElementById('old_password');
   const icon = document.getElementById('password-status-icon');
-  
+
   input.addEventListener('input', () => {
     clearTimeout(typingTimer);
     icon.innerHTML = `<div class="spinner-border spinner-border-sm text-secondary" role="status"></div>`;
-  
+
     typingTimer = setTimeout(() => {
       checkOldPassword(input.value);
     }, delay);
   });
-  
+
   function checkOldPassword(password) {
     fetch('{{ route('check.password') }}', {
       method: 'POST',
@@ -396,10 +414,10 @@
         icon.innerHTML = `<i class="bi bi-exclamation-circle-fill text-warning"></i>`;
       });
   }
-  
+
   // CHECK PASSWORD MATCH
   let matchTimer;
-  
+
   function checkPasswordMatch() {
     const newPassword = document.querySelector('input[name="new_password"]').value;
     const confirmation = document.getElementById('new_password_confirmation').value;
@@ -407,12 +425,12 @@
     const success = document.getElementById('match-success');
     const error = document.getElementById('match-error');
     const icon = document.getElementById('match-icon');
-  
+
     icon.style.display = 'block';
     loading.style.display = 'inline-block';
     success.style.display = 'none';
     error.style.display = 'none';
-  
+
     clearTimeout(matchTimer);
     matchTimer = setTimeout(() => {
       loading.style.display = 'none';
@@ -427,7 +445,7 @@
       }
     }, 500);
   }
-  
+
   // SHOW/HIDE PASSWORD
   function togglePassword(inputId, btn) {
     const input = document.getElementById(inputId);
