@@ -737,18 +737,25 @@ button[type="submit"]:hover {
     background-color: #9e1d45;      /* Darker shade on hover */
 }
 
-importimg-button {
-  width: 48px;
-  height: 48px;
-  background-color: transparent;
-  border: 2px solid transparent; /* Start with no visible border */
-  cursor: pointer;
-  position: relative;
-  z-index: 2;
-  transition: border 0.2s ease-in-out;
+.upload-row {
+  display: flex;
+  align-items: center; /* Aligns items vertically */
+  gap: 10px; /* Adds space between the elements */
 }
 
-.importimg-button:hover {
-  border: 2px solid #961c39; /* Grey border on hover */
-  border-radius: 8px; /* Optional: rounded corners */
+.button-container {
+  position: relative; /* Ensures that the button is positioned correctly */
+}
+
+.importing-button {
+  background-color: transparent;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.filename-text {
+  font-size: 14px;
+  color: #333;
+  margin-left: 10px; /* Adds space between the button and the file name text */
 }

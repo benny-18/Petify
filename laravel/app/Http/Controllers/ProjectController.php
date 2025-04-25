@@ -19,22 +19,24 @@ class ProjectController extends Controller
             'pet_name' => 'required|string|max:255',
             'sex' => 'required|in:Male,Female',
             'age' => 'required|integer|min:0',
-            'breed' => 'nullable|string|max:255',
+            'breed' => 'nullable|string',
             'contact_person' => 'required|string|max:255',
             'contact_number' => 'required|string|max:20',
             'pet_description' => 'required|string',
             'reward' => 'nullable|numeric|min:0',
             'pet_photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
-    
+
         $imageName = null;
-    
+
+        // Handle image upload
         if ($request->hasFile('pet_photo')) {
             $image = $request->file('pet_photo');
             $imageName = time() . '_' . $image->getClientOriginalName();
-            $image->storeAs('public/pets', $imageName);
+            $image->storeAs('public/pets', $imageName);  // Save the image
         }
-    
+
+        // Create the project with the uploaded photo
         $project = Project::create([
             'user_id' => Auth::id(),
             'title' => $request->title,
@@ -47,63 +49,68 @@ class ProjectController extends Controller
             'contact_number' => $request->contact_number,
             'pet_description' => $request->pet_description,
             'reward' => $request->reward,
-            'pet_photo' => $imageName,
+            'pet_photo' => $imageName,  // Save the image name in the database
         ]);
-    
+
         return redirect()->route('project.editor', $project->id);
     }
+    
     
     public function update(Request $request, Project $project)
     {
         if ($project->user_id !== Auth::id()) {
             return redirect()->back()->with('error', 'Unauthorized action.');
         }
-    
+
         $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'nullable|string',
             'pet_name' => 'required|string|max:255',
             'sex' => 'required|in:Male,Female',
             'age' => 'required|integer|min:0',
-            'breed' => 'nullable|string|max:255',
+            'breed' => 'nullable|string',
             'contact_person' => 'required|string|max:255',
             'contact_number' => 'required|string|max:20',
             'pet_description' => 'required|string',
             'reward' => 'nullable|numeric|min:0',
-            'pet_photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'pet_photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Make sure to use 'pet_photo' here
         ]);
-    
-        // Handle new image upload
+
+        // Handle new image upload if provided
         if ($request->hasFile('pet_photo')) {
+            // Delete the old image if exists
+            if ($project->pet_photo) {
+                Storage::delete('public/pets/' . $project->pet_photo);
+            }
+
+            // Store the new image
             $image = $request->file('pet_photo');
             $imageName = time() . '_' . $image->getClientOriginalName();
             $image->storeAs('public/pets', $imageName);
+
+            // Update the pet_photo field in the database
             $project->pet_photo = $imageName;
         }
-    
+
+        // Update other fields
         $project->update($request->only([
             'title', 'description', 'pet_name', 'sex', 'age', 'breed',
             'contact_person', 'contact_number', 'pet_description', 'reward'
-        ]) + ['pet_photo' => $project->pet_photo]);
-    
-        if ($request->ajax()) {
-            return response()->json(['message' => 'Saved']);
-        }
-    
+        ]));
+
         return redirect()->route('project.editor', $project->id)
             ->with('success', 'Project updated successfully.');
-    }
-
-
-    public function destroy(Project $project)
-    {
-        if ($project->user_id == Auth::id()){
-            $project->delete();
-            return redirect()->back()->with('success', 'Project deleted successfully');
-        } else {
-            return redirect()->back()->with('error', 'You are not authorized to delete this project');
         }
-    }
+
+        public function destroy(Project $project)
+        {
+            if ($project->user_id == Auth::id()){
+                $project->delete();
+                return redirect()->back()->with('success', 'Project deleted successfully');
+            } else {
+                return redirect()->back()->with('error', 'You are not authorized to delete this project');
+            }
+        }
 
     public function edit($id)
     {

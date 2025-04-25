@@ -47,7 +47,8 @@
                 </div>
 
                 <h1 class="logo-text">Petify</h2>
-
+                 
+                 <!-- back to dashboard -->
                 <a href="{{ route('dashboard') }}" class="btn-back-dashboard"> 
                   Back to Dashboard
                 </a>
@@ -70,6 +71,7 @@
 
           </header>
 
+          <!-- template part -->
           <div class="content-container">
             <section class="preview-section" id="previewSection">
                 <div class="image-preview">
@@ -99,18 +101,20 @@
               <div class="form-divider"></div>
 
                 <div class="form-row">
-
                     <div class="button-container">
-                        <button class="importimg-button" onclick="document.getElementById('file-input').click()"></button>
-                        <input type="file" id="file-input" style="display:none;" accept="image/*" onchange="handleImageImport(event)" />
+                        <button class="importimg-button" onclick="document.getElementById('file-input').click()">
                         <img src="https://img.icons8.com/?size=100&id=wdoEeeG1GGY6&format=png&color=757575" class="icon-overlay">
                     </div>
+                    </button>
+                        <input type="file" id="file-input" style="display:none;" accept="image/*" onchange="handleImageImport(event)" />
+                        
 
-
+                    <!-- pet name -->
                     <div class="input-field pet-name-field">
                     <input type="text" name="pet_name" value="{{ old('pet_name', $project->pet_name) }}" placeholder="Pet name" />
                     </div>
 
+                    <!-- pet sex -->
                     <div class="input-field pet-sex-field">
                         <select name="sex">
                             <option value="" disabled selected hidden>Sex</option>
@@ -121,18 +125,21 @@
 
                 </div>
 
+                <!-- pet age -->
                 <div class="form-row">
                     <div class="input-field age-field">
                     <input type="number" name="age" value="{{ old('age', $project->age) }}" placeholder="Age" />
                     </div>
 
+                    <!-- pet breed-->
                     <div class="input-field breed-field">
-                    <select id="breed" value="{{ old('breed', $project->breed) }}" class="form-control" placeholder="Breed" />
+                    <select name="breed" id="breed" class="form-control">
                       <option value="" disabled selected>Select a breed</option>
                     </select>
                     </div>
                 </div>
 
+                <!-- contact -->
                 <div class="form-row">
                     <div class="input-field contact-person-field">
                     <input type="text" name="contact_person" value="{{ old('contact_person', $project->contact_person) }}" placeholder="Contact Person" />

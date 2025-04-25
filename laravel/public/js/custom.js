@@ -37,3 +37,17 @@
       wrapper.classList.remove('is-sticky');
     }
   });
+
+
+  // Breeds section
+  fetch("{{ asset('breeds.json') }}")  // Adjust the path to the JSON file if needed
+  .then(response => response.json())
+  .then(data => {
+      const breedSelect = document.getElementById("breed");
+      data.forEach(breed => {
+          const option = document.createElement("option");
+          option.value = breed;  // Use the breed as the option value
+          option.textContent = breed;  // Display breed name in dropdown
+          breedSelect.appendChild(option);
+      });
+  });

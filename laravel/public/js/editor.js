@@ -243,11 +243,9 @@ document.addEventListener('DOMContentLoaded', function () {
         });
 });
 
-// upload file
+
 function handleImageImport(event) {
-  const file = event.target.files[0];
-  if (file) {
-      console.log('Selected file:', file.name);
-      // You can upload it or process it here later
-  }
+  const fileInput = event.target;
+  const fileName = fileInput.files[0]?.name || "No file chosen";
+  document.getElementById("fake-file-name").value = fileName;
 }
