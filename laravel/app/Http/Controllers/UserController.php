@@ -74,8 +74,13 @@ class UserController extends Controller
 
     public function dashboard()
     {
-        $projects = Auth::user()->projects;
-        return view('dashboard', compact('projects'));
+    $projects = Auth::user()->projects;
+
+    return response()
+        ->view('dashboard', compact('projects'))
+        ->header('Cache-Control', 'no-store, no-cache, must-revalidate, max-age=0')
+        ->header('Pragma', 'no-cache')
+        ->header('Expires', '0');
     }
 
     public function update(Request $request)

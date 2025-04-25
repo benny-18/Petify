@@ -31,7 +31,7 @@
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <a href="{{ url('/') }}" class="navbar-brand mx-auto mx-lg-0">Petify</a>
+            <span class="navbar-brand mx-auto mx-lg-0">Petify</span>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-lg-5">
                     <li class="nav-item"><a class="nav-link click-scroll" href="#section_1">Home</a></li>
@@ -235,7 +235,7 @@
  <!-- Profile Modal -->
 <div class="modal fade" id="profileModal" tabindex="-1" aria-labelledby="profileModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
-        <div class="modal-content">
+        <div class="modal-content" style="padding-right: 30px; padding-left: 30px;">
             <div class="modal-header justify-content-center">
                 <h5 style="font-size: 40px" class="modal-title text-center">Profile</h5>
             </div>
@@ -280,19 +280,19 @@
 
                             <!-- Old password -->
                             <div class="mb-3 position-relative">
-                                <input type="password" name="old_password" id="old_password" class="form-control pe-5" placeholder="Enter Old Password" minlength="8" required>
+                                <input type="password" name="old_password" id="old_password" class="form-control pe-5" placeholder="Enter Old Password" minlength="8">
                                 <span id="password-status-icon" class="position-absolute top-50 end-0 translate-middle-y me-3">
                                 </span>
                             </div>
 
                             <!-- New password -->
                             <div class="mb-3">
-                                <input type="password" name="new_password" class="form-control pe-5" placeholder="Enter New Password" minlength="8" required>
+                                <input type="password" name="new_password" class="form-control pe-5" placeholder="Enter New Password" minlength="8">
                             </div>
 
                             <!-- Re-enter password -->
                             <div class="mb-4 position-relative">
-                                <input type="password" name="new_password_confirmation" id="new_password_confirmation" class="form-control" placeholder="Re-enter Password" oninput="checkPasswordMatch()" minlength="8" required>
+                                <input type="password" name="new_password_confirmation" id="new_password_confirmation" class="form-control" placeholder="Re-enter Password" oninput="checkPasswordMatch()" minlength="8">
 
                                 <span id="match-icon" class="position-absolute top-50 end-0 translate-middle-y me-3" style="display: none;">
                                     <div class="spinner-border spinner-border-sm text-secondary" role="status" id="match-loading" style="display: none;"></div>

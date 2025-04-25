@@ -575,8 +575,11 @@ strong {
   background-color: #A01656;
   border-color: #A01656;
 }
+
 .modal-content {
-  border-radius: 50px;
+  border-radius: 30px;
+  padding-left: 30px !important;
+  padding-right: 30px !important;
 }
 
 .hero-divider {

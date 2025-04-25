@@ -15,14 +15,14 @@ class ProjectController extends Controller
     {
         $request->validate([
             'title' => 'required|string|max:256',
-            'description' => 'required|string',
-            'pet_name' => 'required|string|max:255',
-            'sex' => 'required|in:Male,Female',
-            'age' => 'required|integer|min:0',
+            'description' => 'string',
+            'pet_name' => 'string|max:255',
+            'sex' => 'in:Male,Female',
+            'age' => 'integer|min:0',
             'breed' => 'nullable|string',
-            'contact_person' => 'required|string|max:255',
-            'contact_number' => 'required|string|max:20',
-            'pet_description' => 'required|string',
+            'contact_person' => 'string|max:255',
+            'contact_number' => 'string|max:20',
+            'pet_description' => 'string',
             'reward' => 'nullable|numeric|min:0',
             'pet_photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
@@ -65,13 +65,13 @@ class ProjectController extends Controller
         $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'nullable|string',
-            'pet_name' => 'required|string|max:255',
-            'sex' => 'required|in:Male,Female',
-            'age' => 'required|integer|min:0',
+            'pet_name' => 'nullable|string|max:255',
+            'sex' => 'nullable|in:Male,Female',
+            'age' => 'nullable|integer|min:0',
             'breed' => 'nullable|string',
-            'contact_person' => 'required|string|max:255',
-            'contact_number' => 'required|string|max:20',
-            'pet_description' => 'required|string',
+            'contact_person' => 'nullable|string|max:255',
+            'contact_number' => 'nullable|string|max:20',
+            'pet_description' => 'nullable|string',
             'reward' => 'nullable|numeric|min:0',
             'pet_photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Make sure to use 'pet_photo' here
         ]);
