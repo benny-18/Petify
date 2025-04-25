@@ -38,7 +38,6 @@
     }
   });
 
-
   // Breeds section
   fetch("{{ asset('breeds.json') }}")  // Adjust the path to the JSON file if needed
   .then(response => response.json())

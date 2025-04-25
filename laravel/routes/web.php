@@ -14,12 +14,10 @@ Route::get('/editor', function () {return view('editor'); });
 Route::post('/login', [UserController::class, 'login'])->name('login');
 Route::post('/register', [UserController::class, 'register'])->name('register');
 
-//show dashbaord per user
-Route::get('/dashboard', function() {
-    return view('dashboard');
-})->middleware('auth');
-
-Route::get('/dashboard', [UserController::class, 'dashboard'])->name('dashboard');
+// Show dashboard after login
+Route::get('/dashboard', [UserController::class, 'dashboard'])
+    ->middleware('auth')
+    ->name('dashboard');
 
 //profile update
 Route::middleware('auth')->group(function () {
@@ -30,7 +28,7 @@ Route::middleware('auth')->group(function () {
 Route::post('/check-password', [UserController::class, 'checkPassword'])->name('check.password');
 
 //create project route
-Route::post('/dashboard', [ProjectController::class, 'store'])
+Route::post('/dashboard/project-create', [ProjectController::class, 'store'])
     ->middleware('auth')
     ->name('project.store');
 

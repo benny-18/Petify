@@ -280,19 +280,19 @@
 
                             <!-- Old password -->
                             <div class="mb-3 position-relative">
-                                <input type="password" name="old_password" id="old_password" class="form-control pe-5" placeholder="Enter Old Password">
+                                <input type="password" name="old_password" id="old_password" class="form-control pe-5" placeholder="Enter Old Password" minlength="8" required>
                                 <span id="password-status-icon" class="position-absolute top-50 end-0 translate-middle-y me-3">
                                 </span>
                             </div>
 
                             <!-- New password -->
                             <div class="mb-3">
-                                <input type="password" name="new_password" class="form-control pe-5" placeholder="Enter New Password">
+                                <input type="password" name="new_password" class="form-control pe-5" placeholder="Enter New Password" minlength="8" required>
                             </div>
 
                             <!-- Re-enter password -->
                             <div class="mb-4 position-relative">
-                                <input type="password" name="new_password_confirmation" id="new_password_confirmation" class="form-control" placeholder="Re-enter Password" oninput="checkPasswordMatch()">
+                                <input type="password" name="new_password_confirmation" id="new_password_confirmation" class="form-control" placeholder="Re-enter Password" oninput="checkPasswordMatch()" minlength="8" required>
 
                                 <span id="match-icon" class="position-absolute top-50 end-0 translate-middle-y me-3" style="display: none;">
                                     <div class="spinner-border spinner-border-sm text-secondary" role="status" id="match-loading" style="display: none;"></div>
@@ -378,73 +378,112 @@
     }
   });
 
-  // PASSWORD CHECKING SECTION
-  let typingTimer;
-  const delay = 600;
-  const input = document.getElementById('old_password');
-  const icon = document.getElementById('password-status-icon');
+    // PASSWORD CHECKING SECTION
+    let typingTimer;
+    const delay = 600;  // Delay before making the request
+    const input = document.getElementById('old_password');  // The old password input field
+    const icon = document.getElementById('password-status-icon');  // The icon element to show validation feedback
 
-  input.addEventListener('input', () => {
-    clearTimeout(typingTimer);
+    input.addEventListener('input', () => {
+        clearTimeout(typingTimer);
+        icon.innerHTML = `<div class="spinner-border spinner-border-sm text-secondary" role="status"></div>`;  // Show spinner while checking
+
+        typingTimer = setTimeout(() => {
+            checkOldPassword(input.value);  // Call password checking function after delay
+        }, delay);
+    });
+
+    function checkOldPassword(password) {
+    const saveButton = document.getElementById('saveButton');
+    const icon = document.getElementById('password-status-icon');
+    const spinner = document.querySelector('.spinner-border');  // Spinner element (if any)
+
+    // If the old password is empty, enable the button and hide the spinner
+    if (password.trim() === '') {
+        saveButton.classList.remove('btn-secondary');  // Remove gray color
+        saveButton.classList.add('btn-primary');  // Restore the normal color
+        saveButton.removeAttribute('disabled');  // Enable the button
+        icon.innerHTML = '';  // Clear the status icon
+        if (spinner) spinner.style.display = 'none';  // Hide the spinner
+        return;  // Stop further execution
+    }
+
+    // Show the spinner while checking the password
     icon.innerHTML = `<div class="spinner-border spinner-border-sm text-secondary" role="status"></div>`;
+    if (spinner) spinner.style.display = 'inline-block';
 
-    typingTimer = setTimeout(() => {
-      checkOldPassword(input.value);
-    }, delay);
-  });
-
-  function checkOldPassword(password) {
     fetch('{{ route('check.password') }}', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'X-CSRF-TOKEN': '{{ csrf_token() }}'
-      },
-      body: JSON.stringify({ password })
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+        },
+        body: JSON.stringify({ password })
     })
-      .then(response => response.json())
-      .then(data => {
+    .then(response => response.json())
+    .then(data => {
         if (data.match) {
-          icon.innerHTML = `<i class="bi bi-check-circle-fill text-success"></i>`;
+            icon.innerHTML = `<i class="bi bi-check-circle-fill text-success"></i>`;  // Success icon
+            saveButton.classList.remove('btn-secondary');  // Remove gray class if password matches
+            saveButton.classList.add('btn-primary');  // Keep the normal color
+            saveButton.removeAttribute('disabled');  // Enable the button
         } else {
-          icon.innerHTML = `<i class="bi bi-x-circle-fill text-danger"></i>`;
+            icon.innerHTML = `<i class="bi bi-x-circle-fill text-danger"></i>`;  // Error icon (wrong password)
+            saveButton.classList.remove('btn-primary');  // Remove normal color
+            saveButton.classList.add('btn-secondary');  // Apply gray color
+            saveButton.setAttribute('disabled', 'true');  // Make the button unclickable
         }
-      })
-      .catch(() => {
-        icon.innerHTML = `<i class="bi bi-exclamation-circle-fill text-warning"></i>`;
-      });
-  }
+        if (spinner) spinner.style.display = 'none';  // Hide the spinner after the check
+    })
+    .catch(() => {
+        icon.innerHTML = `<i class="bi bi-exclamation-circle-fill text-warning"></i>`;  // Warning icon for any error
+        saveButton.classList.remove('btn-primary');  // Remove normal color
+        saveButton.classList.add('btn-secondary');  // Apply gray color
+        saveButton.setAttribute('disabled', 'true');  // Make the button unclickable
+        if (spinner) spinner.style.display = 'none';  // Hide the spinner if there's an error
+    });
+}
 
-  // CHECK PASSWORD MATCH
-  let matchTimer;
+    //new pass confirmation
+    let matchTimer;
 
-  function checkPasswordMatch() {
-    const newPassword = document.querySelector('input[name="new_password"]').value;
-    const confirmation = document.getElementById('new_password_confirmation').value;
-    const loading = document.getElementById('match-loading');
-    const success = document.getElementById('match-success');
-    const error = document.getElementById('match-error');
-    const icon = document.getElementById('match-icon');
+    function checkPasswordMatch() {
+        const newPassword = document.querySelector('input[name="new_password"]').value;
+        const confirmation = document.getElementById('new_password_confirmation').value;
+        const loading = document.getElementById('match-loading');
+        const success = document.getElementById('match-success');
+        const error = document.getElementById('match-error');
+        const icon = document.getElementById('match-icon');
+        const saveButton = document.getElementById('saveButton');  // The "Save Changes" button
 
-    icon.style.display = 'block';
-    loading.style.display = 'inline-block';
-    success.style.display = 'none';
-    error.style.display = 'none';
-
-    clearTimeout(matchTimer);
-    matchTimer = setTimeout(() => {
-      loading.style.display = 'none';
-      if (confirmation === '') {
-        icon.style.display = 'none';
-      } else if (newPassword === confirmation) {
-        success.style.display = 'inline-block';
-        error.style.display = 'none';
-      } else {
+        icon.style.display = 'block';
+        loading.style.display = 'inline-block';
         success.style.display = 'none';
-        error.style.display = 'inline-block';
-      }
-    }, 500);
-  }
+        error.style.display = 'none';
+
+        clearTimeout(matchTimer);
+        matchTimer = setTimeout(() => {
+            loading.style.display = 'none';
+            if (confirmation === '') {
+                icon.style.display = 'none';
+                saveButton.disabled = true;  // Disable the button if the confirmation is empty
+                saveButton.classList.add('btn-secondary');  // Add gray color class
+                saveButton.classList.remove('btn-primary');  // Remove original color class
+            } else if (newPassword === confirmation) {
+                success.style.display = 'inline-block';
+                error.style.display = 'none';
+                saveButton.disabled = false;  // Enable the button when passwords match
+                saveButton.classList.add('btn-primary');  // Revert to original color
+                saveButton.classList.remove('btn-secondary');  // Remove gray color class
+            } else {
+                success.style.display = 'none';
+                error.style.display = 'inline-block';
+                saveButton.disabled = true;  // Disable the button when passwords do not match
+                saveButton.classList.add('btn-secondary');  // Add gray color class
+                saveButton.classList.remove('btn-primary');  // Remove original color class
+            }
+        }, 500);
+    }
 
   // SHOW/HIDE PASSWORD
   function togglePassword(inputId, btn) {
@@ -458,7 +497,6 @@
     }
   }
 </script>
-
 
 </body>
 </html>
