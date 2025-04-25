@@ -71,7 +71,7 @@
                     </span>
                 </div>
 
-                <a href="#">Forgot your password?</a>
+                <!-- <a href="#">Forgot your password?</a> -->
                 <button type="submit">Login</button>
             </form>
         </div>
@@ -107,49 +107,52 @@
             input.type = isPassword ? 'text' : 'password';
             toggleIcon.textContent = isPassword ? 'Hide' : 'Show';
         }
+    </script>
 
-        // Terms and Conditions popup
-        document.getElementById('termsLabel').addEventListener('click', function (e) {
-            e.preventDefault();
-            Swal.fire({
-                title: 'Terms and Conditions',
-                html: 'By clicking ACCEPT, you agree to our terms of service and privacy policy.',
-                icon: 'info',
-                showCancelButton: true,
-                confirmButtonText: 'ACCEPT',
-                cancelButtonText: 'DECLINE'
-            }).then((result) => {
-                const checkbox = document.getElementById('termsCheckbox');
-                const checkmark = document.getElementById('termsCheckmark');
-                const termsText = document.getElementById('termsText');
-                if (result.isConfirmed) {
-                    checkbox.checked = true;
-                    checkmark.style.display = "inline";
-                    termsText.style.color = "green";
-                    termsText.style.textDecoration = "none";
-                } else {
-                    checkbox.checked = false;
-                    checkmark.style.display = "none";
-                    termsText.style.color = "black";
-                    termsText.style.textDecoration = "underline";
-                }
-                document.getElementById('termsCheckbox').checked = result.isConfirmed;
-            });
-        });
-
-        // Prevent registration if terms not accepted
-        document.getElementById('registrationForm').addEventListener('submit', function (e) {
+    <script>
+    // Terms and Conditions popup
+    document.getElementById('termsLabel').addEventListener('click', function (e) {
+        e.preventDefault();
+        Swal.fire({
+            title: 'Terms and Conditions',
+            html: 'By clicking ACCEPT, you agree to our terms of service and privacy policy.',
+            icon: 'info',
+            showCancelButton: true,
+            confirmButtonText: 'ACCEPT',
+            cancelButtonText: 'DECLINE'
+        }).then((result) => {
             const checkbox = document.getElementById('termsCheckbox');
-
-            if (chekbox.checked) {
-                e.preventDefault();
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Oops...',
-                    text: 'You must accept the Terms and Conditions to register.'
-                });
+            const checkmark = document.getElementById('termsCheckmark');
+            const termsText = document.getElementById('termsText');
+            if (result.isConfirmed) {
+                checkbox.checked = true;
+                checkmark.style.display = "inline";
+                termsText.style.color = "green";
+                termsText.style.textDecoration = "none";
+            } else {
+                checkbox.checked = false;
+                checkmark.style.display = "none";
+                termsText.style.color = "black";
+                termsText.style.textDecoration = "underline";
             }
+            document.getElementById('termsCheckbox').checked = result.isConfirmed;
         });
+    });
+
+    // Prevent registration if terms not accepted
+    document.getElementById('registrationForm').addEventListener('submit', function (e) {
+        const checkbox = document.getElementById('termsCheckbox');
+
+        // Prevent submission if the checkbox is not checked
+        if (!checkbox.checked) {
+            e.preventDefault();  // Prevent form submission
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'You must accept the Terms and Conditions to register.'
+            });
+        }
+    });
     </script>
 
     @if (session('registered'))
