@@ -47,8 +47,7 @@
                 </div>
 
                 <h1 class="logo-text">Petify</h2>
-                 
-                 <!-- back to dashboard -->
+
                 <a href="{{ route('dashboard') }}" class="btn-back-dashboard"> 
                   Back to Dashboard
                 </a>
@@ -86,7 +85,7 @@
 
                 @csrf
                 @method('PUT')
-              
+
               <!-- editable title -->
               <input type="text" name="title" value="{{ old('title', $project->title) }}" class="title-field project-title" />
 
@@ -94,7 +93,7 @@
               <textarea name="description" ows="4" class="desc-field project description">{{ old('description', $project->description) }}</textarea>
 
               <p class="project-meta">
-                {{ $project->user->firstname }} {{ $project->user->lastname }} •
+                Created by {{ $project->user->firstname }} {{ $project->user->lastname }}  •
                 {{ $project->created_at->format('D M d, Y') }}
               </p>
 
