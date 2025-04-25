@@ -171,4 +171,32 @@
 
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+  <script>
+    // breed selector 
+    document.addEventListener('DOMContentLoaded', function () {
+        const selectedBreed = @json(old('breed', $project->breed));
+
+        fetch('/data/breeds.json')
+            .then(response => response.json())
+            .then(breeds => {
+                const select = document.getElementById('breed');
+
+                breeds.forEach(breed => {
+                    const option = document.createElement('option');
+                    option.value = breed;
+                    option.textContent = breed;
+
+                    if (breed === selectedBreed) {
+                        option.selected = true;
+                    }
+
+                    select.appendChild(option);
+                });
+            })
+            .catch(error => {
+                console.error('Error loading breeds:', error);
+            });
+    });
+  </script>
+
 </html>

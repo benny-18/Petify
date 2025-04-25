@@ -218,31 +218,6 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 });
 
-// breed selector 
-document.addEventListener('DOMContentLoaded', function () {
-    fetch('/data/breeds.json')
-        .then(response => response.json())
-        .then(breeds => {
-            const select = document.getElementById('breed');
-            const selectedBreed = "{{ old('breed', $project->breed) }}";
-
-            breeds.forEach(breed => {
-                const option = document.createElement('option');
-                option.value = breed;
-                option.textContent = breed;
-
-                if (breed === selectedBreed) {
-                    option.selected = true;
-                }
-
-                select.appendChild(option);
-            });
-        })
-        .catch(error => {
-            console.error('Error loading breeds:', error);
-        });
-});
-
 
 function handleImageImport(event) {
   const fileInput = event.target;
