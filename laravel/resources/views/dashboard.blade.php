@@ -311,7 +311,7 @@
     <script src="{{ asset('js/jquery.magnific-popup.min.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="{{ asset('js/custom.js') }}"></script>
-    <script src="{{ asset('js/click-scroll.js') }}"></script>
+    <script src="{{ asset('js/clickscroll.js') }}"></script>
 
 
 <!-- save changes -->
@@ -332,6 +332,113 @@
             modal.show();
         });
     @endif
+</script>
+
+<script>
+  // CONFIRM DELETE PROJECT
+  function confirmDelete(projectId) {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "This project will be deleted permanently.",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#6c757d',
+      confirmButtonText: 'Yes, delete it!',
+      reverseButtons: true
+    }).then((result) => {
+      if (result.isConfirmed) {
+        document.getElementById(`delete-form-${projectId}`).submit();
+      }
+    });
+  }
+  
+  // RELOAD ON BACK BUTTON
+  window.addEventListener('pageshow', function (event) {
+    if (event.persisted) {
+      window.location.reload();
+    }
+  });
+  
+  // PASSWORD CHECKING SECTION
+  let typingTimer;
+  const delay = 600;
+  const input = document.getElementById('old_password');
+  const icon = document.getElementById('password-status-icon');
+  
+  input.addEventListener('input', () => {
+    clearTimeout(typingTimer);
+    icon.innerHTML = `<div class="spinner-border spinner-border-sm text-secondary" role="status"></div>`;
+  
+    typingTimer = setTimeout(() => {
+      checkOldPassword(input.value);
+    }, delay);
+  });
+  
+  function checkOldPassword(password) {
+    fetch('{{ route('check.password') }}', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+      },
+      body: JSON.stringify({ password })
+    })
+      .then(response => response.json())
+      .then(data => {
+        if (data.match) {
+          icon.innerHTML = `<i class="bi bi-check-circle-fill text-success"></i>`;
+        } else {
+          icon.innerHTML = `<i class="bi bi-x-circle-fill text-danger"></i>`;
+        }
+      })
+      .catch(() => {
+        icon.innerHTML = `<i class="bi bi-exclamation-circle-fill text-warning"></i>`;
+      });
+  }
+  
+  // CHECK PASSWORD MATCH
+  let matchTimer;
+  
+  function checkPasswordMatch() {
+    const newPassword = document.querySelector('input[name="new_password"]').value;
+    const confirmation = document.getElementById('new_password_confirmation').value;
+    const loading = document.getElementById('match-loading');
+    const success = document.getElementById('match-success');
+    const error = document.getElementById('match-error');
+    const icon = document.getElementById('match-icon');
+  
+    icon.style.display = 'block';
+    loading.style.display = 'inline-block';
+    success.style.display = 'none';
+    error.style.display = 'none';
+  
+    clearTimeout(matchTimer);
+    matchTimer = setTimeout(() => {
+      loading.style.display = 'none';
+      if (confirmation === '') {
+        icon.style.display = 'none';
+      } else if (newPassword === confirmation) {
+        success.style.display = 'inline-block';
+        error.style.display = 'none';
+      } else {
+        success.style.display = 'none';
+        error.style.display = 'inline-block';
+      }
+    }, 500);
+  }
+  
+  // SHOW/HIDE PASSWORD
+  function togglePassword(inputId, btn) {
+    const input = document.getElementById(inputId);
+    if (input.type === "password") {
+      input.type = "text";
+      btn.textContent = "Hide";
+    } else {
+      input.type = "password";
+      btn.textContent = "Show";
+    }
+  }
 </script>
 
 
