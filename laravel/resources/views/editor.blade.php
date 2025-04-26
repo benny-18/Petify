@@ -11,7 +11,30 @@
       rel="stylesheet"
     />
   </head>
+
+  <script>
+    window.addEventListener('load', function () {
+        setTimeout(function () {
+        const loader = document.getElementById('loader');
+        loader.classList.add('fade-out');
+        setTimeout(() => {
+            loader.style.display = 'none';
+        }, 1000);
+        }, 2000);
+    });
+  </script>
+
+
   <body>
+    <div id="loader">
+        <div class="loader-content">
+            <img src="https://i.pinimg.com/originals/18/f5/66/18f566fa5cf046c1e81fc6c61ce5dc53.gif" alt="Loading...">
+            <h1 class="logo-text">Loading...</h1>
+        </div>
+    </div>
+
+
+
     <div class="app-container">
       <main class="main-content">
 
@@ -21,7 +44,8 @@
             <h2 class="sidebar-title">Project Templates</h2>
           </div>
           <div class="sidebar-divider"></div>
-          <div class="template-item selected">
+
+          <div style="border: 2px solid #c50565;" class="template-item template-selected">
             <img
               src="{{ asset('images/templates/missing-pet-template.png') }}"
               alt="Missing Pet Template"
@@ -29,6 +53,44 @@
             />
             <p class="template-name">Missing Pet</p>
           </div>
+
+          <div class="template-item">
+            <img
+              src="{{ asset('images/templates/missing-pet-template-2.webp') }}"
+              alt="Missing Pet Template"
+              class="template-image"
+            />
+            <p class="template-name">Missing Pet</p>
+          </div>
+
+          <div class="template-item">
+            <img
+              src="{{ asset('images/templates/missing-pet-template-3.webp') }}"
+              alt="Missing Pet Template"
+              class="template-image"
+            />
+            <p class="template-name">Missing Pet</p>
+          </div>
+
+          <div class="template-item">
+            <img
+              src="{{ asset('images/templates/missing-pet-template-4.webp') }}"
+              alt="Missing Pet Template"
+              class="template-image"
+            />
+            <p class="template-name">Missing Pet</p>
+          </div>
+
+          <div class="template-item">
+            <img
+              src="{{ asset('images/templates/missing-pet-template-5.webp') }}"
+              alt="Missing Pet Template"
+              class="template-image"
+            />
+            <p class="template-name">Missing Pet</p>
+          </div>
+
+
         </aside>
 
         <div class="content-area">
@@ -48,7 +110,7 @@
 
                 <h1 class="logo-text">Petify</h2>
 
-                <a href="{{ route('dashboard') }}" class="btn-back-dashboard"> 
+                <a href="{{ route('dashboard') }}" class="btn-back-dashboard">
                   Back to Dashboard
                 </a>
             </div>
@@ -106,7 +168,7 @@
                     </div>
                     </button>
                         <input type="file" id="file-input" style="display:none;" accept="image/*" onchange="handleImageImport(event)" />
-                        
+
 
                     <!-- pet name -->
                     <div class="input-field pet-name-field">
@@ -172,7 +234,7 @@
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
   <script>
-    // breed selector 
+    // breed selector
     document.addEventListener('DOMContentLoaded', function () {
         const selectedBreed = @json(old('breed', $project->breed));
 

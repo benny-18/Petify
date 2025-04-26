@@ -28,6 +28,32 @@
     font-style: normal;
 }
 
+#loader {
+    position: fixed;
+    inset: 0;
+    background: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    opacity: 1;
+    transition: opacity 0.5s ease;
+  }
+
+  #loader.fade-out {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .loader-content {
+    text-align: center;
+  }
+
+  #loader img {
+    display: block;
+    height: calc(100% - 50px);
+  }
+
 * {
     margin: 0;
     padding: 0;
@@ -121,10 +147,11 @@
     /* margin-left: 20px; */
     margin-bottom: 24px;
 
-    background-color: #fbfbfb;
     padding: 8px;
     border-radius: 20px;
     border: 1px solid #cfcfcf;
+    background: #FBFBFB;
+    background: linear-gradient(90deg, rgba(251, 251, 251, 1) 30%, rgba(255, 184, 209, 1) 100%);
   }
 
   .logo-container {
@@ -224,6 +251,8 @@
     transition: transform 0.6s ease;
     z-index: 2;
     transform: translateX(0); /* shown */
+    overflow: scroll;
+    scrollbar-width: none;
   }
 
   .sidebar.hidden {
@@ -237,7 +266,7 @@
   }
 
   .sidebar-title {
-    color: #6e6e6e;
+    color: #c50565;
     font-size: 20px;
     font-family: "instagram Sans", sans-serif;
     font-weight: 700;
@@ -258,8 +287,12 @@
     padding: 12px 59px;
     border-radius: 20px;
     background-color: #f5f5f5;
-    border: 2px solid #c50565;
+    border: 2px solid #dddddd;
   }
+
+  /* .template-item, .template-selected {
+    border: 2px solid #c50565;
+  } */
 
   .template-image {
     width: 119px;
@@ -527,7 +560,9 @@
 
   .breed-field {
     width: 75%;
-    padding: 16px;
+    /* padding: 16px; */
+    padding-left: 6px;
+    padding-top: 8px;
   }
 
   .contact-person-field,
@@ -713,7 +748,7 @@
       border: 2px solid #ddd; /* 2px border */
       border-radius: 24px;
       text-decoration: none;
-      margin-left: 16px;
+      /* margin-left: 16px; */
       transition: background-color 0.3s ease, color 0.3s ease;
   }
 
@@ -721,6 +756,8 @@
       background-color: white;
       color: #C50565;
       text-decoration: none;
+      border: 2px solid #c50565;
+      box-shadow: 0px 8px 24px 0px rgba(0, 0, 0, 0.25);
   }
 
   /* Optional custom styling for form inputs */
