@@ -15,25 +15,23 @@
   <script>
     window.addEventListener('load', function () {
         setTimeout(function () {
-        const loader = document.getElementById('loader');
+        const loader = document.getElementById('loader-anim');
         loader.classList.add('fade-out');
         setTimeout(() => {
             loader.style.display = 'none';
         }, 1000);
-        }, 2000);
+        }, 1000);
     });
   </script>
 
-
   <body>
-    <div id="loader">
+
+    <div id="loader-anim">
         <div class="loader-content">
             <img src="https://i.pinimg.com/originals/18/f5/66/18f566fa5cf046c1e81fc6c61ce5dc53.gif" alt="Loading...">
             <h1 class="logo-text">Loading...</h1>
         </div>
     </div>
-
-
 
     <div class="app-container">
       <main class="main-content">
@@ -118,7 +116,7 @@
                     <div class="save-indicators">
                         <div id="save-success" style="display: none; align-items: center; gap: 8px; opacity: 0; transition: opacity 0.5s ease;">
                             <img style="width: 26px" src="https://img.icons8.com/?size=100&id=a2LNYNfCGquh&format=png&color=c50565" alt="Save icon">
-                            <h2 style="color: #C50565" class="sidebar-title">Changes saved to cloud</h2>
+                            <h2 style="color: #C50565" class="sidebar-title">Changes saved!</h2>
                         </div>
 
                         <div id="save-progress" style="display: none; align-items: center; gap: 8px; opacity: 0; transition: opacity 0.5s ease;">

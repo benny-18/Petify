@@ -51,7 +51,7 @@ h1 {
 
   h2 {
     font-family: 'Oleo Script Swash Caps', cursive;
-    font-size: 60px;
+    font-size: 80px;
     margin-top: 0px;
     margin-bottom: 40px;
   }
@@ -375,7 +375,7 @@ input {
     list-style: none;
     width: 20px;
     height: 20px;
-    background: rgba(197,5,101,0.05);
+    background: rgba(197, 5, 101, 0.072);
     animation: animate 19s linear infinite;
 }
 

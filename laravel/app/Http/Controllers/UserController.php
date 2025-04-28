@@ -90,6 +90,7 @@ class UserController extends Controller
     $request->validate([
         'firstname' => 'required|string|max:255',
         'lastname' => 'required|string|max:255',
+        'email' => 'required|string|email|max:255|unique:users,email',
         'old_password' => 'nullable|string',
         'new_password' => 'nullable|string|min:8|confirmed',
         'profile_picture' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
@@ -97,6 +98,7 @@ class UserController extends Controller
 
     $user->firstname = $request->firstname;
     $user->lastname = $request->lastname;
+    $user->email=$request->email;
 
     if ($request->hasFile('profile_picture')) {
         // Delete old profile picture if exists

@@ -245,7 +245,7 @@
                 @csrf
                 <div class="modal-body">
                     <div class="row g-4">
-                        <!-- Left: Profile Picture -->
+                        <!-- Profile Picture -->
                         <div class="col-md-4 text-center mb-3 mb-md-0">
                             <img src="{{ Auth::user()->profile_picture ? asset('storage/' . Auth::user()->profile_picture) : asset('images/pfp.jpg') }}"
                                 alt="Profile Picture"

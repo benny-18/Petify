@@ -28,7 +28,12 @@
     font-style: normal;
 }
 
-#loader {
+.fade-out {
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+#loader-anim {
     position: fixed;
     inset: 0;
     background: #ffffff;
@@ -40,7 +45,7 @@
     transition: opacity 0.5s ease;
   }
 
-  #loader.fade-out {
+  #loader-anim.fade-out {
     opacity: 0;
     pointer-events: none;
   }
@@ -49,7 +54,7 @@
     text-align: center;
   }
 
-  #loader img {
+  #loader-anim img {
     display: block;
     height: calc(100% - 50px);
   }
@@ -359,7 +364,7 @@
 
   .zoom-toggle-btn {
     position: absolute;
-    bottom: 20px;
+    bottom: 50px;
     left: 50%;
     transform: translateX(-50%);
     background-color: #c50565;

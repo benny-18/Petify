@@ -146,6 +146,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
     let autosaveTimer;
 
+    // setTimeout(function () {
+    //   const loader = document.getElementById('loader');
+    //   loader.classList.add('fade-out');
+    //   setTimeout(() => {
+    //     loader.style.display = 'none';
+    //   }, 500); 
+    // }, 1000);
+
     document.querySelectorAll('#editorForm input, #editorForm select, #editorForm textarea').forEach(field => {
         field.addEventListener('input', () => {
             clearTimeout(autosaveTimer);
@@ -156,7 +164,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
             autosaveTimer = setTimeout(() => {
                 autosaveForm();
-            }, 5000);
+            }, 3000);
         });
     });
 
@@ -196,7 +204,7 @@ document.addEventListener('DOMContentLoaded', function () {
     function showSaved() {
         const now = new Date();
         const formattedTime = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-        const timeHTML = `Changes saved to cloud <span style="font-weight: normal; font-size: 13px;">(at ${formattedTime})</span>`;
+        const timeHTML = `Changes saved! <span style="font-weight: normal; font-size: 13px;">(at ${formattedTime})</span>`;
         saveSuccess.querySelector('h2').innerHTML = timeHTML;
 
         fadeOut(saveProgress);
