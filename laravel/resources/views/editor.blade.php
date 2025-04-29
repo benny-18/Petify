@@ -156,7 +156,6 @@
 
 
                 <button id="toggleZoomBtn" class="zoom-toggle-btn">Fit to Panel</button>
-                <div class="text-red-500 text-2xl">Tailwind Test</div>
 
             </section>
 
