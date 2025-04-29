@@ -145,7 +145,7 @@
                     <div style="transform: scale(0.5); transform-origin: top left;">
                     @livewire('poster-editor', [
                         'petName' => $project->pet_name,
-                        'petDescription' => $project->description,
+                        'petDescription' => $project->pet_description,
                         'reward' => $project->reward,
                         'contactNumber' => $project->contact_number,
                         'petImage' => $project->pet_image
