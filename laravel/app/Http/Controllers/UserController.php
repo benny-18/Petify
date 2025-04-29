@@ -83,6 +83,7 @@ class UserController extends Controller
         ->header('Expires', '0');
     }
 
+    // UPDATE
     public function update(Request $request)
     {
     $user = Auth::user();
@@ -90,7 +91,7 @@ class UserController extends Controller
     $request->validate([
         'firstname' => 'required|string|max:255',
         'lastname' => 'required|string|max:255',
-        'email' => 'required|string|email|max:255|unique:users,email',
+        'email' => 'required|string|email|max:255|unique:users,email,' . $user->id, 
         'old_password' => 'nullable|string',
         'new_password' => 'nullable|string|min:8|confirmed',
         'profile_picture' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
