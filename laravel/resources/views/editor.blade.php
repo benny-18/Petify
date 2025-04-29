@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en">
+  @livewireStyles
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -24,6 +25,7 @@
     });
   </script>
 
+  @livewireScripts
   <body>
 
     <div id="loader-anim">
@@ -130,14 +132,32 @@
 
           </header>
 
+
           <!-- template part -->
           <div class="content-container">
             <section class="preview-section" id="previewSection">
-                <div class="image-preview">
+
+                <!-- <div class="image-preview">
                     <img src="{{ asset('images/templates/missing-pet-template.png') }}" alt="Pet Image Preview" class="pet-image" />
+                </div> -->
+
+                <div class="image-preview relative overflow-hidden" style="width: 794px; height: 1122px;">
+                    <div style="transform: scale(0.5); transform-origin: top left;">
+                    @livewire('poster-editor', [
+                        'petName' => $project->pet_name,
+                        'petDescription' => $project->description,
+                        'reward' => $project->reward,
+                        'contactNumber' => $project->contact_number,
+                        'petImage' => $project->pet_image
+                    ])
+                    </div>
                 </div>
 
+
+
                 <button id="toggleZoomBtn" class="zoom-toggle-btn">Fit to Panel</button>
+                <div class="text-red-500 text-2xl">Tailwind Test</div>
+
             </section>
 
             <!-- PROJECT NAME AND DESCRIPTION EDITOR -->
@@ -165,12 +185,12 @@
                         <img src="https://img.icons8.com/?size=100&id=wdoEeeG1GGY6&format=png&color=757575" class="icon-overlay">
                     </div>
                     </button>
-                        <input type="file" id="file-input" style="display:none;" accept="image/*" onchange="handleImageImport(event)" />
+                        <input wire:model="petImage" type="file" id="file-input" style="display:none;" accept="image/*" onchange="handleImageImport(event)" />
 
 
                     <!-- pet name -->
                     <div class="input-field pet-name-field">
-                    <input type="text" name="pet_name" value="{{ old('pet_name', $project->pet_name) }}" placeholder="Pet name" />
+                    <input type="text" wire:model="petName" name="pet_name" value="{{ old('pet_name', $project->pet_name) }}" placeholder="Pet name" />
                     </div>
 
                     <!-- pet sex -->
@@ -204,16 +224,16 @@
                     <input type="text" name="contact_person" value="{{ old('contact_person', $project->contact_person) }}" placeholder="Contact Person" />
                     </div>
                     <div class="input-field contact-number-field">
-                    <input type="tel" name="contact_number" value="{{ old('contact_number', $project->contact_number) }}" placeholder="Contact Number" />
+                    <input type="tel" name="contact_number" wire:model="contactNumber" value="{{ old('contact_number', $project->contact_number) }}" placeholder="Contact Number" />
                     </div>
                 </div>
 
                 <div class="input-field description-field">
-                    <textarea name="pet_description" placeholder="Description">{{ old('pet_description', $project->pet_description) }}</textarea>
+                    <textarea wire:model="petDescription" name="pet_description" placeholder="Description">{{ old('pet_description', $project->pet_description) }}</textarea>
                 </div>
 
                 <div class="input-field reward-field">
-                    <input type="number" step="0.01" name="reward" value="{{ old('reward', $project->reward) }}" placeholder="Reward (leave empty if none)" />
+                    <input type="number" wire:model="reward" step="0.01" name="reward" value="{{ old('reward', $project->reward) }}" placeholder="Reward (leave empty if none)" />
                 </div>
 
                 <button class="save-button" id="saveDownloadBtn">DOWNLOAD DESIGN</button>

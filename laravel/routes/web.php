@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProjectController;
+use App\Livewire\PosterEditor;
 
 //register and login in one ui
 Route::get('/', function () {return view('login'); });
@@ -49,3 +50,5 @@ Route::post('/logout', function() {
     return redirect('/login');
 })->name('logout');
 
+// livewrire chuchu
+Route::get('/editor', PosterEditor::class)->name('editor');
