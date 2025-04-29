@@ -192,7 +192,9 @@
                                     <li class="list-group-item d-flex justify-content-between align-items-center">
                                         <a href="{{ route('project.editor', $project->id) }}" class="text-decoration-none text-dark">
                                         <div>
-                                            <strong style="font-size: 22px; font-weight: bold">{{ $project->title }}</strong><br>
+                                            <strong class="project-title" title="{{ $project->title }}">
+                                                {{ Illuminate\Support\Str::limit($project->title, 50) }}
+                                            </strong><br>
                                             <small>{{ $project->description }}</small>
                                         </div>
                                          </a>
@@ -272,7 +274,7 @@
 
                             <div class="mb-4">
                                 <label class="form-label">Email</label>
-                                <input type="email" class="form-control" value="{{ Auth::user()->email }}" disabled>
+                                <input type="email" name="email" class="form-control" value="{{ Auth::user()->email }}">
                             </div>
 
                             <!-- Change Password Fields -->

@@ -167,10 +167,10 @@
                 @method('PUT')
 
               <!-- editable title -->
-              <input type="text" name="title" value="{{ old('title', $project->title) }}" class="title-field project-title" />
+              <input type="text" name="title" placeholder="Project Title" value="{{ old('title', $project->title) }}" class="title-field project-title" />
 
               <!--editable desc -->
-              <textarea name="description" ows="4" class="desc-field project description">{{ old('description', $project->description) }}</textarea>
+              <textarea name="description" ows="4" class="desc-field project description" placeholder="Project Description">{{ old('description', $project->description) }}</textarea>
 
               <p class="project-meta">
                 Created by {{ $project->user->firstname }} {{ $project->user->lastname }}  •
