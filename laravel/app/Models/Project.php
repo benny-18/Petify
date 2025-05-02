@@ -8,6 +8,7 @@ class Project extends Model
 {
     protected $fillable = [
         'user_id',
+        'template_id',
         'title',
         'description',
         'pet_name',

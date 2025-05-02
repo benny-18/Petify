@@ -151,7 +151,7 @@ document.addEventListener('DOMContentLoaded', function () {
     //   loader.classList.add('fade-out');
     //   setTimeout(() => {
     //     loader.style.display = 'none';
-    //   }, 500); 
+    //   }, 500);
     // }, 1000);
 
     document.querySelectorAll('#editorForm input, #editorForm select, #editorForm textarea').forEach(field => {
@@ -164,7 +164,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
             autosaveTimer = setTimeout(() => {
                 autosaveForm();
-            }, 3000);
+            }, 1000);
         });
     });
 
@@ -201,19 +201,40 @@ document.addEventListener('DOMContentLoaded', function () {
         fadeIn(saveProgress);
     }
 
+    function getPosterEditorComponent() {
+        const wireId = document.querySelector('#poster-preview [wire\\:id]')?.getAttribute('wire:id');
+        return wireId ? Livewire.find(wireId) : null;
+    }
+
+    function updatePosterEditor() {
+        const component = getPosterEditorComponent();
+        if (!component) return;
+
+        component.set('petName', document.querySelector('[name="pet_name"]').value);
+        component.set('petDescription', document.querySelector('[name="pet_description"]').value);
+        component.set('petBreed', document.querySelector('[name="breed"]').value);
+        component.set('petAge', document.querySelector('[name="age"]').value);
+        component.set('petSex', document.querySelector('[name="sex"]').value);
+        component.set('contactPerson', document.querySelector('[name="contact_person"]').value);
+        component.set('contactNumber', document.querySelector('[name="contact_number"]').value);
+    }
+
+
     function showSaved() {
         const now = new Date();
         const formattedTime = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
         const timeHTML = `Changes saved! <span style="font-weight: normal; font-size: 13px;">(at ${formattedTime})</span>`;
         saveSuccess.querySelector('h2').innerHTML = timeHTML;
 
+        Livewire.dispatch('refreshPreview');
+
         fadeOut(saveProgress);
 
         setTimeout(() => {
             fadeIn(saveSuccess);
-        }, 1000);
+            updatePosterEditor();
+        }, 2000);
     }
-
 
     function fadeIn(el) {
         el.style.display = 'flex';

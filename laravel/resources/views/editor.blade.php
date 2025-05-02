@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en">
+
   @livewireStyles
   <head>
     <meta charset="UTF-8" />
@@ -13,7 +14,7 @@
     />
   </head>
 
-  <script>
+  <!-- <script>
     window.addEventListener('load', function () {
         setTimeout(function () {
         const loader = document.getElementById('loader-anim');
@@ -23,17 +24,17 @@
         }, 1000);
         }, 1000);
     });
-  </script>
+  </script> -->
 
   @livewireScripts
   <body>
 
-    <div id="loader-anim">
+    <!-- <div id="loader-anim">
         <div class="loader-content">
             <img src="https://i.pinimg.com/originals/18/f5/66/18f566fa5cf046c1e81fc6c61ce5dc53.gif" alt="Loading...">
             <h1 class="logo-text">Loading...</h1>
         </div>
-    </div>
+    </div> -->
 
     <div class="app-container">
       <main class="main-content">
@@ -45,25 +46,25 @@
           </div>
           <div class="sidebar-divider"></div>
 
-          <div style="border: 2px solid #c50565;" class="template-item template-selected">
+          <div class="template-item">
             <img
-              src="{{ asset('images/templates/missing-pet-template.png') }}"
+              src="{{ asset('images/templates/thumbs/missing-pet-template-1.webp') }}"
               alt="Missing Pet Template"
               class="template-image"
             />
-            <p class="template-name">Missing Pet</p>
+            <p class="template-name">Missing Pet 1</p>
           </div>
 
-          <div class="template-item">
+          <div class="template-item template-selected">
             <img
-              src="{{ asset('images/templates/missing-pet-template-2.webp') }}"
+              src="{{ asset('images/templates/thumbs/missing-pet-template-2.webp') }}"
               alt="Missing Pet Template"
               class="template-image"
             />
-            <p class="template-name">Missing Pet</p>
+            <p class="template-name">Missing Pet 2</p>
           </div>
 
-          <div class="template-item">
+          <!-- <div class="template-item">
             <img
               src="{{ asset('images/templates/missing-pet-template-3.webp') }}"
               alt="Missing Pet Template"
@@ -88,7 +89,7 @@
               class="template-image"
             />
             <p class="template-name">Missing Pet</p>
-          </div>
+          </div> -->
 
 
         </aside>
@@ -142,18 +143,19 @@
                 </div> -->
 
                 <div class="image-preview relative overflow-hidden" style="width: 794px; height: 1122px;">
-                    <div style="transform: scale(0.5); transform-origin: top left;">
-                    @livewire('poster-editor', [
-                        'petName' => $project->pet_name,
-                        'petDescription' => $project->pet_description,
-                        'reward' => $project->reward,
-                        'contactNumber' => $project->contact_number,
-                        'petImage' => $project->pet_image
-                    ])
+                    <div id="poster-preview" style="transform: scale(0.5); transform-origin: top left;">
+                        @livewire('poster-editor', [
+                            'petName' => $project->pet_name,
+                            'petDescription' => $project->pet_description,
+                            'petBreed' => $project->breed,
+                            'petAge' => $project->age,
+                            'petSex' => $project->sex,
+                            'contactPerson' => $project->contact_person,
+                            'contactNumber' => $project->contact_number,
+                            'petImage' => $project->pet_image
+                        ])
                     </div>
                 </div>
-
-
 
                 <button id="toggleZoomBtn" class="zoom-toggle-btn">Fit to Panel</button>
 
@@ -184,12 +186,12 @@
                         <img src="https://img.icons8.com/?size=100&id=wdoEeeG1GGY6&format=png&color=757575" class="icon-overlay">
                     </div>
                     </button>
-                        <input wire:model="petImage" type="file" id="file-input" style="display:none;" accept="image/*" onchange="handleImageImport(event)" />
+                        <input wire:model.live="petImage" type="file" id="file-input" style="display:none;" accept="image/*" onchange="handleImageImport(event)" />
 
 
                     <!-- pet name -->
                     <div class="input-field pet-name-field">
-                    <input type="text" wire:model="petName" name="pet_name" value="{{ old('pet_name', $project->pet_name) }}" placeholder="Pet name" />
+                    <input type="text" wire:model.live="petName" name="pet_name" value="{{ old('pet_name', $project->pet_name) }}" placeholder="Pet name" />
                     </div>
 
                     <!-- pet sex -->
@@ -223,17 +225,17 @@
                     <input type="text" name="contact_person" value="{{ old('contact_person', $project->contact_person) }}" placeholder="Contact Person" />
                     </div>
                     <div class="input-field contact-number-field">
-                    <input type="tel" name="contact_number" wire:model="contactNumber" value="{{ old('contact_number', $project->contact_number) }}" placeholder="Contact Number" />
+                    <input type="tel" name="contact_number" wire:model.live="contactNumber" value="{{ old('contact_number', $project->contact_number) }}" placeholder="Contact Number" />
                     </div>
                 </div>
 
                 <div class="input-field description-field">
-                    <textarea wire:model="petDescription" name="pet_description" placeholder="Description">{{ old('pet_description', $project->pet_description) }}</textarea>
+                    <textarea wire:model.live="petDescription" name="pet_description" placeholder="Description">{{ old('pet_description', $project->pet_description) }}</textarea>
                 </div>
 
-                <div class="input-field reward-field">
-                    <input type="number" wire:model="reward" step="0.01" name="reward" value="{{ old('reward', $project->reward) }}" placeholder="Reward (leave empty if none)" />
-                </div>
+                <!-- <div class="input-field reward-field">
+                    <input type="number" wire:model.live="reward" step="0.01" name="reward" value="{{ old('reward', $project->reward) }}" placeholder="Reward (leave empty if none)" />
+                </div> -->
 
                 <button class="save-button" id="saveDownloadBtn">DOWNLOAD DESIGN</button>
                 </div>
