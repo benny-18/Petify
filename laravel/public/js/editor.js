@@ -164,9 +164,34 @@ document.addEventListener('DOMContentLoaded', function () {
 
             autosaveTimer = setTimeout(() => {
                 autosaveForm();
-            }, 1000);
+            }, 500);
         });
     });
+
+
+    document.querySelectorAll('.template-item').forEach(item => {
+        item.addEventListener('click', () => {
+          const templateId = item.dataset.templateId;
+          const projectId = document.querySelector('#project-id').value; // Make sure this input exists
+
+          fetch(`/projects/${projectId}/change-template`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+            },
+            body: JSON.stringify({ template_id: templateId })
+          })
+          .then(response => {
+            if (!response.ok) throw new Error('Failed to update template.');
+            return response.json();
+          })
+          .then(data => {
+            window.location.reload();
+          })
+          .catch(error => console.error(error));
+        });
+      });
 
     function autosaveForm() {
         const formData = new FormData(form);

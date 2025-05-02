@@ -14,7 +14,7 @@
     />
   </head>
 
-  <!-- <script>
+  <script>
     window.addEventListener('load', function () {
         setTimeout(function () {
         const loader = document.getElementById('loader-anim');
@@ -24,17 +24,18 @@
         }, 1000);
         }, 1000);
     });
-  </script> -->
+  </script>
 
   @livewireScripts
   <body>
 
-    <!-- <div id="loader-anim">
-        <div class="loader-content">
+    <div id="loader-anim">
+        <span class="loader-content">
+            <h1 class="logo-text">Petify</h2>
             <img src="https://i.pinimg.com/originals/18/f5/66/18f566fa5cf046c1e81fc6c61ce5dc53.gif" alt="Loading...">
-            <h1 class="logo-text">Loading...</h1>
-        </div>
-    </div> -->
+            <h1 class="loader-text">Generating preview...</h1>
+        </span>
+    </div>
 
     <div class="app-container">
       <main class="main-content">
@@ -46,51 +47,26 @@
           </div>
           <div class="sidebar-divider"></div>
 
-          <div class="template-item">
-            <img
-              src="{{ asset('images/templates/thumbs/missing-pet-template-1.webp') }}"
-              alt="Missing Pet Template"
-              class="template-image"
-            />
-            <p class="template-name">Missing Pet 1</p>
-          </div>
+            <!-- @foreach(['template-1', 'template-2'] as $templateId)
+                <div class="template-item" data-template-id="{{ $templateId }}">
+                    <img
+                        src="{{ asset("images/templates/thumbs/{$templateId}.webp") }}"
+                        alt="Template Thumbnail"
+                        class="template-image"
+                    />
+                    <p class="template-name">{{ ucfirst(str_replace('-', ' ', $templateId)) }}</p>
+                </div>
+            @endforeach -->
 
-          <div class="template-item template-selected">
-            <img
-              src="{{ asset('images/templates/thumbs/missing-pet-template-2.webp') }}"
-              alt="Missing Pet Template"
-              class="template-image"
-            />
-            <p class="template-name">Missing Pet 2</p>
-          </div>
+            <div class="template-item" data-template-id="template-1">
+                <img src="{{ asset('images/templates/thumbs/template-1.webp') }}" alt="Template 1" class="template-image" />
+                <p class="template-name">Missing Pet 1</p>
+            </div>
 
-          <!-- <div class="template-item">
-            <img
-              src="{{ asset('images/templates/missing-pet-template-3.webp') }}"
-              alt="Missing Pet Template"
-              class="template-image"
-            />
-            <p class="template-name">Missing Pet</p>
-          </div>
-
-          <div class="template-item">
-            <img
-              src="{{ asset('images/templates/missing-pet-template-4.webp') }}"
-              alt="Missing Pet Template"
-              class="template-image"
-            />
-            <p class="template-name">Missing Pet</p>
-          </div>
-
-          <div class="template-item">
-            <img
-              src="{{ asset('images/templates/missing-pet-template-5.webp') }}"
-              alt="Missing Pet Template"
-              class="template-image"
-            />
-            <p class="template-name">Missing Pet</p>
-          </div> -->
-
+            <div class="template-item" data-template-id="template-2">
+                <img src="{{ asset('images/templates/thumbs/template-2.webp') }}" alt="Template 2" class="template-image" />
+                <p class="template-name">Missing Pet 2</p>
+            </div>
 
         </aside>
 
@@ -98,7 +74,6 @@
 
           <header class="app-header">
             <div class="logo-container">
-                <!-- <img src="https://cdn.builder.io/api/v1/image/assets/3cc4bc3e52714dc98afd866a406b78dd/77c540a6be2a96ef613bdcbb05422cc4e122f67c?placeholderIfAbsent=true" alt="Petify Logo" class="menu-icon" id="toggleSidebar" onclick="toggleSidebar()" /> -->
                 <div id="toggleSidebar" class="menu-icon-container" onclick="toggleSidebar()">
                     <img src="https://img.icons8.com/?size=100&id=OTxpMqWbm71F&format=png&color=c50565"
                         alt="Menu Icon"
@@ -145,6 +120,8 @@
                 <div class="image-preview relative overflow-hidden" style="width: 794px; height: 1122px;">
                     <div id="poster-preview" style="transform: scale(0.5); transform-origin: top left;">
                         @livewire('poster-editor', [
+                            'projectId' => $project->id,
+                            'templateId' => $project->template_id,
                             'petName' => $project->pet_name,
                             'petDescription' => $project->pet_description,
                             'petBreed' => $project->breed,
@@ -154,6 +131,8 @@
                             'contactNumber' => $project->contact_number,
                             'petImage' => $project->pet_image
                         ])
+
+
                     </div>
                 </div>
 
@@ -166,6 +145,8 @@
 
                 @csrf
                 @method('PUT')
+
+                <input type="hidden" id="project-id" value="{{ $project->id }}">
 
               <!-- editable title -->
               <input type="text" name="title" placeholder="Project Title" value="{{ old('title', $project->title) }}" class="title-field project-title" />

@@ -12,7 +12,7 @@
     <!-- Pet Name -->
     <div style="
         padding: 6px;
-        border: 1px solid #C50565;
+        /* border: 1px solid #C50565; */
         font-family: 'Pridi', sans-serif;
         font-weight: 700;
         text-transform: capitalize;
@@ -41,7 +41,7 @@
     <!-- age -->
     <div style="
         text-align: center;
-        border: 1px solid #C50565;
+        /* border: 1px solid #C50565; */
         font-family: 'Pridi', sans-serif;
         font-weight: 400;
         padding-top: 7px;
@@ -67,7 +67,7 @@
     <!-- sex -->
     <div style="
         text-align: center;
-        border: 1px solid #C50565;
+        /* border: 1px solid #C50565; */
         font-family: 'Pridi', sans-serif;
         font-weight: 400;
         padding-top: 7px;
@@ -92,7 +92,7 @@
     <!-- bread -->
     <div style="
         text-align: center;
-        border: 1px solid #C50565;
+        /* border: 1px solid #C50565; */
         font-family: 'Pridi', sans-serif;
         font-weight: 400;
         padding-top: 7px;
@@ -118,7 +118,7 @@
     <!-- Pet Description -->
     <div style="
         text-align: justify;
-        border: 1px solid #C50565;
+        /* border: 1px solid #C50565; */
         font-family: 'Pridi', sans-serif;
         font-weight: 400;
         padding-top: 20px;
@@ -165,14 +165,14 @@
     <!-- contact person -->
     <div style="
         position: absolute;
-        top: 1955px;
+        top: 1970px;
         left: 157px;
         width: 1268px;
         height: 140px;
-        font-size: 68px;
+        font-size: 60px;
         color: #eeeeee;
         text-align: center;
-        border: 1px solid #C50565;
+        /* border: 1px solid #C50565; */
         font-family: 'Pridi', sans-serif;
         z-index: 20;
         text-transform: uppercase;
@@ -185,14 +185,14 @@
     <!-- Contact Number -->
     <div style="
         position: absolute;
-        top: 1835px;
+        top: 1840px;
         left: 157px;
         width: 1268px;
         height: 172px;
-        font-size: 105px;
+        font-size: 107px;
         color: white;
         text-align: center;
-        border: 1px solid #C50565;
+        /* border: 1px solid #C50565; */
         font-family: 'Pridi', sans-serif;
         font-weight: 700;
         z-index: 20;

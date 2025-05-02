@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Validator;
 
 class ProjectController extends Controller
 {
-   
+
     public function store(Request $request)
     {
         $request->validate([
@@ -54,8 +54,8 @@ class ProjectController extends Controller
 
         return redirect()->route('project.editor', $project->id);
     }
-    
-    
+
+
     public function update(Request $request, Project $project)
     {
         if ($project->user_id !== Auth::id()) {
@@ -100,17 +100,42 @@ class ProjectController extends Controller
 
         return redirect()->route('project.editor', $project->id)
             ->with('success', 'Project updated successfully.');
-        }
+    }
 
-        public function destroy(Project $project)
-        {
-            if ($project->user_id == Auth::id()){
-                $project->delete();
-                return redirect()->back()->with('success', 'Project deleted successfully');
-            } else {
-                return redirect()->back()->with('error', 'You are not authorized to delete this project');
-            }
+    public function destroy(Project $project)
+    {
+        if ($project->user_id == Auth::id()){
+            $project->delete();
+            return redirect()->back()->with('success', 'Project deleted successfully');
+        } else {
+            return redirect()->back()->with('error', 'You are not authorized to delete this project');
         }
+    }
+
+
+    public function changeTemplate(Request $request, Project $project)
+    {
+        $validated = $request->validate([
+            'template_id' => 'required|string'
+        ]);
+
+        $project->template_id = $validated['template_id'];
+        $project->save();
+
+        return response()->json(['status' => 'success']);
+    }
+
+    // public function updateTemplate(Request $request, Project $project)
+    // {
+    //     $request->validate([
+    //         'template_id' => 'required|string|in:template-1,template-2',
+    //     ]);
+
+    //     $project->template_id = $request->template_id;
+    //     $project->save();
+
+    //     return response()->json(['status' => 'success']);
+    // }
 
     public function edit($id)
     {

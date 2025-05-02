@@ -57,7 +57,10 @@
 #loader-anim {
     position: fixed;
     inset: 0;
-    background: #ffffff;
+
+    background: #FBFBFB;
+    background: linear-gradient(180deg, rgba(251, 251, 251, 1) 60%, rgba(236, 191, 214, 1) 100%);
+
     display: flex;
     justify-content: center;
     align-items: center;
@@ -75,9 +78,16 @@
     text-align: center;
   }
 
+  .loader-text {
+    font-family: "Instagram Sans", sans-serif;
+    font-size: 22px;
+    color: #c50565;
+    font-weight: 700;
+    /* text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); */
+  }
+
   #loader-anim img {
-    display: block;
-    height: calc(100% - 50px);
+    height: 300px;
   }
 
 * {

@@ -52,3 +52,4 @@ Route::post('/logout', function() {
 
 // livewrire chuchu
 Route::get('/editor', PosterEditor::class)->name('editor');
+Route::post('/projects/{project}/change-template', [ProjectController::class, 'changeTemplate']);

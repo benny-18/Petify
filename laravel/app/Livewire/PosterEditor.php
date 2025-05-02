@@ -40,6 +40,8 @@ class PosterEditor extends Component
 {
     use WithFileUploads;
 
+    public $projectId = '';
+    public $templateId = '';
     public $petName = '';
     public $petDescription = '';
     public $petBreed = '';
@@ -49,10 +51,14 @@ class PosterEditor extends Component
     public $contactNumber = '';
     public $petImage;
 
-    protected $listeners = ['refreshPreview' => 'reloadPreview'];
+    protected $listeners = [
+        'refreshPreview' => 'reloadPreview',
+        'switchTemplate' => 'updateTemplate'
+    ];
 
-    public function mount($petName, $petDescription, $petBreed, $petAge, $petSex, $contactPerson, $contactNumber, $petImage)
+    public function mount($templateId, $petName, $petDescription, $petBreed, $petAge, $petSex, $contactPerson, $contactNumber, $petImage)
     {
+        $this->templateId = $templateId;
         $this->petName = $petName;
         $this->petDescription = $petDescription;
         $this->petBreed = $petBreed;
@@ -65,7 +71,27 @@ class PosterEditor extends Component
 
     public function render()
     {
-        return view('livewire.poster-editor');
+        $templateView = null;
+
+        if ($this->templateId === 'template-1') {
+            $templateView = 'livewire.template-1';
+        } elseif ($this->templateId === 'template-2') {
+            $templateView = 'livewire.template-2';
+        }
+
+        return view($templateView, [
+            'templateView' => $templateView,
+        ]);
+    }
+
+    public function updateTemplate($newTemplateId)
+    {
+        $this->templateId = $newTemplateId;
+
+        // Optional: Save it to DB
+        $project = Project::find($this->projectId);
+        $project->template_id = $newTemplateId;
+        $project->save();
     }
 
     public function reloadPreview()
