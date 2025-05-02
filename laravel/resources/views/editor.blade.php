@@ -110,7 +110,7 @@
                     <img src="{{ asset('images/templates/missing-pet-template.png') }}" alt="Pet Image Preview" class="pet-image" />
                 </div> -->
 
-                <div class="pet-image" style="width: 794px; scale: 0.65; transform-origin: center; height: 1122px;">
+                <div class="pet-image" id="poster-image" style="width: 794px; scale: 0.65; transform-origin: center; height: 1122px;">
                     <div id="poster-preview" style="transform: scale(0.5); transform-origin: top center;">
                         @livewire('poster-editor', [
                             'projectId' => $project->id,
@@ -224,6 +224,8 @@
   <script src="{{ asset('js/editor.js') }}"></script>
 
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
   <script>
     // breed selector
