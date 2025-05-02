@@ -7,6 +7,7 @@ use App\Models\Project;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Storage;
 
 class ProjectController extends Controller
 {
@@ -76,20 +77,19 @@ class ProjectController extends Controller
             'pet_photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Make sure to use 'pet_photo' here
         ]);
 
-        // Handle new image upload if provided
+        //pet photo
         if ($request->hasFile('pet_photo')) {
-            // Delete the old image if exists
-            if ($project->pet_photo) {
-                Storage::delete('public/pets/' . $project->pet_photo);
+            // Delete old image if it exists and the file is found
+            if ($project->pet_photo && file_exists(storage_path('app/public/pets/' . $project->pet_photo))) {
+                unlink(storage_path('app/public/pets/' . $project->pet_photo));
             }
-
-            // Store the new image
-            $image = $request->file('pet_photo');
-            $imageName = time() . '_' . $image->getClientOriginalName();
-            $image->storeAs('public/pets', $imageName);
-
-            // Update the pet_photo field in the database
-            $project->pet_photo = $imageName;
+        
+            // Store new image in 'pets' directory under 'public' disk
+            $petPhoto = $request->file('pet_photo');
+            $imagePath = $petPhoto->store('pets', 'public');
+        
+            // Save the relative path to database
+            $project->pet_photo = $imagePath;
         }
 
         // Update other fields

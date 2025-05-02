@@ -242,6 +242,7 @@ document.addEventListener('DOMContentLoaded', function () {
         component.set('petSex', document.querySelector('[name="sex"]').value);
         component.set('contactPerson', document.querySelector('[name="contact_person"]').value);
         component.set('contactNumber', document.querySelector('[name="contact_number"]').value);
+
     }
 
 
@@ -278,3 +279,14 @@ function handleImageImport(event) {
   const fileName = fileInput.files[0]?.name || "No file chosen";
   document.getElementById("fake-file-name").value = fileName;
 }
+
+function handleImageUpload() {
+  // Give Livewire a moment to handle the image upload,
+  // then reload the browser after a short delay
+  setTimeout(() => {
+      location.reload();
+  }, 1500); // Wait 1.5 seconds (adjust if needed)
+  showSaved(); 
+}
+
+

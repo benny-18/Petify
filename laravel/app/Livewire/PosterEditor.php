@@ -23,7 +23,7 @@ class PosterEditor extends Component
 
     protected $listeners = [
         'refreshPreview' => 'reloadPreview',
-        'switchTemplate' => 'updateTemplate'
+        'switchTemplate' => 'updateTemplate',
     ];
 
     public function mount($templateId, $petName, $petDescription, $petBreed, $petAge, $petSex, $contactPerson, $contactNumber, $petImage)
@@ -52,6 +52,14 @@ class PosterEditor extends Component
         return view($templateView, [
             'templateView' => $templateView,
         ]);
+    }
+
+    public function updatedPetImage()
+    {
+        if ($this->petImage instanceof \Livewire\TemporaryUploadedFile) {
+            $path = $this->petImage->store('pets', 'public');
+            $this->imageUrl = asset('storage/' . $path);
+        }
     }
 
     public function updateTemplate($newTemplateId)

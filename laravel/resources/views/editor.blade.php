@@ -14,6 +14,7 @@
     />
   </head>
 
+  <!-- 
   <script>
     window.addEventListener('load', function () {
         setTimeout(function () {
@@ -25,10 +26,12 @@
         }, 1000);
     });
   </script>
+  -->
 
   @livewireScripts
   <body>
 
+<!--
     <div id="loader-anim">
         <span class="loader-content">
             <h1 class="logo-text">Petify</h2>
@@ -36,6 +39,7 @@
             <h1 class="loader-text">Generating preview...</h1>
         </span>
     </div>
+-->
 
     <div class="app-container">
       <main class="main-content">
@@ -118,7 +122,7 @@
                             'petSex' => $project->sex,
                             'contactPerson' => $project->contact_person,
                             'contactNumber' => $project->contact_number,
-                            'petImage' => $project->pet_image
+                            'petImage' => $project->pet_photo
                         ])
 
 
@@ -130,7 +134,7 @@
             </section>
 
             <!-- PROJECT NAME AND DESCRIPTION EDITOR -->
-            <form id="editorForm" data-project-id="{{ $project->id }}" method="POST" action="{{ route('project.update', $project->id) }}" class="form-section">
+            <form id="editorForm" data-project-id="{{ $project->id }}" method="POST" action="{{ route('project.update', $project->id) }}" class="form-section" enctype="multipart/form-data">
 
                 @csrf
                 @method('PUT')
@@ -151,13 +155,13 @@
               <div class="form-divider"></div>
 
                 <div class="form-row">
-                    <div class="button-container">
-                        <button class="importimg-button" onclick="document.getElementById('file-input').click()">
-                        <img src="https://img.icons8.com/?size=100&id=wdoEeeG1GGY6&format=png&color=757575" class="icon-overlay">
-                    </div>
-                    </button>
-                        <input wire:model.live="petImage" type="file" id="file-input" style="display:none;" accept="image/*" onchange="handleImageImport(event)" />
+                    <!-- Pet photo upload -->
+                    <div id="uploadPic" class="col-md-4 text-center mb-3 mb-md-0">
+                        <div class="bg-white p-6 rounded shadow-lg w-80">
+                            <h3 class="text-lg font-semibold mb-4">Upload Pet Image</h3>
 
+                        <!-- File input bound to Livewire -->
+                        <input type="file" wire:model.live="petImage" name="pet_photo" accept="image/*"  onchange="handleImageUpload()" class="mb-4" />
 
                     <!-- pet name -->
                     <div class="input-field pet-name-field">
@@ -250,4 +254,11 @@
     });
   </script>
 
+  <!-- Add this script block to listen for the event -->
+<script>
+    Livewire.on('reloadPage', function() {
+        // Reload the page after the pet image is uploaded and saved
+        location.reload();  // This reloads the whole page
+    });
+</script>
 </html>
