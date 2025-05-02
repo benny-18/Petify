@@ -125,18 +125,6 @@ class ProjectController extends Controller
         return response()->json(['status' => 'success']);
     }
 
-    // public function updateTemplate(Request $request, Project $project)
-    // {
-    //     $request->validate([
-    //         'template_id' => 'required|string|in:template-1,template-2',
-    //     ]);
-
-    //     $project->template_id = $request->template_id;
-    //     $project->save();
-
-    //     return response()->json(['status' => 'success']);
-    // }
-
     public function edit($id)
     {
         $project = Project::findOrFail($id);

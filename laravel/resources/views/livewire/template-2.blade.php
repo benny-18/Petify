@@ -1,9 +1,9 @@
 <div style="position: relative; width: 1587px; height: 2240px; overflow: hidden;">
-    <!-- Template Image (on top of pet image) -->
+    <!-- template image!!! -->
     <img src="{{ asset('images/templates/template-2.png') }}" alt="Poster Template"
          style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 10; pointer-events: none; user-select: none;">
 
-    <!-- Pet Image (underneath template, inside transparent area) -->
+    <!-- pet image aghsgags -->
     @if ($petImage)
         <img src="{{ asset('storage/' . $petImage) }}"
              style="position: absolute;
@@ -15,7 +15,7 @@
                     z-index: 5;">
     @endif
 
-    <!-- Pet Name -->
+    <!-- pet name -->
     <div style="
         position: absolute;
         top: 1400px;
@@ -90,7 +90,7 @@
         {{ $petSex ?? 'Sex' }}
     </div> -->
 
-    <!-- Pet Description -->
+    <!-- pet description -->
     <div style="
         /* border: 1px solid #C50565; */
         position: absolute;
@@ -112,7 +112,7 @@
         {{ $petDescription ?? 'Pet description goes here.' }}
     </div>
 
-    <!-- Contact Person -->
+    <!-- contact person -->
     <div style="
         position: absolute;
         top: 2022px;
@@ -132,7 +132,7 @@
         {{ $contactPerson ?? 'Jane Doe' }}
     </div>
 
-    <!-- Contact Number -->
+    <!-- contact number -->
     <div style="
         position: absolute;
         top: 1968px;

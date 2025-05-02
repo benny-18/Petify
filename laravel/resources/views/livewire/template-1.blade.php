@@ -1,15 +1,15 @@
 <div style="position: relative; width: 1587px; height: 2245px; overflow: hidden;">
-    <!-- Template Image -->
+    <!-- template image hashhahshas -->
     <img src="{{ asset('images/templates/template-1.png') }}" alt="Poster Template"
          style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 10; pointer-events: none; user-select: none;">
 
-    <!-- Pet Image -->
+    <!-- pet iage ambot hini  -->
     @if ($petImage)
         <img src="{{ asset('storage/' . $petImage) }}"
              style="position: absolute; top: 996px; left: 170px; width: 685px; height: 757px; object-fit: cover; z-index: 5;">
     @endif
 
-    <!-- Pet Name -->
+    <!-- petname -->
     <div style="
         padding: 6px;
         /* border: 1px solid #C50565; */
@@ -115,7 +115,7 @@
     </div>
 
 
-    <!-- Pet Description -->
+    <!-- pet desc -->
     <div style="
         text-align: justify;
         /* border: 1px solid #C50565; */
@@ -140,7 +140,7 @@
         {{ $petDescription ?? 'Pet Description' }}
     </div>
 
-    <!-- Reward -->
+    <!-- reward -->
     <!-- <div style="
         border: 1px solid #C50565;
         background: #086c87;
@@ -182,7 +182,7 @@
     </div>
 
 
-    <!-- Contact Number -->
+    <!-- contact number -->
     <div style="
         position: absolute;
         top: 1840px;

@@ -47,17 +47,6 @@
           </div>
           <div class="sidebar-divider"></div>
 
-            <!-- @foreach(['template-1', 'template-2'] as $templateId)
-                <div class="template-item" data-template-id="{{ $templateId }}">
-                    <img
-                        src="{{ asset("images/templates/thumbs/{$templateId}.webp") }}"
-                        alt="Template Thumbnail"
-                        class="template-image"
-                    />
-                    <p class="template-name">{{ ucfirst(str_replace('-', ' ', $templateId)) }}</p>
-                </div>
-            @endforeach -->
-
             <div class="template-item" data-template-id="template-1">
                 <img src="{{ asset('images/templates/thumbs/template-1.webp') }}" alt="Template 1" class="template-image" />
                 <p class="template-name">Missing Pet 1</p>

@@ -6,36 +6,6 @@ use Livewire\Component;
 use Livewire\WithFileUploads;
 use App\Models\Project;
 
-// class PosterEditor extends Component
-// {
-//     use WithFileUploads;
-//     protected $listeners = ['refreshPreview' => 'reloadPreview'];
-
-//     public $petName = '';
-//     public $petDescription = '';
-//     public $petBreed = '';
-//     public $contactPerson = '';
-//     public $contactNumber = '';
-//     public $petAge = '';
-//     public $petSex = '';
-//     public $petImage;
-
-//     public function render()
-//     {
-//         return view('livewire.poster-editor');
-//     }
-
-//     public function reloadPreview()
-//     {
-//         // Optionally fetch from DB again if needed
-//         $project = Project::find($this->projectId);
-//         $this->petName = $project->pet_name;
-
-//         $this->petName = $this->petName; // Triggers re-render if needed
-//     }
-
-// }
-
 class PosterEditor extends Component
 {
     use WithFileUploads;
@@ -88,7 +58,6 @@ class PosterEditor extends Component
     {
         $this->templateId = $newTemplateId;
 
-        // Optional: Save it to DB
         $project = Project::find($this->projectId);
         $project->template_id = $newTemplateId;
         $project->save();
@@ -96,8 +65,6 @@ class PosterEditor extends Component
 
     public function reloadPreview()
     {
-        // No need to emit anything. Livewire will re-render if public properties change.
-        // If needed, you can manipulate something to trigger the render like:
         $this->petName = $this->petName;
     }
 }
