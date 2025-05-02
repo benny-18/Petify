@@ -5,7 +5,14 @@
 
      @if ($petImage)
     <img src="{{ asset('storage/' . $petImage) }}"
-         style="position: absolute; top: 996px; left: 170px; width: 685px; height: 757px; object-fit: cover; z-index: 5;">
+         style="
+         position: absolute;
+         top: 540px;
+         left: 390px;
+         /* width: 685px;  */
+         height: 820px;
+         object-fit: cover;
+         z-index: 5;">
     @else
         <!-- Placeholder or default image if no image is available -->
         <img src="{{ asset('images/default-placeholder.jpg') }}"

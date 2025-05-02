@@ -14,7 +14,7 @@
     />
   </head>
 
-  <!-- 
+  <!--
   <script>
     window.addEventListener('load', function () {
         setTimeout(function () {
@@ -110,8 +110,8 @@
                     <img src="{{ asset('images/templates/missing-pet-template.png') }}" alt="Pet Image Preview" class="pet-image" />
                 </div> -->
 
-                <div class="image-preview relative overflow-hidden" style="width: 794px; height: 1122px;">
-                    <div id="poster-preview" style="transform: scale(0.5); transform-origin: top left;">
+                <div class="pet-image" style="width: 794px; scale: 0.65; transform-origin: center; height: 1122px;">
+                    <div id="poster-preview" style="transform: scale(0.5); transform-origin: top center;">
                         @livewire('poster-editor', [
                             'projectId' => $project->id,
                             'templateId' => $project->template_id,
@@ -124,12 +124,10 @@
                             'contactNumber' => $project->contact_number,
                             'petImage' => $project->pet_photo
                         ])
-
-
                     </div>
                 </div>
 
-                <button id="toggleZoomBtn" class="zoom-toggle-btn">Fit to Panel</button>
+                <!-- <button id="toggleZoomBtn" class="zoom-toggle-btn">Fit to Panel</button> -->
 
             </section>
 
@@ -156,12 +154,13 @@
 
                 <div class="form-row">
                     <!-- Pet photo upload -->
-                    <div id="uploadPic" class="col-md-4 text-center mb-3 mb-md-0">
-                        <div class="bg-white p-6 rounded shadow-lg w-80">
-                            <h3 class="text-lg font-semibold mb-4">Upload Pet Image</h3>
-
-                        <!-- File input bound to Livewire -->
-                        <input type="file" wire:model.live="petImage" name="pet_photo" accept="image/*"  onchange="handleImageUpload()" class="mb-4" />
+                    <div class="button-container">
+                        <input class="importimg-button" type="file" wire:model.live="petImage" name="pet_photo" accept="image/*"  onchange="handleImageUpload()">
+                            <img src="https://img.icons8.com/?size=100&id=wdoEeeG1GGY6&format=png&color=757575" class="icon-overlay">
+                            <!-- <input type="file" wire:model.live="petImage" name="pet_photo" accept="image/*"  onchange="handleImageUpload()" class="mb-4" /> -->
+                        </input>
+                    </div>
+                        <!-- <input wire:model.live="petImage" type="file" id="file-input" style="display:none;" accept="image/*" onchange="handleImageImport(event)" /> -->
 
                     <!-- pet name -->
                     <div class="input-field pet-name-field">
