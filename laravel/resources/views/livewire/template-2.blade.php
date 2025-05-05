@@ -36,7 +36,8 @@
         overflow: hidden;
         z-index: 20;
     ">
-        {{ $petName ?? 'Pet Name' }}
+        <!-- {{ $petName ?? 'Pet Name' }} -->
+        {{ Illuminate\Support\Str::limit( $petName ?? 'Pet name', 14) }}
     </div>
 
     <!-- Age -->
@@ -113,7 +114,8 @@
         z-index: 20;
     ">
         {{ $petSex ?? 'Sex' }} • {{ $petAge ?? 'Age' }} year(s) old • {{ $petBreed ?? 'Breed' }}<br>
-        {{ $petDescription ?? 'Pet description goes here.' }}
+        {{ Illuminate\Support\Str::limit( $petDescription ?? 'Pet description goes here.', 150) }}
+        <!-- {{ $petDescription ?? 'Pet description goes here.' }} -->
     </div>
 
     <!-- contact person -->
@@ -150,6 +152,7 @@
         line-height: 150px;
         overflow: hidden;
         z-index: 20;
+
     ">
         {{ $contactNumber ?? '+63 900 000 0000' }}
     </div>

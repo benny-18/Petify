@@ -193,9 +193,9 @@
                                         <a href="{{ route('project.editor', $project->id) }}" class="text-decoration-none text-dark">
                                         <div>
                                             <strong class="project-title" title="{{ $project->title }}">
-                                                {{ Illuminate\Support\Str::limit($project->title, 50) }}
+                                                {{ Illuminate\Support\Str::limit($project->title, 80) }}
                                             </strong><br>
-                                            <small>{{ $project->description }}</small>
+                                            <small>{{ Illuminate\Support\Str::limit($project->description, 100) }}</small>
                                         </div>
                                          </a>
 

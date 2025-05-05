@@ -37,7 +37,7 @@
         margin-bottom: auto;
 
     ">
-        {{ $petName ?? 'Pet Name' }}
+        {{ Illuminate\Support\Str::limit( $petName ?? 'Pet name', 12) }}
     </div>
 
 
@@ -140,7 +140,7 @@
         overflow-wrap: break-word;
         overflow: hidden;
     ">
-        {{ $petDescription ?? 'Pet Description' }}
+        {{ Illuminate\Support\Str::limit( $petDescription ?? 'Pet description goes here.', 155) }}
     </div>
 
     <!-- reward -->

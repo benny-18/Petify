@@ -14,7 +14,7 @@
     />
   </head>
 
-  <!--
+
   <script>
     window.addEventListener('load', function () {
         setTimeout(function () {
@@ -26,12 +26,12 @@
         }, 1000);
     });
   </script>
-  -->
+
 
   @livewireScripts
   <body>
 
-<!--
+
     <div id="loader-anim">
         <span class="loader-content">
             <h1 class="logo-text">Petify</h2>
@@ -39,7 +39,7 @@
             <h1 class="loader-text">Generating preview...</h1>
         </span>
     </div>
--->
+
 
     <div class="app-container">
       <main class="main-content">
@@ -198,7 +198,7 @@
                     <input type="text" name="contact_person" value="{{ old('contact_person', $project->contact_person) }}" placeholder="Contact Person" />
                     </div>
                     <div class="input-field contact-number-field">
-                    <input type="tel" name="contact_number" wire:model.live="contactNumber" value="{{ old('contact_number', $project->contact_number) }}" placeholder="Contact Number" />
+                    <input type="tel" name="contact_number" wire:model.live="contactNumber" value="{{ old('contact_number', $project->contact_number) }}" minlength="8" placeholder="Contact Number" />
                     </div>
                 </div>
 
