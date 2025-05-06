@@ -18,6 +18,13 @@
 
     <h2>Petify</h2>
 
+    <!-- back to welcome from login -->
+    <div class="flex justify-end p-4">
+        <a href="{{ url('/') }}" class="text-white text-2xl">
+            ← Back to Home
+        </a>
+    </div>
+
     <div class="container" id="container">
         {{-- REGISTER Form --}}
         <div class="form-container sign-up-container">
@@ -95,7 +102,7 @@
         </div>
     </div>
 
-    <p style="margin-top: 50px">Made with 🩷 by Swifties</p>
+    <p style="margin-top: 50px">Powered by Swifties</p>
 
 	<script src="{{ asset('js/login.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -115,7 +122,7 @@
         e.preventDefault();
         Swal.fire({
             title: 'Terms and Conditions',
-            html: 'By clicking ACCEPT, you agree to our terms of service and privacy policy.',
+            html: 'By clicking ACCEPT, you agree to our <a href="{{ route('terms') }}" target="_blank" style="text-decoration: underline; color: #3085d6;">Terms and Conditions</a>.',
             icon: 'info',
             showCancelButton: true,
             confirmButtonText: 'ACCEPT',

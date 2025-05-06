@@ -6,9 +6,11 @@ use App\Http\Controllers\ProjectController;
 use App\Livewire\PosterEditor;
 
 //register and login in one ui
-Route::get('/', function () {return view('login'); });
+Route::get('/', function () {return view('welcome'); });
 Route::get('/login', function () {return view('login'); });
 Route::get('/register', function () {return view('login'); });
+
+Route::view('/terms-and-conditions', 'terms')->name('terms');
 
 Route::get('/editor', function () {return view('editor'); });
 
