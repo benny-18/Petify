@@ -115,7 +115,7 @@ document.getElementById("saveDownloadBtn").addEventListener("click", function (e
     }).then((result) => {
         const preview = document.getElementById('poster-preview');
         const originalTransform = preview.style.transform;
-        preview.style.transform = 'scale(1)';
+        preview.style.transform = 'scale(2)';
 
         html2canvas(preview).then((canvas) => {
             if (result.isConfirmed) {

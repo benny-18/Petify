@@ -40,7 +40,10 @@
                 </ul>
                 <!-- redirect to login -->
                 <div class="d-flex align-items-center flex-wrap gap-2 ms-auto">
-                    <a href="{{ route('login')}}" class="text" hover="underline">Login or Sign Up</a>
+                    <!-- <a href="{{ route('login')}}" class="text" hover="underline">Login or Sign Up</a> -->
+                    <ul class="navbar-nav ms-lg-5">
+                        <li class="nav-item"><a class="nav-link click-scroll" href="{{ route('login')}}">Login or Sign Up</a></li>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -156,30 +159,12 @@
 
         <!-- testimonies keme -->
         <section class="testimonies section-padding" id="section_4"
-            style="background: linear-gradient(to right, #000000, #000000, #C4196D, #000000);">
+            style="overflow:hidden; background: linear-gradient(180deg,rgba(196, 25, 109, 1) 0%, rgba(56, 10, 35, 1) 85%, rgba(196, 25, 109, 1) 100%);">
             <div id="marquee-wrapper" class="container">
                 <h1 class="text-white text-center mb-5">What Our Users Say</h>
-                <div id="carousel" class=" marquee-track gap-4" style="margin-top: 50px; scrollbar-width: none; animation: scroll 15s linear infinite;">
+                <div id="carousel" class=" marquee-track gap-4" style="margin-top: 50px; scrollbar-width: none; animation: scroll 24s linear infinite;">
 
                     @for ($i = 0; $i < 2; $i++)
-                    {{-- card 1--}}
-                    <div class="card flex-shrink-0" style="border: 2px solid #C50565; width: 28rem; border-radius: 30px">
-                        <div class="card-body">
-                            <div class="card-top">
-                                <img src="{{ asset('images/card/taylorshesh.webp') }}" class="rounded-circle img-fluid" style="border: 2px solid #C50565; width: 75px; height: 75px; margin-bottom: 4px; object-fit: cover;">
-                            </div>
-                            <p class="card-text mt-2">"Petify helped me create a poster of my dog in minutes!"</p>
-                            <!-- #SwiftieApproved #Slay!  -->
-                            <div class="card-profile">
-                                <!-- <hr class="card-divider"> -->
-                                <!-- <p class="card-title mb-0" style="font-size: 44px; font-family: 'Oleo Script Swash Caps', sans-serif; margin-top: 4px">"</p> -->
-                                <img src="https://img.icons8.com/?size=100&id=38970&format=png&color=C50565" width=30px alt="Quotation mark">
-                                <p class="card-title mb-0">Taylor Swift</p>
-                                <p class="card-title mb-0" style="font-size: 16px; margin-top: 4px">Singer</p>
-                            </div>
-                        </div>
-                    </div>
-
                     {{-- card 2--}}
                     <div class="card flex-shrink-0" style="border: 2px solid #C50565; width: 28rem; border-radius: 30px">
                         <div class="card-body">
@@ -190,7 +175,7 @@
                             <div class="card-profile">
                                 <!-- <hr class="card-divider"> -->
                                 <!-- <p class="card-title mb-0" style="font-size: 44px; font-family: 'Oleo Script Swash Caps', sans-serif; margin-top: 4px">"</p> -->
-                                <img src="https://img.icons8.com/?size=100&id=38970&format=png&color=C50565" width=30px alt="Quotation mark">
+                                <img src="{{ asset('images/icons/quotation_mark.png') }}" width=30px alt="Quotation mark">
                                 <p class="card-title mb-0">Joyce Pabo</p>
                                 <p class="card-title mb-0" style="font-size: 16px; margin-top: 4px">Pet owner</p>
                             </div>
@@ -207,13 +192,31 @@
                             <div class="card-profile">
                                 <!-- <hr class="card-divider"> -->
                                 <!-- <p class="card-title mb-0" style="font-size: 44px; font-family: 'Oleo Script Swash Caps', sans-serif; margin-top: 4px">"</p> -->
-                                <img src="https://img.icons8.com/?size=100&id=38970&format=png&color=C50565" width=30px alt="Quotation mark">
+                                <img src="{{ asset('images/icons/quotation_mark.png') }}" width=30px alt="Quotation mark">
                                 <p class="card-title mb-0">Mr. Tung Sahur</p>
                                 <p class="card-title mb-0" style="font-size: 16px; margin-top: 4px">Comedian</p>
                             </div>
                         </div>
                     </div>
 
+                    {{-- card 1--}}
+                    <div class="card flex-shrink-0" style="border: 2px solid #C50565; width: 28rem; border-radius: 30px">
+                        <div class="card-body">
+                            <div class="card-top">
+                                <img src="{{ asset('images/card/taylorshesh.webp') }}" class="rounded-circle img-fluid" style="border: 2px solid #C50565; width: 75px; height: 75px; margin-bottom: 4px; object-fit: cover;">
+                            </div>
+                            <p class="card-text mt-2">"Petify helped me create a poster of my dog in minutes! #SLAY"</p>
+                            <!-- #SwiftieApproved #Slay!  -->
+                            <div class="card-profile">
+                                <!-- <hr class="card-divider"> -->
+                                <!-- <p class="card-title mb-0" style="font-size: 44px; font-family: 'Oleo Script Swash Caps', sans-serif; margin-top: 4px">"</p> -->
+                                <!-- <img src="https://img.icons8.com/?size=100&id=38970&format=png&color=C50565" width=30px alt="Quotation mark"> -->
+                                <img src="{{ asset('images/icons/quotation_mark.png') }}" width=30px alt="Quotation mark">
+                                <p class="card-title mb-0">Taylor Swift</p>
+                                <p class="card-title mb-0" style="font-size: 16px; margin-top: 4px">Singer</p>
+                            </div>
+                        </div>
+                    </div>
 
                     {{-- card 4--}}
                     <div class="card flex-shrink-0" style="border: 2px solid #C50565; width: 28rem; border-radius: 30px">
@@ -225,7 +228,7 @@
                             <div class="card-profile">
                                 <!-- <hr class="card-divider"> -->
                                 <!-- <p class="card-title mb-0" style="font-size: 44px; font-family: 'Oleo Script Swash Caps', sans-serif; margin-top: 4px">"</p> -->
-                                <img src="https://img.icons8.com/?size=100&id=38970&format=png&color=C50565" width=30px alt="Quotation mark">
+                                <img src="{{ asset('images/icons/quotation_mark.png') }}" width=30px alt="Quotation mark">
                                 <p class="card-title mb-0">Koda</p>
                                 <p class="card-title mb-0" style="font-size: 16px; margin-top: 4px">Dog</p>
                             </div>
@@ -242,7 +245,7 @@
                             <div class="card-profile">
                                 <!-- <hr class="card-divider"> -->
                                 <!-- <p class="card-title mb-0" style="font-size: 44px; font-family: 'Oleo Script Swash Caps', sans-serif; margin-top: 4px">"</p> -->
-                                <img src="https://img.icons8.com/?size=100&id=38970&format=png&color=C50565" width=30px alt="Quotation mark">
+                                <img src="{{ asset('images/icons/quotation_mark.png') }}" width=30px alt="Quotation mark">
                                 <p class="card-title mb-0">Yanna</p>
                                 <p class="card-title mb-0" style="font-size: 16px; margin-top: 4px">Vlogger</p>
                             </div>
@@ -259,7 +262,7 @@
                             <div class="card-profile">
                                 <!-- <hr class="card-divider"> -->
                                 <!-- <p class="card-title mb-0" style="font-size: 44px; font-family: 'Oleo Script Swash Caps', sans-serif; margin-top: 4px">"</p> -->
-                                <img src="https://img.icons8.com/?size=100&id=38970&format=png&color=C50565" width=30px alt="Quotation mark">
+                                <img src="{{ asset('images/icons/quotation_mark.png') }}" width=30px alt="Quotation mark">
                                 <p class="card-title mb-0">Ms. Ballerina Capuccina</p>
                                 <p class="card-title mb-0" style="font-size: 16px; margin-top: 4px">Vlogger</p>
                             </div>
@@ -290,8 +293,8 @@
                     <h1 style="font-family: 'Instagram Sans', sans-serif; font-size: 66px;">Start designing with </h1>
                     <h1 style="font-size: 75px; color: #C50565;">Petify</h1>
                 </div>
-                <a href="{{ route('login') }}" class="btn btn-primary btn-lg mt-4">
-                    Start designing
+                <a href="{{ route('login') }}" style="border: 2px solid #FFFFFF; border-radius: 30px" class="btn btn-primary btn-lg mt-4">
+                    Discover templates
                 </a>
             </div>
 
@@ -303,8 +306,8 @@
         <div class="container">
             <div class="row">
                 <div class="col-12 text-center">
-                    <p>&copy; 2025 Petify. All Rights Reserved.
-                        <br><a href="{{ route('terms') }}" target="_blank" class="text-decoration-underline">Terms and Conditions</a>
+                    <p style="color: #FFFFFF">&copy; 2025 Petify. All Rights Reserved.
+                        <a href="{{ route('terms') }}" target="_blank" style="color: #FFFFFF" class="text-decoration-underline">Terms and Conditions</a>
                     </p>
                 </div>
             </div>
