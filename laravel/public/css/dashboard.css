@@ -287,6 +287,12 @@ a:hover {
 .section-padding {
   padding-top: 80px;
   padding-bottom: 60px;
+  background: var(--secondary-color);
+}
+
+.section-projects {
+  padding-bottom: 60px;
+  background: var(--secondary-color);
 }
 
 b,
@@ -694,22 +700,16 @@ strong {
   background: var(--secondary-color);
   position: relative;
   overflow: hidden;
-  padding-top: 330px;
-  padding-bottom: 330px;
-  height: 100vh;
+  padding-top: 130px;
+  height: 50vh;
 }
 
 @media screen and (min-width: 991px) {
-  .hero {
-    height: 60vh;
-  }
 }
 
 .hero-title,
 .hero h2 {
-  background: var(--white-color);
-  box-shadow: 0 1rem 3rem rgba(0,0,0,.175);
-  border-radius: var(--border-radius-large);
+
   display: inline-block;
   padding: 8px 24px;
 }
@@ -850,7 +850,7 @@ strong {
 }
 
 #section_2 {
-  background: linear-gradient(to bottom, #430021, #C4196D) !important;
+  background: var(--white-color);
 }
 
 .banner-image {
@@ -862,12 +862,11 @@ strong {
 }
 
 .gallery-heading {
-  color: var(--border-color) !important;
+  color: var(--white-color) !important;
   text-align: center;
   font-weight: bold;
-  font-size: 2.7rem;
+  font-size: 3rem;
 }
-
 
 /*Contact*/
 .contact {
@@ -1212,3 +1211,51 @@ strong {
   border-color: #c4196d;
 }
 
+.no-projects-text {
+  font-size: 18px; /* Adjust font size */
+  color: var(--secondary-color);     /* Set text color */
+  font-weight: bold; /* Optionally make the text bold */
+  text-transform: uppercase; /* Make text uppercase */
+  margin-top: 20px; /* Adjust top margin */
+}
+
+.no-projects-image {
+  width: 400px; /* Adjust the width as needed */
+  height: 400px; /* Maintain aspect ratio */
+  padding-bottom: 50px;
+}
+
+.stretched-link {
+  z-index: 1;
+}
+
+.card-project {
+  transition: all 0.3s ease;
+  border: 2px solid transparent; /* Ensure there's space for border transition */
+  border-radius: 10px;
+  overflow: hidden;
+  background-color: #fff;
+  z-index: 2;
+}
+
+.card-project:hover {
+  transform: scale(1.02);
+  border: 2px solid #ff69b4; /* Pink border instead of outline */
+  box-shadow: 0 4px 12px rgba(255, 105, 180, 0.3); /* Optional soft pink shadow */
+}
+
+.card-project .card-img-top {
+  max-height: 200px;
+  object-fit: cover;
+  border-bottom: 1px solid #ddd;
+}
+
+.card-project .card-body {
+  padding: 1rem;
+}
+
+.card-project .card-footer {
+  padding: 0.75rem 1rem;
+  background-color: #f8f9fa;
+  border-top: 1px solid #eee;
+}

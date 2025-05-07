@@ -34,10 +34,9 @@
             <span class="navbar-brand mx-auto mx-lg-0">Petify</span>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-lg-5">
-                    <li class="nav-item"><a class="nav-link click-scroll" href="#section_1">Home</a></li>
-                    <li class="nav-item"><a class="nav-link click-scroll" href="#section_2">Gallery</a></li>
-                    <li class="nav-item"><a class="nav-link click-scroll" href="#section_3">About</a></li>
-                    <li class="nav-item"><a class="nav-link click-scroll" href="#section_4">Generate</a></li>
+                    <li class="nav-item"><a class="nav-link click-scroll" href="#section_1">Create</a></li>
+                    <li class="nav-item"><a class="nav-link click-scroll" href="#section_2">Projects</a></li>
+                    <li class="nav-item"><a class="nav-link click-scroll" href="#section_3">Templates</a></li>
                 </ul>
                 <div class="d-flex align-items-center flex-wrap gap-2 ms-auto">
                     <a href="#" class="profile-photo-link" data-bs-toggle="modal" data-bs-target="#profileModal">
@@ -68,47 +67,103 @@
                     <span></span>
                 </div>
 
+                
+
                 <div style="position: relative" class="row align-items-center">
-                    <div class="col-lg-6 hero-text-container">
-                        <h1 class="hero-heading">Generate posters with Petify</h1>
-                        <div class="hero-body-container">
-                            <p class="hero-body">Use Petify to easily create beautiful, ready-to-print pet posters that help spread the word fast. Easily customize and download missing pet posters—no design skills needed.</p>
-                            <hr class="hero-divider">
-                            <a href="#section_4" class="btn generate-btn">Generate now</a>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 mb-4 mb-lg-0">
-                        <div id="heroCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
-                            <div class="carousel-indicators">
-                                @for($i = 0; $i < 5; $i++)
-                                    <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="{{ $i }}" class="{{ $i == 0 ? 'active' : '' }}" aria-label="Slide {{ $i+1 }}"></button>
-                                @endfor
-                            </div>
-                            <div class="carousel-inner">
-                                @for($i = 1; $i <= 5; $i++)
-                                    <div class="carousel-item {{ $i == 1 ? 'active' : '' }}">
-                                        <img src="{{ asset("images/carousel/Pet $i.png") }}" class="d-block w-100 rounded" alt="Slide {{ $i }}">
-                                    </div>
-                                @endfor
-                            </div>
-                        </div>
-                    </div>
+                    <div class="hero-text-container">
+                        <div class="section-title-wrap d-flex justify-content-center align-items-center mb-5">
+                    <h2 class="create-text text-white mb-0">Create Project</h2>
                 </div>
 
-                <!-- <div class="background">
-                    @for($i = 0; $i < 12; $i++)
-                        <span></span>
-                    @endfor
-                </div> -->
-
+                <!-- CREATE FORM -->
+                 <form action="{{ route('project.store') }}" method="POST" class="row g-3 mb-5">
+                    @csrf
+                    <div class="col-md-4">
+                            <input type="text" name="title" class="form-control" placeholder="Project Title" required>
+                    </div>
+                    <div class="col-md-5">
+                            <input type="text" name="description" class="form-control" placeholder="Project Description">
+                    </div>
+                    <div class="col-md-3">
+                        <button type="submit" class="btn btn-primary w-100 rounded">Create Project</button>
+                    </div>
+                </form>
+                    </div>
+                </div>
             </div>
         </section>
 
-        <section class="gallery section-padding" id="section_2">
+        <!-- PROJECTS -->
+        <section class="contact section-projects" id="section_2">
             <div class="container">
-                <div class="banner-wrapper mb-4">
-                    <img src="{{ asset('images/Banner.png') }}" class="banner-image" alt="Banner">
+                <div class="row">
+                    <div class="col-12">
+                        <h2 class="text-white mb-4">Your Projects</h2>
+
+                        @if(Auth::user()->projects->isEmpty())
+                            <div class="text-center">
+                                <img src="{{ asset('images/dog-question.gif') }}" alt="No Projects" class="img-fluid no-projects-image">
+                                <p class="no-projects-text mt-3">
+                                    You have no projects yet...? Create one!
+                                </p>
+                            </div>
+                        @else
+                            <div class="row">
+                                @foreach(Auth::user()->projects as $project)
+                                    <div class="col-md-4 mb-4">
+                                        <div class="card-project h-100 shadow-sm position-relative">
+
+                                            {{-- Clickable Wrapper --}}
+                                            <a href="{{ route('project.editor', $project->id) }}" class="stretched-link"></a>
+
+                                            {{-- Poster Thumbnail --}}
+                                            @if ($project->poster_path)
+                                                <img src="{{ asset('images/templates/template-1.png') }}"
+                                                    class="card-img-top img-fluid"
+                                                    alt="Poster thumbnail of {{ $project->title }}">
+                                            @else
+                                                <img src="{{ asset('images/templates/template-1.png') }}"
+                                                    class="card-img-top img-fluid"
+                                                    alt="Default thumbnail">
+                                            @endif
+
+                                            {{-- Card Body --}}
+                                            <div class="card-body">
+                                                <h5 class="card-title mb-1">{{ Str::limit($project->title, 50) }}</h5>
+                                                <p class="card-text">{{ Str::limit($project->description, 100) }}</p>
+                                            </div>
+
+                                            {{-- Card Footer --}}
+                                            <div class="card-footer d-flex justify-content-between align-items-center bg-white border-0 position-relative">
+                                                <small class="text-muted">{{ $project->created_at->format('M d, Y') }}</small>
+
+                                                <form id="delete-form-{{ $project->id }}"
+                                                    action="{{ route('project.destroy', $project->id) }}"
+                                                    method="POST"
+                                                    style="display: none;">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                </form>
+
+                                                <button type="button"
+                                                        class="btn btn-sm btn-outline-danger z-3 position-relative"
+                                                        onclick="event.preventDefault(); event.stopPropagation(); confirmDelete({{ $project->id }})">
+                                                    Delete
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+                        @endif
+                    </div>
                 </div>
+            </div>
+        </section>
+
+
+           <section class="gallery section-padding" id="section_3">
+            <div class="container">
                 <div class="section-title-wrap text-center mb-4">
                     <h2 class="gallery-heading mb-0">Template Gallery</h2>
                 </div>
@@ -135,92 +190,7 @@
             </div>
         </section>
 
-        <section class="about section-padding" id="section_3">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-6 col-12">
-                        <img src="{{ asset('images/About.png') }}" class="about-image img-fluid" alt="">
-                    </div>
-                    <div class="col-lg-6 col-12 mt-5 mt-lg-0">
-                        <div class="about-thumb">
-                            <div class="section-title-wrap d-flex justify-content-end align-items-center mb-4">
-                                <h2 class="text-white me-4 mb-0">About Us</h2>
-                            </div>
-                            <h3 class="pt-2 mb-3">A glimpse of Petify.</h3>
-                            <p style="text-align: justify;">Petify is designed to help pet owners quickly create lost and found posters using a simple and user-friendly editor. Whether it’s for a missing pet or adoption, making a poster takes just minutes.</p>
-                            <p style="text-align: justify;">With a variety of customizable templates, Petify ensures your pet’s details are clear and easy to spot—helping you reach the right people fast.</p>
-                            <hr class="hero-divider">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- CREATE PROJECT -->
-        <section class="contact section-padding" id="section_4">
-            <div class="container">
-                <div class="section-title-wrap d-flex justify-content-center align-items-center mb-5">
-                    <h2 class="text-white mb-0">Create Project</h2>
-                </div>
-
-                <!-- CREATE FORM -->
-                 <form action="{{ route('project.store') }}" method="POST" class="row g-3 mb-5">
-                    @csrf
-                    <div class="col-md-4">
-                            <input type="text" name="title" class="form-control" placeholder="Project Title" required>
-                    </div>
-                    <div class="col-md-5">
-                            <input type="text" name="description" class="form-control" placeholder="Project Description">
-                    </div>
-                    <div class="col-md-3">
-                        <button type="submit" class="btn btn-primary w-100 rounded">Create Project</button>
-                    </div>
-                </form>
-
-                <!-- PROJECTS SECTION -->
-                 <div class="row">
-                    <div class="col-12">
-                            <h2 class="text-white- mb-3">Your Projects</h2>
-
-                            @if(Auth::user()->projects->isEmpty())
-                                <div class="alert alert-info text-center">
-                                    You have no projects yet.
-                                </div>
-                            @else
-                            <ul class="list-group">
-                                @foreach(Auth::user()->projects as $project)
-                                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                                        <a href="{{ route('project.editor', $project->id) }}" class="text-decoration-none text-dark">
-                                        <div>
-                                            <strong class="project-title" title="{{ $project->title }}">
-                                                {{ Illuminate\Support\Str::limit($project->title, 80) }}
-                                            </strong><br>
-                                            <small>{{ Illuminate\Support\Str::limit($project->description, 100) }}</small>
-                                        </div>
-                                         </a>
-
-                                        <!-- DELETE BUTTON FOR PROJECTS and DATE -->
-                                         <div class="d-flex align-items-center ms-3">
-                                            <small class="me-3">{{ $project->created_at->format('M d, Y') }}</small>
-
-                                        <form id="delete-form-{{ $project->id }}" action="{{ route('project.destroy', $project->id) }}#section_4" method="POST" style="display: none;">
-                                            @csrf
-                                            @method('DELETE')
-                                        </form>
-
-                                        <button type="button" class="btn btn-sm btn-outline-danger rounded"
-                                            onclick="event.stopPropagation(); confirmDelete({{ $project->id }})">
-                                            Delete
-                                        </button>
-                                    </li>
-                                @endforeach
-                            </ul>
-                            @endif
-                    </div>
-                </div>
-
-            </div>
-        </section>
+        
     </main>
 
     <footer class="site-footer" style="background: linear-gradient(to right, #430021, #C4196D); color: white;">
