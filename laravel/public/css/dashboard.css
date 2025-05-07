@@ -1225,19 +1225,23 @@ strong {
   padding-bottom: 50px;
 }
 
+.stretched-link {
+  z-index: 1;
+}
+
 .card-project {
   transition: all 0.3s ease;
+  border: 2px solid transparent; /* Ensure there's space for border transition */
   border-radius: 10px;
   overflow: hidden;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   background-color: #fff;
-  position: relative;
-  z-index: 1;
+  z-index: 2;
 }
 
 .card-project:hover {
   transform: scale(1.02);
-  z-index: 2;
+  border: 2px solid #ff69b4; /* Pink border instead of outline */
+  box-shadow: 0 4px 12px rgba(255, 105, 180, 0.3); /* Optional soft pink shadow */
 }
 
 .card-project .card-img-top {
