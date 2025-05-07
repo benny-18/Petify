@@ -373,6 +373,116 @@ strong {
   color: var(--secondary-color);
 }
 
+.card {
+    background: linear-gradient(180deg, rgba(251, 251, 251, 1) 60%, rgba(236, 191, 214, 1) 100%);
+}
+
+.card-top {
+    gap: 20px;
+    /* display: flex; */
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.card-profile {
+    /* display: flex; */
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px
+}
+
+.card-text {
+    font-size: 28px;
+    font-family: 'Instagram Sans', sans-serif;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.card-title {
+    font-family: 'Instagram Sans', sans-serif;
+    font-size: 20px
+}
+
+.card-body {
+    overflow: hidden;
+    align-content: center;
+    padding: 25px;
+    padding-top: 35px;
+    padding-bottom: 35px;
+    /* box-shadow: 0 1rem 3rem rgba(0,0,0,.175); */
+}
+
+.card-divider {
+    all: unset;
+    display: block;
+    height: 2px !important;
+    /* width: 240px ; */
+    background-color: #C50565;
+    margin: 1rem 0;
+    border-radius: 999px;
+}
+
+.marquee-track {
+    display: flex;
+  }
+
+  @keyframes scroll {
+    0% {
+      transform: translateX(0%);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  @keyframes animate {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+        border-radius: 0;
+    }
+    100% {
+        transform: translateY(-1000px) rotate(720deg);
+        opacity: 0;
+        border-radius: 50%;
+    }
+}
+
+.section-5-bubbles {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    margin: 0;
+    padding: 0;
+    background: transparent;
+    overflow: hidden;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.section-5-bubbles li {
+    position: absolute;
+    display: block;
+    list-style: none;
+    width: 20px;
+    height: 20px;
+    background: rgb(255, 0, 0);
+    animation: animate 19s linear infinite;
+}
+
+.section-5-bubbles li:nth-child(1) { left: 24%; width: 165px; height: 165px; bottom: -165px; animation-delay: 5s; }
+.section-5-bubbles li:nth-child(2) { left: 24%; width: 107px; height: 107px; bottom: -107px; animation-delay: 8s; }
+.section-5-bubbles li:nth-child(3) { left: 35%; width: 133px; height: 133px; bottom: -133px; animation-delay: 2s; }
+.section-5-bubbles li:nth-child(4) { left: 30%; width: 147px; height: 147px; bottom: -147px; animation-delay: 15s; }
+.section-5-bubbles li:nth-child(5) { left: 4%;  width: 120px; height: 120px; bottom: -120px; animation-delay: 22s; }
+.section-5-bubbles li:nth-child(6) { left: 59%; width: 178px; height: 178px; bottom: -178px; animation-delay: 30s; }
+.section-5-bubbles li:nth-child(7) { left: 53%; width: 103px; height: 103px; bottom: -103px; animation-delay: 3s; }
+.section-5-bubbles li:nth-child(8) { left: 64%; width: 196px; height: 196px; bottom: -196px; animation-delay: 31s; }
+.section-5-bubbles li:nth-child(9) { left: 73%; width: 174px; height: 174px; bottom: -174px; animation-delay: 22s; }
+
 
 /*Custom Button*/
 .custom-btn,

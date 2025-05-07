@@ -153,97 +153,157 @@
                 </div>
             </div>
         </section>
-        
+
         <!-- testimonies keme -->
         <section class="testimonies section-padding" id="section_4"
             style="background: linear-gradient(to right, #000000, #000000, #C4196D, #000000);">
-            <div class="container">
+            <div id="marquee-wrapper" class="container">
                 <h1 class="text-white text-center mb-5">What Our Users Say</h>
-                    <div class="d-flex overflow-auto gap-4 px-2 pb-4">
+                <div id="carousel" class=" marquee-track gap-4" style="margin-top: 50px; scrollbar-width: none; animation: scroll 15s linear infinite;">
+
+                    @for ($i = 0; $i < 2; $i++)
                     {{-- card 1--}}
-                    <div class="card flex-shrink-0" style="width: 18rem;">
+                    <div class="card flex-shrink-0" style="border: 2px solid #C50565; width: 28rem; border-radius: 30px">
                         <div class="card-body">
-                            <img src="{{ asset('images/card/taylorshesh.webp') }}" class="rounded-circle img-fluid"
-                                style="width: 200px; height: 200px; object-fit: cover;">
-                            <h5 class="card-title mb-0">Taylor Swift</h5>
-                            <small class="text-muted">Singer</small>
-                            <p class="card-text mt-2">"Petify helped me create a poster of my dog in minutes! #SwiftieApproved #Slay!"</p>
+                            <div class="card-top">
+                                <img src="{{ asset('images/card/taylorshesh.webp') }}" class="rounded-circle img-fluid" style="border: 2px solid #C50565; width: 75px; height: 75px; margin-bottom: 4px; object-fit: cover;">
+                            </div>
+                            <p class="card-text mt-2">"Petify helped me create a poster of my dog in minutes!"</p>
+                            <!-- #SwiftieApproved #Slay!  -->
+                            <div class="card-profile">
+                                <!-- <hr class="card-divider"> -->
+                                <!-- <p class="card-title mb-0" style="font-size: 44px; font-family: 'Oleo Script Swash Caps', sans-serif; margin-top: 4px">"</p> -->
+                                <img src="https://img.icons8.com/?size=100&id=38970&format=png&color=C50565" width=30px alt="Quotation mark">
+                                <p class="card-title mb-0">Taylor Swift</p>
+                                <p class="card-title mb-0" style="font-size: 16px; margin-top: 4px">Singer</p>
+                            </div>
                         </div>
                     </div>
+
                     {{-- card 2--}}
-                    <div class="card flex-shrink-0" style="width: 18rem;">
+                    <div class="card flex-shrink-0" style="border: 2px solid #C50565; width: 28rem; border-radius: 30px">
                         <div class="card-body">
-                            <img src="{{ asset('images/card/taylorshesh.webp') }}" class="rounded-circle img-fluid"
-                                style="width: 200px; height: 200px; object-fit: cover;">
-                            <h5 class="card-title mb-0">Joyce Pabo</h5>
-                            <small class="text-muted">Pet owners</small>
+                            <div class="card-top">
+                                <img src="{{ asset('images/card/taylorshesh.webp') }}" class="rounded-circle img-fluid" style="border: 2px solid #C50565; width: 75px; height: 75px; margin-bottom: 4px; object-fit: cover;">
+                            </div>
                             <p class="card-text mt-2">"I LOVE PETIFY!!! #THEbestbest!!"</p>
+                            <div class="card-profile">
+                                <!-- <hr class="card-divider"> -->
+                                <!-- <p class="card-title mb-0" style="font-size: 44px; font-family: 'Oleo Script Swash Caps', sans-serif; margin-top: 4px">"</p> -->
+                                <img src="https://img.icons8.com/?size=100&id=38970&format=png&color=C50565" width=30px alt="Quotation mark">
+                                <p class="card-title mb-0">Joyce Pabo</p>
+                                <p class="card-title mb-0" style="font-size: 16px; margin-top: 4px">Pet owner</p>
+                            </div>
                         </div>
                     </div>
+
                     {{-- card 3--}}
-                    <div class="card flex-shrink-0" style="width: 18rem;">
+                    <div class="card flex-shrink-0" style="border: 2px solid #C50565; width: 28rem; border-radius: 30px">
                         <div class="card-body">
-                            <img src="{{ asset('images/card/taylorshesh.webp') }}" class="rounded-circle img-fluid"
-                                style="width: 200px; height: 200px; object-fit: cover;">
-                            <h5 class="card-title mb-0">Mr. Tung Sahur</h5>
-                            <small class="text-muted">Comedian</small>
+                            <div class="card-top">
+                                <img src="{{ asset('images/card/taylorshesh.webp') }}" class="rounded-circle img-fluid" style="border: 2px solid #C50565; width: 75px; height: 75px; margin-bottom: 4px; object-fit: cover;">
+                            </div>
                             <p class="card-text mt-2">"I am Tung Tung Sahur, and I love PETIFY!"</p>
+                            <div class="card-profile">
+                                <!-- <hr class="card-divider"> -->
+                                <!-- <p class="card-title mb-0" style="font-size: 44px; font-family: 'Oleo Script Swash Caps', sans-serif; margin-top: 4px">"</p> -->
+                                <img src="https://img.icons8.com/?size=100&id=38970&format=png&color=C50565" width=30px alt="Quotation mark">
+                                <p class="card-title mb-0">Mr. Tung Sahur</p>
+                                <p class="card-title mb-0" style="font-size: 16px; margin-top: 4px">Comedian</p>
+                            </div>
                         </div>
                     </div>
+
+
                     {{-- card 4--}}
-                    <div class="card flex-shrink-0" style="width: 18rem;">
+                    <div class="card flex-shrink-0" style="border: 2px solid #C50565; width: 28rem; border-radius: 30px">
                         <div class="card-body">
-                            <img src="{{ asset('images/card/taylorshesh.webp') }}" class="rounded-circle img-fluid"
-                                style="width: 200px; height: 200px; object-fit: cover;">
-                            <h5 class="card-title mb-0">Koda</h5>
-                            <small class="text-muted">Dog</small>
+                            <div class="card-top">
+                                <img src="{{ asset('images/card/taylorshesh.webp') }}" class="rounded-circle img-fluid" style="border: 2px solid #C50565; width: 75px; height: 75px; margin-bottom: 4px; object-fit: cover;">
+                            </div>
                             <p class="card-text mt-2">"Petify helped me find myself when I feel lost."</p>
+                            <div class="card-profile">
+                                <!-- <hr class="card-divider"> -->
+                                <!-- <p class="card-title mb-0" style="font-size: 44px; font-family: 'Oleo Script Swash Caps', sans-serif; margin-top: 4px">"</p> -->
+                                <img src="https://img.icons8.com/?size=100&id=38970&format=png&color=C50565" width=30px alt="Quotation mark">
+                                <p class="card-title mb-0">Koda</p>
+                                <p class="card-title mb-0" style="font-size: 16px; margin-top: 4px">Dog</p>
+                            </div>
                         </div>
                     </div>
+
                     {{-- card 5--}}
-                    <div class="card flex-shrink-0" style="width: 18rem;">
+                    <div class="card flex-shrink-0" style="border: 2px solid #C50565; width: 28rem; border-radius: 30px">
                         <div class="card-body">
-                            <img src="{{ asset('images/card/taylorshesh.webp') }}" class="rounded-circle img-fluid"
-                                style="width: 200px; height: 200px; object-fit: cover;">
-                            <h5 class="card-title mb-0">Yanna</h5>
-                            <small class="text-muted">Vlogger</small>
+                            <div class="card-top">
+                                <img src="{{ asset('images/card/taylorshesh.webp') }}" class="rounded-circle img-fluid" style="border: 2px solid #C50565; width: 75px; height: 75px; margin-bottom: 4px; object-fit: cover;">
+                            </div>
                             <p class="card-text mt-2">"YOU TELL ME!! I love PETIFY for my posters!"</p>
+                            <div class="card-profile">
+                                <!-- <hr class="card-divider"> -->
+                                <!-- <p class="card-title mb-0" style="font-size: 44px; font-family: 'Oleo Script Swash Caps', sans-serif; margin-top: 4px">"</p> -->
+                                <img src="https://img.icons8.com/?size=100&id=38970&format=png&color=C50565" width=30px alt="Quotation mark">
+                                <p class="card-title mb-0">Yanna</p>
+                                <p class="card-title mb-0" style="font-size: 16px; margin-top: 4px">Vlogger</p>
+                            </div>
                         </div>
                     </div>
+
                     {{-- card 6--}}
-                    <div class="card flex-shrink-0" style="width: 18rem;">
+                    <div class="card flex-shrink-0" style="border: 2px solid #C50565; width: 28rem; border-radius: 30px">
                         <div class="card-body">
-                            <img src="{{ asset('images/card/taylorshesh.webp') }}" class="rounded-circle img-fluid"
-                                style="width: 200px; height: 200px; object-fit: cover;">
-                            <h5 class="card-title mb-0">Ms. Ballerina Capuccina</h5>
-                            <small class="text-muted">Dancer</small>
+                            <div class="card-top">
+                                <img src="{{ asset('images/card/taylorshesh.webp') }}" class="rounded-circle img-fluid" style="border: 2px solid #C50565; width: 75px; height: 75px; margin-bottom: 4px; object-fit: cover;">
+                            </div>
                             <p class="card-text mt-2">"Mi mi mi mi mi~ Mi love PETIFY! Solid! 10/10."</p>
+                            <div class="card-profile">
+                                <!-- <hr class="card-divider"> -->
+                                <!-- <p class="card-title mb-0" style="font-size: 44px; font-family: 'Oleo Script Swash Caps', sans-serif; margin-top: 4px">"</p> -->
+                                <img src="https://img.icons8.com/?size=100&id=38970&format=png&color=C50565" width=30px alt="Quotation mark">
+                                <p class="card-title mb-0">Ms. Ballerina Capuccina</p>
+                                <p class="card-title mb-0" style="font-size: 16px; margin-top: 4px">Vlogger</p>
+                            </div>
                         </div>
                     </div>
-
-
+                    @endfor
                 </div>
             </div>
         </section>
 
           <!-- start designing keme keme -->
-        <section class="last section-padding" id="section_5">
-            <div class="container">
-                <div class="row">
-                    <h1> start desigingin w us bro </h>
+        <section class="last section-padding animated-bg-section" id="section_5" style="position: relative; height: 480px; display: flex; align-content: center; flex-wrap: wrap; overflow: hidden;">
+            <ul class="section-5-bubbles">
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+
+            <div class="container" style="display: flex; flex-direction: column; flex-wrap: nowrap; align-items: center; z-index: 1; position: relative;">
+                <div class="section-5-text" style="display: flex; gap: 20px; align-items: center;">
+                    <h1 style="font-family: 'Instagram Sans', sans-serif; font-size: 66px;">Start designing with </h1>
+                    <h1 style="font-size: 75px; color: #C50565;">Petify</h1>
                 </div>
                 <a href="{{ route('login') }}" class="btn btn-primary btn-lg mt-4">
-                    Start desiginigg
+                    Start designing
                 </a>
             </div>
+
         </section>
+
     </main>
 
     <footer class="site-footer" style="background: linear-gradient(to right, #430021, #C4196D); color: white;">
         <div class="container">
             <div class="row">
                 <div class="col-12 text-center">
-                    <p>&copy; 2025 Petify. All Rights Reserved. 
+                    <p>&copy; 2025 Petify. All Rights Reserved.
                         <br><a href="{{ route('terms') }}" target="_blank" class="text-decoration-underline">Terms and Conditions</a>
                     </p>
                 </div>
@@ -261,5 +321,6 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="{{ asset('js/welcome.js') }}"></script>
     <script src="{{ asset('js/clickscroll.js') }}"></script>
+    <script src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs" type="module"></script>
 </body>
 </html>
