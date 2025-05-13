@@ -49,8 +49,7 @@
     </nav>
 
     <main>
-        <section class="hero d-flex justify-content-center align-items-center" id="section_1"
-                 style="background: linear-gradient(to right, #000000, #000000, #C4196D, #000000);">
+        <section class="hero d-flex justify-content-center align-items-center" id="section_1" style="background: linear-gradient(to right, #000000, #000000, #C4196D, #000000);">
             <div class="container position-relative">
 
                 <div class="background">

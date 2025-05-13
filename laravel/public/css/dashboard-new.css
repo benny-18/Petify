@@ -27,7 +27,7 @@
     font-style: normal;
 }
 
-/* Main container */
+/* main container */
 .project-container {
     display: flex;
     gap: 24px;
@@ -38,7 +38,7 @@
     z-index: 20;
   }
 
-  /* Creation panel (left side) */
+  /* creation chuchu panel (ito na left side) */
   .creation-panel {
     width: 420px;
     background-color: #ffffff;
@@ -74,7 +74,6 @@
     margin: 12px auto 7px;
   }
 
-  /* Form elements */
   .creation-form {
     width: 100%;
     margin-top: 24px;
@@ -121,7 +120,7 @@
     cursor: pointer;
   }
 
-  /* Projects panel (right side) */
+  /* projects panel  (right) */
   .projects-panel {
     flex: 1;
     /* background-color: #ffffff; */
@@ -154,7 +153,6 @@
     background: linear-gradient(90deg, #fdfdfd 13.46%, #c50565 100%);
   }
 
-  /* Empty state */
   .empty-state {
     border-radius: 40px;
     border: 2px solid #cfcfcf;
@@ -189,7 +187,6 @@
     margin-top: 6px;
   }
 
-  /* Focus states for form elements */
   .title-input:focus,
   .description-textarea:focus {
     outline: none;
@@ -200,7 +197,6 @@
     background-color: #a80456;
   }
 
-  /* Placeholder styling */
   ::placeholder {
     color: #d8d8d8;
   }
