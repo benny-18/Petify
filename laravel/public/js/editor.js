@@ -47,6 +47,34 @@ function toggleSidebar() {
 
 }
 
+function inlineImages(node) {
+    const imgs = node.querySelectorAll('img');
+    const promises = [];
+
+    imgs.forEach((img) => {
+        const src = img.src;
+        if (src.startsWith('data:')) return; // Already inlined
+
+        const promise = fetch(src, { mode: 'cors' })
+            .then((res) => res.blob())
+            .then((blob) => new Promise((resolve) => {
+                const reader = new FileReader();
+                reader.onloadend = () => {
+                    img.src = reader.result;
+                    resolve();
+                };
+                reader.readAsDataURL(blob);
+            }))
+            .catch((err) => {
+                console.warn(`Image could not be inlined: ${src}`, err);
+            });
+
+        promises.push(promise);
+    });
+
+    return Promise.all(promises);
+}
+
 document.getElementById("saveDownloadBtn").addEventListener("click", function (e) {
     e.preventDefault();
 
@@ -117,49 +145,85 @@ document.getElementById("saveDownloadBtn").addEventListener("click", function (e
         const originalTransform = preview.style.transform;
         preview.style.transform = 'scale(2)';
 
-        html2canvas(preview).then((canvas) => {
-            if (result.isConfirmed) {
+    }).then((result) => {
+        const preview = document.getElementById('poster-preview');
+        const originalTransform = preview.style.transform;
+        preview.style.transform = 'scale(2)';
 
-                const imgData = canvas.toDataURL('image/png');
-                const { jsPDF } = window.jspdf;
-                const pdf = new jsPDF({
-                    orientation: 'portrait',
-                    unit: 'px',
-                    format: [canvas.width, canvas.height],
-                });
-                pdf.addImage(imgData, 'PNG', 0, 0, canvas.width, canvas.height);
-                pdf.save('poster.pdf');
+        inlineImages(preview).then(() => {
+            return domtoimage.toPng(preview, {
+                cacheBust: true,
+                style: {
+                    transform: 'scale(2)',
+                    transformOrigin: 'top left',
+                }
+            });
+        }).then((dataUrl) => {
+            const img = new Image();
+            img.src = dataUrl;
 
-                Swal.fire({
-                    title: 'Success!',
-                    text: 'Poster exported as PDF!',
-                    icon: 'success',
-                    confirmButtonText: 'Close',
-                    customClass: {
-                      popup: 'swal2-custom-popup swal2-custom-font',
-                      confirmButton: 'swal2-confirm-custom'
-                    }
-                });
-            } else if (result.isDenied) {
-                // Export as PNG
-                const link = document.createElement('a');
-                link.download = 'poster.png';
-                link.href = canvas.toDataURL();
-                link.click();
+            img.onload = () => {
+                const canvas = document.createElement('canvas');
+                canvas.width = img.width;
+                canvas.height = img.height;
+                const ctx = canvas.getContext('2d');
+                ctx.drawImage(img, 0, 0);
 
-                Swal.fire({
-                    title: 'Success!',
-                    text: 'Poster exported as PNG!',
-                    icon: 'success',
-                    confirmButtonText: 'Close',
-                    customClass: {
-                      popup: 'swal2-custom-popup swal2-custom-font',
-                      confirmButton: 'swal2-confirm-custom'
-                    }
-                });
-            }
+                if (result.isConfirmed) {
+                    const imgData = canvas.toDataURL('image/png');
+                    const { jsPDF } = window.jspdf;
+                    const pdf = new jsPDF({
+                        orientation: 'portrait',
+                        unit: 'px',
+                        format: [canvas.width, canvas.height],
+                    });
+                    pdf.addImage(imgData, 'PNG', 0, 0, canvas.width, canvas.height);
+                    pdf.save('poster.pdf');
 
+                    Swal.fire({
+                        title: 'Success!',
+                        text: 'Poster exported as PDF!',
+                        icon: 'success',
+                        confirmButtonText: 'Close',
+                        customClass: {
+                            popup: 'swal2-custom-popup swal2-custom-font',
+                            confirmButton: 'swal2-confirm-custom'
+                        }
+                    });
+                } else if (result.isDenied) {
+                    const link = document.createElement('a');
+                    link.download = 'poster.png';
+                    link.href = dataUrl;
+                    link.click();
+
+                    Swal.fire({
+                        title: 'Success!',
+                        text: 'Poster exported as PNG!',
+                        icon: 'success',
+                        confirmButtonText: 'Close',
+                        customClass: {
+                            popup: 'swal2-custom-popup swal2-custom-font',
+                            confirmButton: 'swal2-confirm-custom'
+                        }
+                    });
+                }
+
+                preview.style.transform = originalTransform;
+            };
+        }).catch((error) => {
+            console.error('dom-to-image failed:', error);
             preview.style.transform = originalTransform;
+
+            Swal.fire({
+                title: 'Error!',
+                text: 'Failed to export poster. Please try again.',
+                icon: 'error',
+                confirmButtonText: 'Close',
+                customClass: {
+                    popup: 'swal2-custom-popup swal2-custom-font',
+                    confirmButton: 'swal2-confirm-custom'
+                }
+            });
         });
     });
 });

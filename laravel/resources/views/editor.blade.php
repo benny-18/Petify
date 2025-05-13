@@ -8,12 +8,7 @@
     <title>Petify - Editor</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" href="{{ asset('css/editor.css') }}" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Oleo+Script+Swash+Caps&family=Syne:wght@400;500;700&family=Almarai:wght@400;700&display=swap"
-      rel="stylesheet"
-    />
   </head>
-
 
   <script>
     window.addEventListener('load', function () {
@@ -30,8 +25,7 @@
 
   @livewireScripts
   <body>
-
-
+    <script src="https://cdn.jsdelivr.net/npm/dom-to-image-more@3.6.0/dist/dom-to-image-more.min.js"></script>
     <div id="loader-anim">
         <span class="loader-content">
             <h1 class="logo-text">Petify</h2>

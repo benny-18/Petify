@@ -49,6 +49,20 @@
     font-style: normal;
 }
 
+@font-face {
+    font-family: 'Oleo Script Swash Caps';
+    src: url('/fonts/OleoScriptSwashCaps-Regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Oleo Script Swash Caps';
+    src: url('/fonts/OleoScriptSwashCaps-Bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+}
+
 .fade-out {
   opacity: 0;
   transition: opacity 0.5s ease;
