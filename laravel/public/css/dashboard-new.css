@@ -1,0 +1,206 @@
+
+@font-face {
+    font-family: 'Instagram Sans';
+    src: url('/fonts/Instagram Sans.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Instagram Sans';
+    src: url('/fonts/Instagram Sans Light.woff2') format('woff2');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Instagram Sans';
+    src: url('/fonts/Instagram Sans Medium.woff2') format('woff2');
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Instagram Sans';
+    src: url('/fonts/Instagram Sans Bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+}
+
+/* Main container */
+.project-container {
+    display: flex;
+    gap: 24px;
+    /* padding: 0 54px;
+    margin: 50px 0 124px; */
+    height: calc(100vh - 174px);
+    position: relative;
+    z-index: 20;
+  }
+
+  /* Creation panel (left side) */
+  .creation-panel {
+    width: 420px;
+    background-color: #ffffff;
+    border-radius: 40px;
+    border: 1px solid #cfcfcf;
+    box-shadow: 0 9px 24px rgba(0, 0, 0, 0.25);
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+  }
+
+  .template-image {
+    /* width: 421px; */
+    height: 330px;
+    margin: 0 auto;
+    filter: drop-shadow(0 4px 4px rgba(0, 0, 0, 0.25));
+  }
+
+  .panel-title {
+    color: #c50565;
+    font-size: 32px;
+    /* font-weight: 400; */
+    text-align: center;
+    /* margin-top: 20px; */
+  }
+
+  .create-project-divider {
+    width: 283px;
+    height: 3px;
+    background-color: #dedede;
+    margin: 12px auto 7px;
+  }
+
+  /* Form elements */
+  .creation-form {
+    width: 100%;
+    margin-top: 24px;
+    /* padding: 0 16px; */
+  }
+
+  .title-input {
+    width: 100%;
+    height: 54px;
+    border-radius: 20px;
+    border: 1px solid #d8d8d8;
+    background-color: #fdfdfd;
+    padding: 0 19px;
+    font-size: 20px;
+    color: #b8055e;
+    font-family: 'Instagram Sans', sans-serif;
+  }
+
+  .description-textarea {
+    width: 100%;
+    scrollbar-width: none;
+    height: 97px;
+    border-radius: 20px;
+    border: 1px solid #d8d8d8;
+    background-color: #fdfdfd;
+    padding: 18px;
+    margin-top: 23px;
+    font-size: 20px;
+    color: rgba(62, 62, 62, 1);
+    font-family: 'Instagram Sans', sans-serif;
+    resize: none;
+  }
+
+  .generate-button {
+    width: 100%;
+    height: 54px;
+    border-radius: 20px;
+    background-color: #c50565;
+    border: 1px solid #888;
+    color: #ffffff;
+    font-size: 20px;
+    font-family: 'Instagram Sans', sans-serif;
+    margin-top: 16px;
+    cursor: pointer;
+  }
+
+  /* Projects panel (right side) */
+  .projects-panel {
+    flex: 1;
+    /* background-color: #ffffff; */
+    background: linear-gradient(to bottom,#fbfbfb 32%,#f6e8ef 64%, #ecbfd6 100%);
+    border-radius: 40px;
+    border: 1px solid #cfcfcf;
+    box-shadow: 0 9px 24px rgba(0, 0, 0, 0.25);
+    padding: 52px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .projects-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 32px;
+  }
+
+  .projects-title {
+    color: #c50565;
+    font-size: 28px;
+    font-family: 'Instagram Sans', sans-serif;
+    font-weight: 700;
+  }
+
+  .header-line {
+    flex: 1;
+    height: 24px;
+    border-radius: 16px;
+    background: linear-gradient(90deg, #fdfdfd 13.46%, #c50565 100%);
+  }
+
+  /* Empty state */
+  .empty-state {
+    border-radius: 40px;
+    border: 2px solid #cfcfcf;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    margin-bottom: 50px;
+    height: 750px;
+    flex: 1;
+  }
+
+  .empty-state-image {
+    width: 225px;
+    height: 225px;
+    margin-top: -70px;
+  }
+
+  .empty-state-title {
+    color: #c50565;
+    font-size: 32px;
+    font-weight: 700;
+    text-align: center;
+  }
+
+  .empty-state-description {
+    color: #d34c8f;
+    font-size: 24px;
+    font-weight: 700;
+    text-align: center;
+    margin-top: 6px;
+  }
+
+  /* Focus states for form elements */
+  .title-input:focus,
+  .description-textarea:focus {
+    outline: none;
+    border-color: #c50565;
+  }
+
+  .generate-button:hover {
+    background-color: #a80456;
+  }
+
+  /* Placeholder styling */
+  ::placeholder {
+    color: #d8d8d8;
+  }

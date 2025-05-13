@@ -1211,6 +1211,17 @@ strong {
   border-color: #c4196d;
 }
 
+.no-projects {
+    display: flex;
+    text-align: center !important;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+    padding-top: 100px;
+}
+
 .no-projects-text {
   font-size: 18px; /* Adjust font size */
   color: var(--secondary-color);     /* Set text color */
@@ -1220,9 +1231,9 @@ strong {
 }
 
 .no-projects-image {
-  width: 400px; /* Adjust the width as needed */
-  height: 400px; /* Maintain aspect ratio */
-  padding-bottom: 50px;
+  width: 240px; /* Adjust the width as needed */
+  height: 240px; /* Maintain aspect ratio */
+  padding-bottom: 12px;
 }
 
 .stretched-link {
@@ -1231,7 +1242,7 @@ strong {
 
 .card-project {
   transition: all 0.3s ease;
-  border: 2px solid transparent; /* Ensure there's space for border transition */
+  border: 2px solid #dbdbdb; /* Ensure there's space for border transition */
   border-radius: 10px;
   overflow: hidden;
   background-color: #fff;

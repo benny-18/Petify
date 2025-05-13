@@ -17,6 +17,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/magnific-popup@1.1.0/dist/magnific-popup.css" rel="stylesheet">
     <link href="{{ asset('css/dashboard.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/dashboard-new.css') }}" rel="stylesheet">
 </head>
 <body>
 
@@ -67,15 +68,18 @@
                     <span></span>
                 </div>
 
-                
+                <main class="project-container">
+                    <section class="creation-panel">
+                    <img
+                        src="{{ asset('images/petify-templates-large.png') }}"
+                        alt="Missing Pet Templates"
+                        class="template-image"
+                    />
 
-                <div style="position: relative" class="row align-items-center">
-                    <div class="hero-text-container">
-                        <div class="section-title-wrap d-flex justify-content-center align-items-center mb-5">
-                    <h2 class="create-text text-white mb-0">Create Project</h2>
-                </div>
+                    <h1 class="panel-title">What will you design today?</h1>
+                    <div class="create-project-divider"></div>
 
-                <!-- CREATE FORM -->
+                                    <!-- CREATE FORM
                  <form action="{{ route('project.store') }}" method="POST" class="row g-3 mb-5">
                     @csrf
                     <div class="col-md-4">
@@ -87,14 +91,117 @@
                     <div class="col-md-3">
                         <button type="submit" class="btn btn-primary w-100 rounded">Create Project</button>
                     </div>
-                </form>
+                </form> -->
+
+                    <form action="{{ route('project.store') }}" method="POST" class="creation-form">
+                        @csrf
+                        <input type="text" name="title" placeholder="Project title" required class="title-input"/>
+                        <textarea name="description" placeholder="Project description (optional)" class="description-textarea"></textarea>
+                        <button type="submit" class="generate-button">Generate new project</button>
+                    </form>
+
+                    </section>
+                    <section class="projects-panel">
+                    <header class="projects-header">
+                        <div class="projects-title">YOUR PROJECTS</div>
+                        <div class="header-line"></div>
+                    </header>
+
+                    <!-- <div class="empty-state">
+                        <img
+                        src="{{ asset('images/dog-question.gif') }}"
+                        alt="No projects"
+                        class="empty-state-image"
+                        />
+                        <h3 class="empty-state-title">You currently don't have any projects.</h3>
+                        <p class="empty-state-description">Projects you create will appear here.</p>
+                    </div> -->
+
+                    @if(Auth::user()->projects->isEmpty())
+                            <div class="no-projects">
+                                <img src="{{ asset('images/dog-question.gif') }}" alt="No Projects" class="img-fluid no-projects-image">
+                                <p class="no-projects-text mt-3">
+                                    You have no projects yet...? Create one!
+                                </p>
+                            </div>
+                        @else
+                            <div class="row">
+                                @foreach(Auth::user()->projects as $project)
+                                    <div class="col-md-4 mb-4">
+                                        <div class="card-project h-100 shadow-sm position-relative">
+
+                                            {{-- Clickable Wrapper --}}
+                                            <a href="{{ route('project.editor', $project->id) }}" class="stretched-link"></a>
+
+                                            {{-- Poster Thumbnail --}}
+                                            @if ($project->poster_path)
+                                                <img src="{{ asset('images/templates/template-1.png') }}"
+                                                    class="card-img-top img-fluid"
+                                                    alt="Poster thumbnail of {{ $project->title }}">
+                                            @else
+                                                <img src="{{ asset('images/templates/template-1.png') }}"
+                                                    class="card-img-top img-fluid"
+                                                    alt="Default thumbnail">
+                                            @endif
+
+                                            {{-- Card Body --}}
+                                            <div class="card-body">
+                                                <h5 class="card-title mb-1">{{ Str::limit($project->title, 50) }}</h5>
+                                                <p class="card-text">{{ Str::limit($project->description, 100) }}</p>
+                                            </div>
+
+                                            {{-- Card Footer --}}
+                                            <div class="card-footer d-flex justify-content-between align-items-center bg-white border-0 position-relative">
+                                                <small class="text-muted">{{ $project->created_at->format('M d, Y') }}</small>
+
+                                                <form id="delete-form-{{ $project->id }}"
+                                                    action="{{ route('project.destroy', $project->id) }}"
+                                                    method="POST"
+                                                    style="display: none;">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                </form>
+
+                                                <button type="button"
+                                                        class="btn btn-sm btn-outline-danger z-3 position-relative"
+                                                        onclick="event.preventDefault(); event.stopPropagation(); confirmDelete({{ $project->id }})">
+                                                    Delete
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+                        @endif
+                    </section>
+                </main>
+
+                <!-- <div style="position: relative" class="row align-items-center">
+                    <div class="hero-text-container">
+                        <div class="section-title-wrap d-flex justify-content-center align-items-center mb-5">
+                    <h2 class="create-text text-white mb-0">Create Project</h2>
+                </div> -->
+
+                <!-- CREATE FORM -->
+                 <!-- <form action="{{ route('project.store') }}" method="POST" class="row g-3 mb-5">
+                    @csrf
+                    <div class="col-md-4">
+                            <input type="text" name="title" class="form-control" placeholder="Project Title" required>
+                    </div>
+                    <div class="col-md-5">
+                            <input type="text" name="description" class="form-control" placeholder="Project Description">
+                    </div>
+                    <div class="col-md-3">
+                        <button type="submit" class="btn btn-primary w-100 rounded">Create Project</button>
+                    </div>
+                </form> -->
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- PROJECTS -->
-        <section class="contact section-projects" id="section_2">
+        <!-- <section class="contact section-projects" id="section_2">
             <div class="container">
                 <div class="row">
                     <div class="col-12">
@@ -159,13 +266,12 @@
                     </div>
                 </div>
             </div>
-        </section>
+        </section> -->
 
-
-           <section class="gallery section-padding" id="section_3">
-            <div class="container">
-                <div class="section-title-wrap text-center mb-4">
-                    <h2 class="gallery-heading mb-0">Template Gallery</h2>
+        <section class="gallery section-padding" id="section_3">
+        <div class="container">
+            <div class="section-title-wrap text-center mb-4">
+                <h2 class="gallery-heading mb-0">Template Gallery</h2>
                 </div>
                 <div class="row">
                     @php
@@ -190,7 +296,7 @@
             </div>
         </section>
 
-        
+
     </main>
 
     <footer class="site-footer" style="background: linear-gradient(to right, #430021, #C4196D); color: white;">
@@ -301,7 +407,7 @@
     <script src="{{ asset('js/jquery.magnific-popup.min.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="{{ asset('js/custom.js') }}"></script>
-    <script src="{{ asset('js/clickscroll.js') }}"></script>
+    <script src="{{ asset('js/click-scroll.js') }}"></script>
 
 
 <!-- save changes -->
