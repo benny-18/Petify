@@ -808,7 +808,7 @@ strong {
   background: var(--secondary-color);
   position: relative;
   overflow: hidden;
-  padding-top: 330px;
+  padding-top: 400px;
   padding-bottom: 330px;
   height: 100vh;
 }

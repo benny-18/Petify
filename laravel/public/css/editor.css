@@ -63,6 +63,13 @@
     font-style: normal;
 }
 
+@font-face {
+  font-family: 'One Little Font';
+  src: url('/fonts/One-Little-Font-Regular.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+}
+
 .fade-out {
   opacity: 0;
   transition: opacity 0.5s ease;
@@ -347,6 +354,8 @@
   .template-image {
     width: 119px;
     aspect-ratio: 0.71;
+    border-radius: 10px;
+    border: 2px solid #d2d2d2;
     object-fit: contain;
   }
 

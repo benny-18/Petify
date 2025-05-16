@@ -16,7 +16,18 @@
     @else
         <!-- Placeholder or default image if no image is available -->
         <img src="{{ asset('images/default-placeholder.jpg') }}"
-            style="position: absolute; top: 996px; left: 170px; width: 685px; height: 757px; object-fit: cover; z-index: 5;">
+            style="
+            position: absolute;
+            {{-- top: 996px; 
+            left: 170px; 
+            width: 685px; 
+            height: 757px;  --}}
+            top: 540px;
+            left: 380px;
+            width: 825px;
+            height: 810px;
+            object-fit: cover; 
+            z-index: 5;">
     @endif
 
     <!-- pet name -->

@@ -55,6 +55,11 @@
                 <p class="template-name">Missing Pet 2</p>
             </div>
 
+            <div class="template-item" data-template-id="template-3">
+                <img src="{{ asset('images/templates/thumbs/template-3.webp') }}" alt="Template 3" class="template-image" />
+                <p class="template-name">Birthday Template</p>
+            </div>
+
         </aside>
 
         <div class="content-area">

@@ -36,11 +36,12 @@
     height: calc(100vh - 174px);
     position: relative;
     z-index: 20;
+    justify-content: center;
   }
 
   /* creation chuchu panel (ito na left side) */
   .creation-panel {
-    width: 420px;
+    width: 400px;
     background-color: #ffffff;
     border-radius: 40px;
     border: 1px solid #cfcfcf;
@@ -68,10 +69,11 @@
   }
 
   .create-project-divider {
-    width: 283px;
-    height: 3px;
-    background-color: #dedede;
-    margin: 12px auto 7px;
+    width: 180px;
+    height: 4px;
+    background-color: #c3c3c3;
+    /* margin: 12px auto 7px; */
+    margin-top: 12px;
   }
 
   .creation-form {
@@ -131,6 +133,7 @@
     padding: 52px;
     display: flex;
     flex-direction: column;
+    overflow: scroll;
   }
 
   .projects-header {

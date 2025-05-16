@@ -7,6 +7,7 @@ use App\Livewire\PosterEditor;
 
 //register and login in one ui
 Route::get('/', function () {return view('welcome'); });
+Route::get('/welcome', function () {return view('welcome'); });
 Route::get('/login', function () {return view('login'); });
 Route::get('/register', function () {return view('login'); });
 

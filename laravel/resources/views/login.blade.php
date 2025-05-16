@@ -18,13 +18,6 @@
 
     <h2>Petify</h2>
 
-    <!-- back to welcome from login -->
-    <div class="flex justify-end p-4">
-        <a href="{{ url('/') }}" class="text-white text-2xl">
-            ← Back to Home
-        </a>
-    </div>
-
     <div class="container" id="container">
         {{-- REGISTER Form --}}
         <div class="form-container sign-up-container">
@@ -80,6 +73,13 @@
 
                 <!-- <a href="#">Forgot your password?</a> -->
                 <button type="submit">Login</button>
+
+                    <!-- back to welcome from login -->
+                <div style="margin-top: 12px;" class="flex justify-end p-4">
+                    <a href="{{ url('/') }}" style="font-size: 12px;" class="text-white text-sm">
+                        ⾕ Back to Home
+                    </a>
+                </div>
             </form>
         </div>
 
