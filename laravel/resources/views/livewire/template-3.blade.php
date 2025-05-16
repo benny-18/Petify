@@ -4,7 +4,7 @@
          style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 10; pointer-events: none; user-select: none;">
 
      @if ($petImage)
-    <img src="{{ asset('storage/' . $petImage) }}"
+    <img crossorigin="anonymous" src="{{ asset('storage/' . $petImage) }}"
          style="
          position: absolute;
          top: 210px;
@@ -15,18 +15,18 @@
          z-index: 5;">
     @else
         <!-- Placeholder or default image if no image is available -->
-        <img src="{{ asset('images/default-placeholder.jpg') }}"
+        <img crossorigin="anonymous" src="{{ asset('images/default-placeholder.jpg') }}"
             style="
             position: absolute;
-            {{-- top: 996px; 
-            left: 170px; 
-            width: 685px; 
+            {{-- top: 996px;
+            left: 170px;
+            width: 685px;
             height: 757px;  --}}
             top: 540px;
             left: 380px;
             width: 825px;
             height: 810px;
-            object-fit: cover; 
+            object-fit: cover;
             z-index: 5;">
     @endif
 

@@ -26,6 +26,7 @@
   @livewireScripts
   <body>
     <script src="https://cdn.jsdelivr.net/npm/dom-to-image-more@3.6.0/dist/dom-to-image-more.min.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/dom-to-image-more@2.9.0/dist/dom-to-image-more.min.js"></script> -->
     <div id="loader-anim">
         <span class="loader-content">
             <h1 class="logo-text">Petify</h2>
@@ -35,7 +36,7 @@
     </div>
 
 
-    <div class="app-container">
+    <div class="app-container" id="test">
       <main class="main-content">
 
         <aside class="sidebar" id="sidebar">
@@ -102,7 +103,7 @@
 
 
           <!-- template part -->
-          <div class="content-container">
+          <div class="content-container" id="content">
             <section class="preview-section" id="previewSection">
 
                 <!-- <div class="image-preview">
@@ -111,9 +112,7 @@
 
                 <div class="pet-image" id="poster-image" style="width: 794px; scale: 0.65; transform-origin: center; height: 1122px;">
                     <div id="poster-preview" style="transform: scale(0.5); transform-origin: top center;">
-                        @livewire('poster-editor', [
-                            'projectId' => $project->id,
-                            'templateId' => $project->template_id,
+                        @include('livewire.' . $project->template_id, [
                             'petName' => $project->pet_name,
                             'petDescription' => $project->pet_description,
                             'petBreed' => $project->breed,
