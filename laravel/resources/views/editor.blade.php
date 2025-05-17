@@ -106,12 +106,23 @@
           <div class="content-container" id="content">
             <section class="preview-section" id="previewSection">
 
-                <!-- <div class="image-preview">
-                    <img src="{{ asset('images/templates/missing-pet-template.png') }}" alt="Pet Image Preview" class="pet-image" />
-                </div> -->
+                <div class="pet-image" id="poster-image">
+                    <div id="poster-preview" x-show="!exporting" style="transform: scale(0.5); transform-origin: top center;">
+                        @livewire('poster-editor', [
+                            'projectId' => $project->id,
+                            'templateId' => $project->template_id,
+                            'petName' => $project->pet_name,
+                            'petDescription' => $project->pet_description,
+                            'petBreed' => $project->breed,
+                            'petAge' => $project->age,
+                            'petSex' => $project->sex,
+                            'contactPerson' => $project->contact_person,
+                            'contactNumber' => $project->contact_number,
+                            'petImage' => $project->pet_photo
+                        ])
+                    </div>
 
-                <div class="pet-image" id="poster-image" style="width: 794px; scale: 0.65; transform-origin: center; height: 1122px;">
-                    <div id="poster-preview" style="transform: scale(0.5); transform-origin: top center;">
+                    <div id="poster-preview-static" x-show="exporting">
                         @include('livewire.' . $project->template_id, [
                             'petName' => $project->pet_name,
                             'petDescription' => $project->pet_description,
