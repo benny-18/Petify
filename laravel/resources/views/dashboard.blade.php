@@ -35,9 +35,11 @@
             <span class="navbar-brand mx-auto mx-lg-0">Petify</span>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-lg-5">
+                <!--
                     <li class="nav-item"><a class="nav-link click-scroll" href="#section_1">Create</a></li>
                     <li class="nav-item"><a class="nav-link click-scroll" href="#section_2">Projects</a></li>
                     <li class="nav-item"><a class="nav-link click-scroll" href="#section_3">Templates</a></li>
+                -->
                 </ul>
                 <div class="d-flex align-items-center flex-wrap gap-2 ms-auto">
                     <a href="#" class="profile-photo-link" data-bs-toggle="modal" data-bs-target="#profileModal">
@@ -145,8 +147,8 @@
 
                                             {{-- Card Body --}}
                                             <div class="card-body">
-                                                <h5 class="card-title mb-1">{{ Str::limit($project->title, 50) }}</h5>
-                                                <p class="card-text">{{ Str::limit($project->description, 100) }}</p>
+                                                <h5 class="card-title mb-1">{{ Str::limit($project->title, 15) }}</h5>
+                                                <p class="card-text">{{ Str::limit($project->description, 16) }}</p>
                                             </div>
 
                                             {{-- Card Footer --}}
@@ -267,6 +269,8 @@
             </div>
         </section> -->
 
+        <!--
+
         <section class="gallery section-padding" id="section_3">
         <div class="container">
             <div class="section-title-wrap text-center mb-4">
@@ -294,6 +298,7 @@
                 </div>
             </div>
         </section>
+        -->
 
 
     </main>

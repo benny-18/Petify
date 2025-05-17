@@ -71,8 +71,8 @@
                     <img src="https://img.icons8.com/?size=100&id=OTxpMqWbm71F&format=png&color=c50565"
                         alt="Menu Icon"
                         class="menu-icon icon-menu" />
-
-                    <img src="https://img.icons8.com/?size=100&id=2i5n7zNvArOt&format=png&color=c50565"
+                    <!-- https://img.icons8.com/?size=100&id=2i5n7zNvArOt&format=png&color=c50565 old exit -->
+                    <img src="https://img.icons8.com/?size=100&id=OTxpMqWbm71F&format=png&color=c50565"
                         alt="Close Icon"
                         class="menu-icon icon-close visible" />
                 </div>
