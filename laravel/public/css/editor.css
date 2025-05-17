@@ -141,8 +141,9 @@
     /* background: #F6F5F7;
     background: linear-gradient(180deg, rgba(246, 245, 247, 1) 40%, rgba(213, 82, 148, 1) 80%, rgba(197, 5, 101, 1) 100%); */
 
-    background: #000000;
-    background: linear-gradient(180deg, #7a033f 40%, rgba(197, 5, 101, 1) 100%);
+    /* background: #000000; */
+    /* background: linear-gradient(180deg, #7a033f 40%, rgba(197, 5, 101, 1) 100%); */
+    background: linear-gradient(180deg, #fdfdfd 40%, rgba(197, 5, 101, 1) 100%);
     width: 100%;
     padding: 24px;
     height: 100vh;

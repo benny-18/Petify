@@ -24,13 +24,13 @@
 
 
   @livewireScripts
-  <body>
+  <body data-project-id="{{ $project->id }}">
     <script src="https://cdn.jsdelivr.net/npm/dom-to-image-more@3.6.0/dist/dom-to-image-more.min.js"></script>
     <!-- <script src="https://cdn.jsdelivr.net/npm/dom-to-image-more@2.9.0/dist/dom-to-image-more.min.js"></script> -->
     <div id="loader-anim">
         <span class="loader-content">
             <h1 class="logo-text">Petify</h2>
-            <img src="https://i.pinimg.com/originals/18/f5/66/18f566fa5cf046c1e81fc6c61ce5dc53.gif" alt="Loading...">
+            <img src="{{ asset('images/dog_running.gif') }}" alt="Loading...">
             <h1 class="loader-text">Generating preview...</h1>
         </span>
     </div>
@@ -68,30 +68,30 @@
           <header class="app-header">
             <div class="logo-container">
                 <div id="toggleSidebar" class="menu-icon-container" onclick="toggleSidebar()">
-                    <img src="https://img.icons8.com/?size=100&id=OTxpMqWbm71F&format=png&color=c50565"
+                    <img src="{{ asset('images/icons/sidebar-icon.png') }}"
                         alt="Menu Icon"
                         class="menu-icon icon-menu" />
                     <!-- https://img.icons8.com/?size=100&id=2i5n7zNvArOt&format=png&color=c50565 old exit -->
-                    <img src="https://img.icons8.com/?size=100&id=OTxpMqWbm71F&format=png&color=c50565"
+                    <img src="{{ asset('images/icons/sidebar-icon.png') }}"
                         alt="Close Icon"
                         class="menu-icon icon-close visible" />
                 </div>
 
                 <h1 class="logo-text">Petify</h2>
 
-                <a href="{{ route('dashboard') }}" class="btn-back-dashboard">
+                <a href="{{ route('dashboard') }}" id="back-to-dashboard-btn" class="btn-back-dashboard">
                   Back to Dashboard
                 </a>
             </div>
                 <div style="display: flex; align-items: center; gap: 30px">
                     <div class="save-indicators">
                         <div id="save-success" style="display: none; align-items: center; gap: 8px; opacity: 0; transition: opacity 0.5s ease;">
-                            <img style="width: 26px" src="https://img.icons8.com/?size=100&id=a2LNYNfCGquh&format=png&color=c50565" alt="Save icon">
+                            <img style="width: 26px" src="{{ asset('images/icons/cloud-active.png') }}" alt="Save icon">
                             <h2 style="color: #C50565" class="sidebar-title">Changes saved!</h2>
                         </div>
 
                         <div id="save-progress" style="display: none; align-items: center; gap: 8px; opacity: 0; transition: opacity 0.5s ease;">
-                            <img style="width: 26px" src="https://img.icons8.com/?size=100&id=sV1GrqFeGaYn&format=png&color=757575" alt="Save icon">
+                            <img style="width: 26px" src="{{ asset('images/icons/cloud-inactive.png') }}" alt="Save icon">
                             <h2 style="color: #757575" class="sidebar-title">Autosaving changes...</h2>
                         </div>
                     </div>
@@ -165,7 +165,7 @@
                     <!-- Pet photo upload -->
                     <div class="button-container">
                         <input class="importimg-button" type="file" wire:model.live="petImage" name="pet_photo" accept="image/*"  onchange="handleImageUpload()">
-                            <img src="https://img.icons8.com/?size=100&id=wdoEeeG1GGY6&format=png&color=757575" class="icon-overlay">
+                            <img src="{{ asset('images/icons/import-img.png') }}" class="icon-overlay">
                             <!-- <input type="file" wire:model.live="petImage" name="pet_photo" accept="image/*"  onchange="handleImageUpload()" class="mb-4" /> -->
                         </input>
                     </div>

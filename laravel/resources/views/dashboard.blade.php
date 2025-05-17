@@ -135,20 +135,20 @@
                                             <a href="{{ route('project.editor', $project->id) }}" class="stretched-link"></a>
 
                                             {{-- Poster Thumbnail --}}
-                                            @if ($project->poster_path)
-                                                <img src="{{ asset('images/templates/template-1.png') }}"
+                                            @if ($project->thumbnail_path)
+                                                <img src="{{ asset($project->thumbnail_path) }}"
                                                     class="card-img-top img-fluid"
                                                     alt="Poster thumbnail of {{ $project->title }}">
                                             @else
-                                                <img src="{{ asset('images/templates/template-1.png') }}"
+                                                <img src="{{ asset('images/templates/thumbs/template-1.webp') }}"
                                                     class="card-img-top img-fluid"
                                                     alt="Default thumbnail">
                                             @endif
 
                                             {{-- Card Body --}}
                                             <div class="card-body">
-                                                <h5 class="card-title mb-1">{{ Str::limit($project->title, 15) }}</h5>
-                                                <p class="card-text">{{ Str::limit($project->description, 16) }}</p>
+                                                <h5 style="color: #c50565" class="card-title mb-1">{{ Str::limit($project->title, 15) }}</h5>
+                                                <p style="font-size: 18px" class="card-text">{{ Str::limit($project->description, 16) }}</p>
                                             </div>
 
                                             {{-- Card Footer --}}
@@ -164,6 +164,7 @@
                                                 </form>
 
                                                 <button type="button"
+                                                        style="border-radius: 12px"
                                                         class="btn btn-sm btn-outline-danger z-3 position-relative"
                                                         onclick="event.preventDefault(); event.stopPropagation(); confirmDelete({{ $project->id }})">
                                                     Delete

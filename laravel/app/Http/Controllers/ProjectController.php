@@ -83,11 +83,11 @@ class ProjectController extends Controller
             if ($project->pet_photo && file_exists(storage_path('app/public/pets/' . $project->pet_photo))) {
                 unlink(storage_path('app/public/pets/' . $project->pet_photo));
             }
-        
+
             // Store new image in 'pets' directory under 'public' disk
             $petPhoto = $request->file('pet_photo');
             $imagePath = $petPhoto->store('pets', 'public');
-        
+
             // Save the relative path to database
             $project->pet_photo = $imagePath;
         }
@@ -123,6 +123,26 @@ class ProjectController extends Controller
         $project->save();
 
         return response()->json(['status' => 'success']);
+    }
+
+    public function uploadThumbnail(Request $request)
+    {
+        $request->validate([
+            'project_id' => 'required|exists:projects,id',
+            'thumbnail' => 'required|image|mimes:png,jpeg,webp|max:2048',
+        ]);
+
+        $project = Project::findOrFail($request->project_id);
+
+        $filename = 'thumb_' . time() . '_' . uniqid() . '.png';
+        $path = 'images/project-thumbnails/' . $filename;
+
+        $request->file('thumbnail')->move(public_path('images/project-thumbnails'), $filename);
+
+        $project->thumbnail_path = $path;
+        $project->save();
+
+        return response()->json(['success' => true, 'path' => asset($path)]);
     }
 
     public function edit($id)

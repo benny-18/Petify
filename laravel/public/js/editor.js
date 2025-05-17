@@ -9,6 +9,8 @@ const closeIcon = document.querySelector('.icon-close');
 const previewSection = document.getElementById("previewSection");
 const toggleZoomBtn = document.getElementById("toggleZoomBtn");
 
+const projectId = document.body.dataset.projectId;
+
 // toggleZoomBtn.addEventListener("click", () => {
 //     if (isZoomed) {
 //       // Switch to Fit Mode
@@ -198,6 +200,55 @@ function exportAsPDF(previewElement) {
     });
 }
 
+function generateProjectThumbnail(projectId) {
+    const preview = document.getElementById('poster-preview-static');
+    if (!preview) return;
+
+    domtoimage.toPng(preview)
+        .then(originalDataUrl => {
+            const img = new Image();
+            img.onload = () => {
+                const canvas = document.createElement('canvas');
+                canvas.width = img.width / 2;
+                canvas.height = img.height / 2;
+
+                const ctx = canvas.getContext('2d');
+                ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+                canvas.toBlob((blob) => {
+                    const formData = new FormData();
+                    formData.append('thumbnail', blob, `${projectId}_thumb.png`);
+                    formData.append('project_id', projectId);
+
+                    fetch('/projects/upload-thumbnail', {
+                        method: 'POST',
+                        headers: {
+                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+                        },
+                        body: formData
+                    })
+                        .then(res => res.json())
+                        .then(res => {
+                            console.log('Thumbnail saved:', res.path);
+                        })
+                        .catch(err => {
+                            console.error('Thumbnail upload failed:', err);
+                        });
+                }, 'image/png');
+            };
+
+            img.src = originalDataUrl;
+        })
+        .catch(error => {
+            console.error('Thumbnail generation failed:', error);
+        });
+}
+
+document.getElementById("back-to-dashboard-btn").addEventListener("click", function (e) {
+    // e.preventDefault();
+    generateProjectThumbnail(projectId);
+})
+
 document.getElementById("saveDownloadBtn").addEventListener("click", function (e) {
     e.preventDefault();
 
@@ -247,126 +298,6 @@ document.getElementById("saveDownloadBtn").addEventListener("click", function (e
         }
     });
 });
-
-
-// document.getElementById("saveDownloadBtn").addEventListener("click", function (e) {
-//   e.preventDefault();
-
-//   const pet_name = document.querySelector("input[name='pet_name']");
-//   const pet_sex = document.querySelector("select[name='sex']");
-//   const contact_person = document.querySelector("input[name='contact_person']");
-//   const contact_number = document.querySelector("input[name='contact_number']");
-
-//   const requiredFields = [
-//     { field: pet_name, name: "Pet Name" },
-//     { field: pet_sex, name: "Sex" },
-//     { field: contact_person, name: "Contact Person" },
-//     { field: contact_number, name: "Contact Number" }
-//   ];
-
-//   let missingFields = [];
-
-//   requiredFields.forEach(({ field, name }) => {
-//     if (!field.value || field.value.trim() === "") {
-//       field.classList.add("field-error");
-//       missingFields.push(name);
-//     } else {
-//       field.classList.remove("field-error");
-//     }
-//   });
-
-//   if (missingFields.length > 0) {
-//     Swal.fire({
-//       icon: 'warning',
-//       title: 'Oops! Missing Info',
-//       html: `
-//         <p style="font-weight: bold" class="swal2-custom-font">Please fill out the following required fields:</p>
-//         <p class="swal2-custom-font" style="text-align: center; margin: 10px 0;">
-//         ${missingFields.join(', ')}
-//         </p>
-//       `,
-//       confirmButtonText: 'Okay, got it!',
-//       customClass: {
-//         popup: 'swal2-custom-popup',
-//         title: 'swal2-custom-font',
-//         confirmButton: 'swal2-confirm-custom',
-//       }
-//     });
-//     return;
-//   }
-
-//   Swal.fire({
-//     title: 'Choose format',
-//     text: 'Which format do you want Petify to save the file as?',
-//     icon: 'question',
-//     showCancelButton: true,
-//     showDenyButton: true,
-//     confirmButtonText: 'Save as SVG',
-//     denyButtonText: 'Cancel',
-//     cancelButtonText: 'Cancel',
-//     customClass: {
-//       popup: 'swal2-custom-popup swal2-custom-font',
-//       confirmButton: 'swal2-confirm-custom',
-//       denyButton: 'swal2-confirm-custom',
-//       cancelButton: 'swal2-cancel-default'
-//     },
-//     backdrop: `
-//       rgba(0, 0, 0, 0.4)
-//       blur(5px)
-//     `
-//   }).then((result) => {
-//     if (result.isConfirmed) {
-//       const preview = document.getElementById('poster-image');
-//       domtoimage.toPng(preview, {
-//             filter: (node) => {
-//                 if (node.attributes) {
-//                 for (let i = 0; i < node.attributes.length; i++) {
-//                     if (node.attributes[i].name.startsWith('wire:')) {
-//                     return false;
-//                     }
-//                 }
-//                 }
-//                 return true;
-//             }
-//       })
-//         .then(function (dataUrl) {
-//           const link = document.createElement('a');
-//           link.download = 'poster.png';
-//           link.href = dataUrl;
-//           link.click();
-
-//           Swal.fire({
-//             title: 'Success!',
-//             text: 'Poster exported as SVG!',
-//             icon: 'success',
-//             confirmButtonText: 'Close',
-//             customClass: {
-//               popup: 'swal2-custom-popup swal2-custom-font',
-//               confirmButton: 'swal2-confirm-custom'
-//             }
-//           });
-//         })
-//         .catch(function (error) {
-//           console.error('SVG export failed:', error);
-//           Swal.fire({
-//             title: 'Export Failed',
-//             text: error.message || 'An error occurred while exporting SVG.',
-//             icon: 'error',
-//             confirmButtonText: 'Close',
-//             customClass: {
-//               popup: 'swal2-custom-popup swal2-custom-font',
-//               confirmButton: 'swal2-confirm-custom'
-//             }
-//           });
-//         });
-//     }
-//   });
-// });
-
-
-
-
-
 
 document.addEventListener('DOMContentLoaded', function () {
     const form = document.querySelector('#editorForm');
@@ -472,6 +403,7 @@ document.addEventListener('DOMContentLoaded', function () {
         component.set('contactPerson', document.querySelector('[name="contact_person"]').value);
         component.set('contactNumber', document.querySelector('[name="contact_number"]').value);
 
+        generateProjectThumbnail(projectId);
     }
 
 
