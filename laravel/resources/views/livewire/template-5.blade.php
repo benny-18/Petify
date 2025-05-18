@@ -6,26 +6,24 @@
      @if ($petImage)
     <img src="{{ asset('storage/' . $petImage) }}"
          style="
-         position: absolute;
-         top: 580px;
-         left: 170px;
+         overflow: scroll;
+         position: relative;
+         top: 550px;
+         left: 160px;
          width: 1270px;
-         /* height: 820px; */
+         height: 800px;
          object-fit: cover;
          z-index: 5;">
     @else
         <!-- Placeholder or default image if no image is available -->
         <img src="{{ asset('images/default-placeholder.jpg') }}"
             style="
-            position: absolute;
-            {{-- top: 996px;
-            left: 170px;
-            width: 685px;
-            height: 757px;  --}}
-            top: 540px;
-            left: 380px;
-            width: 825px;
-            height: 810px;
+            overflow: scroll;
+            position: relative;
+            top: 550px;
+            left: 160px;
+            width: 1270px;
+            height: 800px;
             object-fit: cover;
             z-index: 5;">
     @endif
@@ -33,12 +31,12 @@
     <!-- pet name -->
     <div style="
         position: absolute;
-        top: 1400px;
+        top: 1370px;
         left: 244px;
         width: 1096px;
         height: 142px;
         font-size: 120px;
-        color: #9f582b;
+        color: #222222;
         font-family: 'Chunk Five', sans-serif;
         font-weight: bold;
         text-align: center;
@@ -48,75 +46,20 @@
         z-index: 20;
     ">
         <!-- {{ $petName ?? 'Pet Name' }} -->
-        {{ Illuminate\Support\Str::limit( $petName ?? 'Pet name', 14) }}
+        • {{ Illuminate\Support\Str::limit( $petName ?? 'Pet name', 12) }} •
     </div>
-
-    <!-- Age -->
-    <!-- <div style="
-        position: absolute;
-        top: 1573px;
-        left: 242px;
-        width: 93px;
-        height: 48px;
-        font-size: 40px;
-        color: #9f582b;
-        font-family: 'Pridi', sans-serif;
-        text-align: center;
-        line-height: 48px;
-        overflow: hidden;
-        z-index: 20;
-    ">
-        {{ $petAge ?? 'Age' }}
-    </div> -->
-
-    <!-- Breed -->
-    <!-- <div style="
-        position: absolute;
-        top: 1570px;
-        left: 514px;
-        width: 550px;
-        height: 52px;
-        font-size: 40px;
-        color: #9f582b;
-        border: 1px solid #C50565;
-        font-family: 'Pridi', sans-serif;
-        text-align: center;
-        line-height: 52px;
-        overflow: hidden;
-        z-index: 20;
-    ">
-        {{ $petBreed ?? 'Breed' }}
-    </div> -->
-
-    <!-- Sex -->
-    <!-- <div style="
-        position: absolute;
-        top: 1570px;
-        left: 1202px;
-        width: 242px;
-        height: 50px;
-        font-size: 40px;
-        color: #9f582b;
-        font-family: 'Pridi', sans-serif;
-        text-align: center;
-        line-height: 50px;
-        overflow: hidden;
-        z-index: 20;
-    ">
-        {{ $petSex ?? 'Sex' }}
-    </div> -->
 
     <!-- pet description -->
     <div style="
         /* border: 1px solid #C50565; */
         position: absolute;
         padding: 10px;
-        top: 1560px;
+        top: 1530px;
         left: 143px;
         width: 1300px;
         height: 300px;
         font-size: 45px;
-        color: #9f582b;
+        color: #222222;
         font-family: 'Pridi', sans-serif;
         text-align: center;
         line-height: 1.5;
@@ -132,39 +75,20 @@
     <!-- contact person -->
     <div style="
         position: absolute;
-        top: 2022px;
+        top: 1990px;
         left: 140px;
-        width: 592px;
-        height: 84px;
-        font-size: 50px;
+        width: 1300px;
+        height: 100px;
+        font-size: 65px;
         font-weight: 700;
-        color: #9f582b;
+        color: #222222;
         font-family: 'Chunk Five', sans-serif;
-        text-align: left;
+        text-align: center;
         line-height: 55px;
         overflow: hidden;
         z-index: 20;
-        text-transform: uppercase;
+        /* text-transform: uppercase; */
     ">
-        {{ $contactPerson ?? 'Jane Doe' }}
-    </div>
-
-    <!-- contact number -->
-    <div style="
-        position: absolute;
-        top: 1968px;
-        left: 750px;
-        width: 697px;
-        height: 138px;
-        font-size: 90px;
-        color: #9f582b;
-        font-family: 'Chunk Five', sans-serif;
-        text-align: right;
-        line-height: 150px;
-        overflow: hidden;
-        z-index: 20;
-
-    ">
-        {{ $contactNumber ?? '+63 900 000 0000' }}
+        {{ Illuminate\Support\Str::limit( $contactPerson ?? 'Jane Doe', 15) }} • {{ Illuminate\Support\Str::limit( $contactNumber ?? '+63 900 000 0000', 11) }}
     </div>
 </div>

@@ -274,6 +274,19 @@
     });
   </script>
 
+  @if ($project->template_id == "template-4")
+  <script>
+      document.addEventListener("DOMContentLoaded", function () {
+          const posterImage = document.getElementById("poster-image");
+          if (posterImage) {
+              posterImage.style.height = "794px";
+              posterImage.style.transform = "scale(0.93)";
+          }
+      });
+  </script>
+  @endif
+
+
   <script>
     Livewire.on('reloadPage', function() {
         location.reload();

@@ -7,10 +7,9 @@
     <img crossorigin="anonymous" src="{{ asset('storage/' . $petImage) }}"
          style="
          position: absolute;
-         top: 210px;
-         left: 230px;
-         width: 1130px;
-         {{-- height: 1020px; --}}
+         top: 350px;
+         left: 400px;
+         width: 780px;
          object-fit: cover;
          z-index: 5;">
     @else
@@ -18,25 +17,21 @@
         <img crossorigin="anonymous" src="{{ asset('images/default-placeholder.jpg') }}"
             style="
             position: absolute;
-            {{-- top: 996px;
-            left: 170px;
-            width: 685px;
-            height: 757px;  --}}
-            top: 540px;
-            left: 380px;
-            width: 825px;
-            height: 810px;
+            top: 350px;
+            left: 400px;
+            width: 780px;
             object-fit: cover;
             z-index: 5;">
     @endif
 
     <!-- pet name -->
     <div style="
+        scale: 0.65;
         position: absolute;
-        top: 1630px;
-        left: 244px;
-        width: 1130px;
-        {{-- height: 142px; --}}
+        top: 370px;
+        left: 670px;
+        width: 980px;
+        /* height: 142px; */
         font-size: 150px;
         rotate: 358deg;
         color: #feb823;
@@ -51,7 +46,7 @@
                 0px -15px 0 #401b0f,
                 0px 15px 0 #401b0f;
         font-family: 'One Little Font', sans-serif;
-        font-weight: bold;
+        /* font-weight: bold; */
         text-align: center;
         /* text-transform: uppercase; */
         line-height: 1.5;
@@ -59,16 +54,15 @@
         z-index: 20;
     ">
         <!-- {{ $petName ?? 'Pet Name' }} -->
-        {{ Illuminate\Support\Str::limit( $petName ?? 'Pet name', 14) }}
+        {{ Illuminate\Support\Str::limit( $petName ?? 'Pet name', 12) }}
     </div>
 
     <!-- Age -->
     <!-- <div style="
         position: absolute;
-        top: 1573px;
-        left: 242px;
-        width: 93px;
-        height: 48px;
+        top: 350px;
+        left: 400px;
+        width: 780px;
         font-size: 40px;
         color: #9f582b;
         font-family: 'Pridi', sans-serif;
