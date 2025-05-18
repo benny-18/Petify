@@ -7,10 +7,10 @@
     <img src="{{ asset('storage/' . $petImage) }}"
          style="
          position: absolute;
-         top: 540px;
-         left: 390px;
-         /* width: 685px;  */
-         height: 820px;
+         top: 580px;
+         left: 170px;
+         width: 1270px;
+         /* height: 820px; */
          object-fit: cover;
          z-index: 5;">
     @else
