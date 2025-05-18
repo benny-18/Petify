@@ -61,6 +61,16 @@
                 <p class="template-name">Birthday Template</p>
             </div>
 
+            <div class="template-item" data-template-id="template-4">
+                <img src="{{ asset('images/templates/thumbs/template-4.webp') }}" alt="Template 4" class="template-image" />
+                <p class="template-name">Happy Birthday!</p>
+            </div>
+
+            <div class="template-item" data-template-id="template-5">
+                <img src="{{ asset('images/templates/thumbs/template-5.webp') }}" alt="Template 5" class="template-image" />
+                <p class="template-name">Missing You</p>
+            </div>
+
         </aside>
 
         <div class="content-area">

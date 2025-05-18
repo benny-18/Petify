@@ -49,6 +49,10 @@ class PosterEditor extends Component
             $templateView = 'livewire.template-2';
         } elseif ($this->templateId === 'template-3') {
             $templateView = 'livewire.template-3';
+        } elseif ($this->templateId === 'template-4') {
+            $templateView = 'livewire.template-4';
+        } elseif ($this->templateId === 'template-5') {
+            $templateView = 'livewire.template-5';
         }
 
         return view($templateView, [
