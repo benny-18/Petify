@@ -136,7 +136,7 @@
                     </div>
                 </div>
 
-                <button id="toggleZoomBtn" class="zoom-toggle-btn">Fit to Panel</button>
+                <button id="toggleZoomBtn" class="zoom-toggle-btn">Zoom Image</button>
 
             </section>
 
