@@ -136,7 +136,7 @@
                     </div>
                 </div>
 
-                <!-- <button id="toggleZoomBtn" class="zoom-toggle-btn">Fit to Panel</button> -->
+                <button id="toggleZoomBtn" class="zoom-toggle-btn">Fit to Panel</button>
 
             </section>
 
@@ -264,11 +264,9 @@
     });
   </script>
 
-  <!-- Add this script block to listen for the event -->
-<script>
+  <script>
     Livewire.on('reloadPage', function() {
-        // Reload the page after the pet image is uploaded and saved
-        location.reload();  // This reloads the whole page
-    });
-</script>
+        location.reload();
+        });
+  </script>
 </html>

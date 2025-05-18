@@ -1,5 +1,5 @@
 let sidebarOpen = true;
-let isZoomed = true;
+let isZoomed = false;
 
 const sidebar = document.querySelector('.sidebar');
 const contentArea = document.querySelector('.content-area');
@@ -7,26 +7,29 @@ const menuIcon = document.querySelector('.icon-menu');
 const closeIcon = document.querySelector('.icon-close');
 
 const previewSection = document.getElementById("previewSection");
+const posterImage = document.getElementById("poster-image");
 const toggleZoomBtn = document.getElementById("toggleZoomBtn");
 
 const projectId = document.body.dataset.projectId;
 
-// toggleZoomBtn.addEventListener("click", () => {
-//     if (isZoomed) {
-//       // Switch to Fit Mode
-//       previewSection.style.alignItems = "initial";
-//       previewSection.style.padding = "0px";
-//       toggleZoomBtn.textContent = "Zoom Image";
-//     } else {
-//       // Switch to Zoom Mode
-//       previewSection.style.alignItems = "start";
-//       previewSection.style.padding = "50px";
-//       toggleZoomBtn.textContent = "Fit to Panel";
-//     }
+toggleZoomBtn.addEventListener("click", () => {
+    if (isZoomed) {
+      // fit chuchu
+      //   previewSection.style.alignItems = "initial";
+      //   previewSection.style.padding = "0px";
+      posterImage.style.transform = "scale(0.656)";
+      toggleZoomBtn.textContent = "Zoom Image";
+    } else {
+      // zoom to fit
+      //   previewSection.style.alignItems = "start";
+      //   previewSection.style.padding = "50px";
+      posterImage.style.transform = "none";
+      toggleZoomBtn.textContent = "Fit to Panel";
+    }
 
-//     isZoomed = !isZoomed;
-//   }
-// )
+    isZoomed = !isZoomed;
+  }
+)
 
 function toggleSidebar() {
 
@@ -245,9 +248,30 @@ function generateProjectThumbnail(projectId) {
 }
 
 document.getElementById("back-to-dashboard-btn").addEventListener("click", function (e) {
-    // e.preventDefault();
+    e.preventDefault();
+
+    Swal.fire({
+        icon: 'info',
+        title: 'Saving project...',
+        html: 'Please wait while we save your project.',
+        allowOutsideClick: false,
+        allowEscapeKey: false,
+        showConfirmButton: false,
+        customClass: {
+            popup: 'swal2-custom-popup swal2-custom-font',
+            confirmButton: 'swal2-confirm-custom'
+        },
+        // didOpen: () => {
+        //     Swal.showLoading();
+        // }
+    });
+
     generateProjectThumbnail(projectId);
-})
+    setTimeout(() => {
+        window.location.href = '/dashboard';
+    }, 2000);
+});
+
 
 document.getElementById("saveDownloadBtn").addEventListener("click", function (e) {
     e.preventDefault();
@@ -350,6 +374,7 @@ document.addEventListener('DOMContentLoaded', function () {
             window.location.reload();
           })
           .catch(error => console.error(error));
+          generateProjectThumbnail(projectId);
         });
       });
 
@@ -379,6 +404,7 @@ document.addEventListener('DOMContentLoaded', function () {
             console.error("Autosave failed", error);
             showSaving(false);
         });
+        generateProjectThumbnail(projectId);
     }
 
     function showSavingIndicator() {
@@ -420,7 +446,7 @@ document.addEventListener('DOMContentLoaded', function () {
         setTimeout(() => {
             fadeIn(saveSuccess);
             updatePosterEditor();
-        }, 2000);
+        }, 150);
     }
 
     function fadeIn(el) {
