@@ -5,13 +5,14 @@
 <head>
     <meta charset="UTF-8">
     <title>Petify Terms and Conditions</title>
+    <link rel="stylesheet" href="{{ asset('css/terms.css') }}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body class="bg-light">
+<body class="bg">
 
 <div class="container py-5">
     <div class="card shadow-lg">
-        <div class="card-body">
+        <div class="cardbody">
             <h1 class="mb-4 text-center">Petify Terms and Conditions</h1>
 
             <p>Welcome to Petify! By creating an account or using our services, you agree to the following terms and conditions. Please read them carefully.</p>
@@ -40,6 +41,5 @@
             <p>Petify may update these terms occasionally. Users will be notified of significant changes, and continued use of the service after changes means you accept the revised terms.</p>
     </div>
 </div>
-
 </body>
 </html>
