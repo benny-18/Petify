@@ -172,14 +172,12 @@
               <div class="form-divider"></div>
 
                 <div class="form-row">
-                    <!-- Pet photo upload -->
+                    <!-- pet photo uploadd -->
                     <div class="button-container">
                         <input class="importimg-button" type="file" wire:model.live="petImage" name="pet_photo" accept="image/*"  onchange="handleImageUpload()">
                             <img src="{{ asset('images/icons/import-img.png') }}" class="icon-overlay">
-                            <!-- <input type="file" wire:model.live="petImage" name="pet_photo" accept="image/*"  onchange="handleImageUpload()" class="mb-4" /> -->
                         </input>
                     </div>
-                        <!-- <input wire:model.live="petImage" type="file" id="file-input" style="display:none;" accept="image/*" onchange="handleImageImport(event)" /> -->
 
                     <!-- pet name -->
                     <div class="input-field pet-name-field">
@@ -187,7 +185,7 @@
                     </div>
 
                     <!-- pet sex -->
-                    <div class="input-field pet-sex-field">
+                    <div class="input-field pet-sex-field" id="sexlist">
                         <select name="sex">
                             <option value="" disabled selected hidden>Sex</option>
                             <option value="Male" {{ $project->sex == 'Male' ? 'selected' : '' }}>Male</option>
@@ -198,7 +196,7 @@
                 </div>
 
                 <!-- pet age -->
-                <div class="form-row">
+                <div class="form-row" id="formfield-2">
                     <div class="input-field age-field">
                     <input type="number" name="age" value="{{ old('age', $project->age) }}" placeholder="Age" />
                     </div>
@@ -212,7 +210,7 @@
                 </div>
 
                 <!-- contact -->
-                <div class="form-row">
+                <div class="form-row" id="formfield-3">
                     <div class="input-field contact-person-field">
                     <input type="text" name="contact_person" value="{{ old('contact_person', $project->contact_person) }}" placeholder="Contact Person" />
                     </div>
@@ -221,7 +219,7 @@
                     </div>
                 </div>
 
-                <div class="input-field description-field">
+                <div class="input-field description-field" id="formfield-4">
                     <textarea wire:model.live="petDescription" name="pet_description" placeholder="Description">{{ old('pet_description', $project->pet_description) }}</textarea>
                 </div>
 
@@ -278,14 +276,37 @@
   <script>
       document.addEventListener("DOMContentLoaded", function () {
           const posterImage = document.getElementById("poster-image");
+          const formField = document.getElementById("editorForm");
+          const sexList = document.getElementById("sexlist");
+          const saveButton = document.getElementById("saveDownloadBtn");
+          const formFieldLine2 = document.getElementById("formfield-2");
+          const formFieldLine3 = document.getElementById("formfield-3");
+          const formFieldLine4 = document.getElementById("formfield-4");
           if (posterImage) {
               posterImage.style.height = "794px";
               posterImage.style.transform = "scale(0.93)";
-          }
+          };
+          if (formFieldLine2) {
+            formFieldLine2.style.display = "none";
+          };
+          if (formFieldLine3) {
+            formFieldLine3.style.display = "none";
+          };
+          if (formFieldLine4) {
+            formFieldLine4.style.display = "none";
+          };
+          if (formField) {
+            formField.style.justifyContent = "flex-start";
+          };
+          if (saveButton) {
+            saveDownloadBtn.style.marginTop = "auto";
+          };
+          if (sexList) {
+            sexList.style.display = "none";
+          };
       });
   </script>
   @endif
-
 
   <script>
     Livewire.on('reloadPage', function() {
