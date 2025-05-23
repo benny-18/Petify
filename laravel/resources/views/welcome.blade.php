@@ -10,14 +10,17 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Oleo+Script+Swash+Caps&family=Poppins&display=swap" rel="stylesheet">
+
     <!-- CSS assets -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/magnific-popup@1.1.0/dist/magnific-popup.css" rel="stylesheet">
     <link href="{{ asset('css/welcome.css') }}" rel="stylesheet">
+
 </head>
 <body>
+
     <section class="preloader">
         <div class="spinner">
             <span class="spinner-rotate"></span>
@@ -33,7 +36,6 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-lg-5">
                     <li class="nav-item"><a class="nav-link click-scroll" href="#section_1">Home</a></li>
-                    <li class="nav-item"><a class="nav-link click-scroll" href="#section_2">Gallery</a></li>
                     <li class="nav-item"><a class="nav-link click-scroll" href="#section_3">About</a></li>
                 </ul>
                 <!-- redirect to login -->
@@ -91,37 +93,6 @@
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="gallery section-padding" id="section_2">
-            <div class="container">
-                <div class="banner-wrapper mb-4">
-                    <img src="{{ asset('images/Banner.png') }}" class="banner-image" alt="Banner">
-                </div>
-                <div class="section-title-wrap text-center mb-4">
-                    <h2 class="gallery-heading mb-0">Template Gallery</h2>
-                </div>
-                <div class="row">
-                    @php
-                        $gallery = [
-                            ['tag' => 'Lost / Found Templates', 'title' => 'Find Your Babies!', 'img' => 'p1.png'],
-                            ['tag' => 'Birthday Templates', 'title' => 'Celebrate Online', 'img' => 'p2.png'],
-                            ['tag' => 'Pet ID Templates', 'title' => 'Introduce Your Babies', 'img' => 'p3.png'],
-                        ];
-                    @endphp
-                    @foreach ($gallery as $item)
-                        <div class="col-lg-4 col-md-6 col-12">
-                            <div class="gallery-thumb">
-                                <div class="gallery-info">
-                                    <small class="gallery-tag">{{ $item['tag'] }}</small>
-                                    <h3 class="gallery-title">{{ $item['title'] }}</h3>
-                                </div>
-                                <img src="{{ asset("images/gallery/{$item['img']}") }}" class="gallery-image img-fluid" alt="">
-                            </div>
-                        </div>
-                    @endforeach
                 </div>
             </div>
         </section>

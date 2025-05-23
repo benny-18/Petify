@@ -171,12 +171,11 @@
                         <h5 style="font-size: 40px" class="modal-title text-center">Profile</h5>
                     </div>
 
-                    <!-- Profile Update Form -->
                     <form method="POST" action="{{ route('profile.update') }}" enctype="multipart/form-data">
                         @csrf
                         <div class="modal-body">
                             <div class="row g-4">
-                                <!-- Profile Picture -->
+ 
                                 <div class="col-md-4 text-center mb-3 mb-md-0">
                                     <img src="{{ Auth::user()->profile_picture ? asset('storage/' . Auth::user()->profile_picture) : asset('images/pfp.jpg') }}"
                                         alt="Profile Picture"
@@ -186,7 +185,6 @@
                                     <p id="picError" style="color: red; font-size: 14px; display:none;">File is too large. Maximum size is 2MB.</p>
                                 </div>
 
-                                <!-- Right: Form -->
                                 <div class="col-md-8">
                                     <div class="row mb-3">
                                         <div class="col">
@@ -206,22 +204,18 @@
                                         <input type="email" name="email" class="form-control" value="{{ Auth::user()->email }}">
                                     </div>
 
-                                    <!-- Change Password Fields -->
                                     <h6 class="fw-bold">Change Password</h6>
 
-                                    <!-- Old password -->
                                     <div class="mb-3 position-relative">
                                         <input type="password" name="old_password" id="old_password" class="form-control pe-5" placeholder="Enter Old Password" minlength="8">
                                         <span id="password-status-icon" class="position-absolute top-50 end-0 translate-middle-y me-3">
                                         </span>
                                     </div>
 
-                                    <!-- New password -->
                                     <div class="mb-3">
                                         <input type="password" name="new_password" class="form-control pe-5" placeholder="Enter New Password" minlength="8">
                                     </div>
-
-                                    <!-- Re-enter password -->
+                                    
                                     <div class="mb-4 position-relative">
                                         <input type="password" name="new_password_confirmation" id="new_password_confirmation" class="form-control" placeholder="Re-enter Password" oninput="checkPasswordMatch()" minlength="8">
 
@@ -254,16 +248,13 @@
             </div>
         </div>
 
-        <!-- JS assets -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
         <script src="{{ asset('js/jquery.min.js') }}"></script>
         <script src="{{ asset('js/jquery.magnific-popup.min.js') }}"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-        <script src="{{ asset('js/custom.js') }}"></script>
+        <script src="{{ asset('js/dashboard.js') }}"></script>
         <script src="{{ asset('js/click-scroll.js') }}"></script>
 
-
-        <!-- save changes -->
         <script>
             @if (session('success'))
                 Swal.fire({
@@ -283,7 +274,6 @@
             @endif
         </script>
 
-        <!-- confirm delete -->
         <script>
             function confirmDelete(projectId) {
                 Swal.fire({
@@ -302,14 +292,6 @@
                 });
             }
 
-            // reload
-            window.addEventListener('pageshow', function (event) {
-                if (event.persisted) {
-                window.location.reload();
-                }
-            });
-
-            // PASSWORD CHECKING SECTION
             let typingTimer;
             const delay = 600;
             const input = document.getElementById('old_password');

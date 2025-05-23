@@ -1,59 +1,56 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProjectController;
 use App\Livewire\PosterEditor;
 
-//register and login in one ui
-Route::get('/', function () {return view('welcome'); });
-Route::get('/welcome', function () {return view('welcome'); });
-Route::get('/login', function () {return view('login'); });
-Route::get('/register', function () {return view('login'); });
+Route::get('/', function () {
+    return view('welcome');
+});
+Route::get('/welcome', function () {
+    return view('welcome');
+});
+Route::get('/login', function () {
+    return view('login');
+});
+Route::get('/register', function () {
+    return view('login');
+});
 
+Route::post('/login', [AuthController::class, 'login'])->name('login');
+Route::post('/register', [AuthController::class, 'register'])->name('register');
 Route::view('/terms-and-conditions', 'terms')->name('terms');
 
-Route::get('/editor', function () {return view('editor'); });
-
-Route::post('/login', [UserController::class, 'login'])->name('login');
-Route::post('/register', [UserController::class, 'register'])->name('register');
-
-//show dashboard after login
-Route::get('/dashboard', [UserController::class, 'dashboard'])
+Route::get('/dashboard', [DashboardController::class, 'dashboard'])
     ->middleware('auth')
     ->name('dashboard');
 
-//profile update
-Route::middleware('auth')->group(function () {
-    Route::post('/dashboard/profile', [UserController::class, 'update'])->name('profile.update');
-});
-
-//password checker
-Route::post('/check-password', [UserController::class, 'checkPassword'])->name('check.password');
-
-//create project route
-Route::post('/dashboard/project-create', [ProjectController::class, 'store'])
-    ->middleware('auth')
-    ->name('project.store');
-
-// rredirect to project
-Route::get('/editor/{id}', [ProjectController::class, 'edit'])->name('project.editor');
-
-// Delete project
-Route::delete('/dashboard/{project}', [ProjectController::class, 'destroy'])
-    ->name('project.destroy')
-    ->middleware('auth');
-
-// save project - update
-Route::put('/projects/{project}', [ProjectController::class, 'update'])->name('project.update');
-
-//logout route
-Route::post('/logout', function() {
+Route::post('/logout', function () {
     Auth::logout();
     return redirect('/login');
 })->name('logout');
 
-// livewrire chuchu
+Route::middleware('auth')->group(function () {
+    Route::post('/dashboard/profile', [UserController::class, 'update'])->name('profile.update');
+});
+
+Route::post('/check-password', [UserController::class, 'checkPassword'])->name('check.password');
+
+Route::post('/dashboard/project-create', [ProjectController::class, 'store'])
+    ->middleware('auth')
+    ->name('project.store');
+
+Route::delete('/dashboard/{project}', [ProjectController::class, 'destroy'])
+    ->name('project.destroy')
+    ->middleware('auth');
+
+Route::get('/editor/{id}', [ProjectController::class, 'edit'])->name('project.editor');
+
+Route::put('/projects/{project}', [ProjectController::class, 'update'])->name('project.update');
+
 Route::get('/editor', PosterEditor::class)->name('editor');
 Route::post('/projects/{project}/change-template', [ProjectController::class, 'changeTemplate']);
 Route::post('/projects/upload-thumbnail', [ProjectController::class, 'uploadThumbnail']);
