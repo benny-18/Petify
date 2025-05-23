@@ -29,7 +29,7 @@
 
 > git add .
 
-> git commit -m "Updated code for poyit-finding functionality; ako nalang kase"
+> git commit -m "Updated code for poyit-finding functionality"
 
 > git push -u origin main
 
@@ -40,3 +40,7 @@
 > LESGAURRRR
 
 > WOWOWOWOWOWOW guys mapasar <3
+
+> defense sched >> sat, may 24 @ 1pm
+
+> mapasar :>

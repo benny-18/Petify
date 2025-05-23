@@ -26,8 +26,10 @@
                 <h1 style="margin-top: 40px">Sign up</h1>
                 <div class="social-container"></div>
                 <span>Create a Petify account</span>
-                <input type="text" name="firstname" placeholder="First Name" required />
-                <input type="text" name="lastname" placeholder="Last Name" required />
+                <div class="names-form" style="display: flex; gap: 10px">
+                    <input type="text" name="firstname" placeholder="First Name" required />
+                    <input type="text" name="lastname" placeholder="Last Name" required />
+                </div>
                 <input type="email" name="email" placeholder="Email" required />
                 <div class="password-wrapper">
                     <input id="register-password" type="password" name="password" placeholder="Password" minlength="8" required />
@@ -48,7 +50,7 @@
             </form>
         </div>
 
-        {{-- Sign In Form --}}
+        {{-- sign in form --}}
         <div class="form-container sign-in-container">
             <form method="POST" action="{{ route('login') }}">
                 @csrf
@@ -71,19 +73,18 @@
                     </span>
                 </div>
 
-                <!-- <a href="#">Forgot your password?</a> -->
                 <button type="submit">Login</button>
 
-                    <!-- back to welcome from login -->
+                <!-- back to welcome from login -->
                 <div style="margin-top: 12px;" class="flex justify-end p-4">
-                    <a href="{{ url('/') }}" style="font-size: 12px;" class="text-white text-sm">
-                        ⾕ Back to Home
+                    <a href="{{ url('/') }}" style="font-size: 14px;" class="text-white text-sm">
+                        🏠︎ Back to Home
                     </a>
                 </div>
             </form>
         </div>
 
-        {{-- Overlay Panel --}}
+        {{-- overlay panel chuchu --}}
         <div class="overlay-container">
             <div class="overlay">
                 <div class="overlay-panel overlay-left">
@@ -117,49 +118,48 @@
     </script>
 
     <script>
-    // Terms and Conditions popup
-    document.getElementById('termsLabel').addEventListener('click', function (e) {
-        e.preventDefault();
-        Swal.fire({
-            title: 'Terms and Conditions',
-            html: 'By clicking ACCEPT, you agree to our <a href="{{ route('terms') }}" target="_blank" style="text-decoration: underline; color: #3085d6;">Terms and Conditions</a>.',
-            icon: 'info',
-            showCancelButton: true,
-            confirmButtonText: 'ACCEPT',
-            cancelButtonText: 'DECLINE'
-        }).then((result) => {
-            const checkbox = document.getElementById('termsCheckbox');
-            const checkmark = document.getElementById('termsCheckmark');
-            const termsText = document.getElementById('termsText');
-            if (result.isConfirmed) {
-                checkbox.checked = true;
-                checkmark.style.display = "inline";
-                termsText.style.color = "green";
-                termsText.style.textDecoration = "none";
-            } else {
-                checkbox.checked = false;
-                checkmark.style.display = "none";
-                termsText.style.color = "black";
-                termsText.style.textDecoration = "underline";
-            }
-            document.getElementById('termsCheckbox').checked = result.isConfirmed;
-        });
-    });
-
-    // Prevent registration if terms not accepted
-    document.getElementById('registrationForm').addEventListener('submit', function (e) {
-        const checkbox = document.getElementById('termsCheckbox');
-
-        // Prevent submission if the checkbox is not checked
-        if (!checkbox.checked) {
-            e.preventDefault();  // Prevent form submission
+        // terms and conditions popup
+        document.getElementById('termsLabel').addEventListener('click', function (e) {
+            e.preventDefault();
             Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: 'You must accept the Terms and Conditions to register.'
+                title: 'Terms and Conditions',
+                html: 'By clicking ACCEPT, you agree to our <a href="{{ route('terms') }}" target="_blank" style="text-decoration: underline; color: #3085d6;">Terms and Conditions</a>.',
+                icon: 'info',
+                showCancelButton: true,
+                confirmButtonText: 'ACCEPT',
+                cancelButtonText: 'DECLINE'
+            }).then((result) => {
+                const checkbox = document.getElementById('termsCheckbox');
+                const checkmark = document.getElementById('termsCheckmark');
+                const termsText = document.getElementById('termsText');
+                if (result.isConfirmed) {
+                    checkbox.checked = true;
+                    checkmark.style.display = "inline";
+                    termsText.style.color = "green";
+                    termsText.style.textDecoration = "none";
+                } else {
+                    checkbox.checked = false;
+                    checkmark.style.display = "none";
+                    termsText.style.color = "black";
+                    termsText.style.textDecoration = "underline";
+                }
+                document.getElementById('termsCheckbox').checked = result.isConfirmed;
             });
-        }
-    });
+        });
+
+        document.getElementById('registrationForm').addEventListener('submit', function (e) {
+            const checkbox = document.getElementById('termsCheckbox');
+
+            // bawal submission kun t&c isn't accepted
+            if (!checkbox.checked) {
+                e.preventDefault();
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'You must accept the Terms and Conditions to register.'
+                });
+            }
+        });
     </script>
 
     @if (session('registered'))
@@ -186,5 +186,6 @@
         });
     </script>
     @endif
+
 </body>
 </html>

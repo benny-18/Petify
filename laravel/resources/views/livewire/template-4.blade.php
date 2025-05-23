@@ -13,7 +13,7 @@
          object-fit: cover;
          z-index: 5;">
     @else
-        <!-- Placeholder or default image if no image is available -->
+        <!-- placeholder na pic if waray pa pet image -->
         <img crossorigin="anonymous" src="{{ asset('images/default-placeholder.jpg') }}"
             style="
             position: absolute;
@@ -34,7 +34,7 @@
         /* height: 142px; */
         font-size: 150px;
         rotate: 358deg;
-        color: #feb823;
+        color: #fef9ea;
         {{-- -webkit-text-stroke: 2px #401b0f; --}}
         text-shadow:
                 -15px -15px 0 #401b0f,
@@ -53,24 +53,6 @@
         overflow: hidden;
         z-index: 20;
     ">
-        <!-- {{ $petName ?? 'Pet Name' }} -->
         {{ Illuminate\Support\Str::limit( $petName ?? 'Pet name', 12) }}
     </div>
-
-    <!-- Age -->
-    <!-- <div style="
-        position: absolute;
-        top: 350px;
-        left: 400px;
-        width: 780px;
-        font-size: 40px;
-        color: #9f582b;
-        font-family: 'Pridi', sans-serif;
-        text-align: center;
-        line-height: 48px;
-        overflow: hidden;
-        z-index: 20;
-    ">
-        {{ $petAge ?? 'Age' }}
-    </div> -->
 </div>

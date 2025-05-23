@@ -3,30 +3,30 @@
     <img src="{{ asset('images/templates/template-2.png') }}" alt="Poster Template"
          style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 10; pointer-events: none; user-select: none;">
 
-     @if ($petImage)
-    <img src="{{ asset('storage/' . $petImage) }}"
-         style="
-         position: absolute;
-         top: 540px;
-         left: 390px;
-         /* width: 685px;  */
-         height: 820px;
-         object-fit: cover;
-         z-index: 5;">
-    @else
-        <!-- Placeholder or default image if no image is available -->
+        @if ($petImage)
+        <img src="{{ asset('storage/' . $petImage) }}"
+            style="
+            position: absolute;
+            top: 540px;
+            left: 390px;
+            /* width: 685px;  */
+            height: 820px;
+            object-fit: cover;
+            z-index: 5;">
+        @else
+        <!-- placeholder na pic if waray pa pet image -->
         <img src="{{ asset('images/default-placeholder.jpg') }}"
             style="
             position: absolute;
-            {{-- top: 996px; 
-            left: 170px; 
-            width: 685px; 
+            {{-- top: 996px;
+            left: 170px;
+            width: 685px;
             height: 757px;  --}}
             top: 540px;
             left: 380px;
             width: 825px;
             height: 810px;
-            object-fit: cover; 
+            object-fit: cover;
             z-index: 5;">
     @endif
 
@@ -47,64 +47,8 @@
         overflow: hidden;
         z-index: 20;
     ">
-        <!-- {{ $petName ?? 'Pet Name' }} -->
         {{ Illuminate\Support\Str::limit( $petName ?? 'Pet name', 14) }}
     </div>
-
-    <!-- Age -->
-    <!-- <div style="
-        position: absolute;
-        top: 1573px;
-        left: 242px;
-        width: 93px;
-        height: 48px;
-        font-size: 40px;
-        color: #9f582b;
-        font-family: 'Pridi', sans-serif;
-        text-align: center;
-        line-height: 48px;
-        overflow: hidden;
-        z-index: 20;
-    ">
-        {{ $petAge ?? 'Age' }}
-    </div> -->
-
-    <!-- Breed -->
-    <!-- <div style="
-        position: absolute;
-        top: 1570px;
-        left: 514px;
-        width: 550px;
-        height: 52px;
-        font-size: 40px;
-        color: #9f582b;
-        border: 1px solid #C50565;
-        font-family: 'Pridi', sans-serif;
-        text-align: center;
-        line-height: 52px;
-        overflow: hidden;
-        z-index: 20;
-    ">
-        {{ $petBreed ?? 'Breed' }}
-    </div> -->
-
-    <!-- Sex -->
-    <!-- <div style="
-        position: absolute;
-        top: 1570px;
-        left: 1202px;
-        width: 242px;
-        height: 50px;
-        font-size: 40px;
-        color: #9f582b;
-        font-family: 'Pridi', sans-serif;
-        text-align: center;
-        line-height: 50px;
-        overflow: hidden;
-        z-index: 20;
-    ">
-        {{ $petSex ?? 'Sex' }}
-    </div> -->
 
     <!-- pet description -->
     <div style="

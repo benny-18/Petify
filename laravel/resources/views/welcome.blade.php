@@ -6,12 +6,11 @@
     <meta name="description" content="">
     <title>Petify</title>
 
-    <!-- Google Fonts -->
+    <!-- google fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Oleo+Script+Swash+Caps&family=Poppins&display=swap" rel="stylesheet">
-
-    <!-- CSS Assets -->
+    <!-- CSS assets -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
@@ -19,7 +18,6 @@
     <link href="{{ asset('css/welcome.css') }}" rel="stylesheet">
 </head>
 <body>
-
     <section class="preloader">
         <div class="spinner">
             <span class="spinner-rotate"></span>
@@ -40,7 +38,6 @@
                 </ul>
                 <!-- redirect to login -->
                 <div class="d-flex align-items-center flex-wrap gap-2 ms-auto">
-                    <!-- <a href="{{ route('login')}}" class="text" hover="underline">Login or Sign Up</a> -->
                     <ul class="navbar-nav ms-lg-5">
                         <li class="nav-item"><a class="nav-link click-scroll" href="{{ route('login')}}">Login or Sign Up</a></li>
                     </ul>
@@ -71,7 +68,7 @@
 
                 <div style="position: relative" class="row align-items-center">
                     <div class="col-lg-6 hero-text-container">
-                        <h1 class="hero-heading">Generate posters with Petify</h1>
+                        <h1 style="gap: 20px;" class="hero-heading"><a style="font-size: 65px; font-family: 'Instagram Sans', sans-serif;">Easily generate pet posters with </a>Petify</h1>
                         <div class="hero-body-container">
                             <p class="hero-body">Use Petify to easily create beautiful, ready-to-print pet posters that help spread the word fast. Easily customize and download missing pet posters—no design skills needed.</p>
                             <hr class="hero-divider">
@@ -95,13 +92,6 @@
                         </div>
                     </div>
                 </div>
-
-                <!-- <div class="background">
-                    @for($i = 0; $i < 12; $i++)
-                        <span></span>
-                    @endfor
-                </div> -->
-
             </div>
         </section>
 
@@ -162,113 +152,61 @@
             style="overflow:hidden; background: linear-gradient(180deg,rgba(196, 25, 109, 1) 0%, rgba(56, 10, 35, 1) 85%, rgba(196, 25, 109, 1) 100%);">
             <div id="marquee-wrapper" class="container">
                 <h1 class="text-white text-center mb-5">What Our Users Say</h>
-                <div id="carousel" class=" marquee-track gap-4" style="margin-top: 50px; scrollbar-width: none; animation: scroll 24s linear infinite;">
+                <div id="carousel" class=" marquee-track gap-4" style="margin-top: 50px; scrollbar-width: none; animation: scroll 24s linear infinite; transition: all 0.6s cubic-bezier(0.68, -0.55, 0.27, 1.55);">
 
-                    @for ($i = 0; $i < 2; $i++)
-                    {{-- card 2--}}
-                    <div class="card flex-shrink-0" style="border: 2px solid #C50565; width: 28rem; border-radius: 30px">
-                        <div class="card-body">
-                            <div class="card-top">
-                                <img src="{{ asset('images/card/taylorshesh.webp') }}" class="rounded-circle img-fluid" style="border: 2px solid #C50565; width: 75px; height: 75px; margin-bottom: 4px; object-fit: cover;">
-                            </div>
-                            <p class="card-text mt-2">"I LOVE PETIFY!!! #THEbestbest!!"</p>
-                            <div class="card-profile">
-                                <!-- <hr class="card-divider"> -->
-                                <!-- <p class="card-title mb-0" style="font-size: 44px; font-family: 'Oleo Script Swash Caps', sans-serif; margin-top: 4px">"</p> -->
-                                <img src="{{ asset('images/icons/quotation_mark.png') }}" width=30px alt="Quotation mark">
-                                <p class="card-title mb-0">Joyce Pabo</p>
-                                <p class="card-title mb-0" style="font-size: 16px; margin-top: 4px">Pet owner</p>
+                    @php
+                        $testimonials = [
+                            [
+                                'quote' => '"I LOVE PETIFY!!! #THEbestbest!!"',
+                                'name' => 'Joyce Pabo',
+                                'role' => 'Pet owner',
+                            ],
+                            [
+                                'quote' => '"I am Tung Tung Sahur, and I love PETIFY!"',
+                                'name' => 'Mr. Tung Sahur',
+                                'role' => 'Comedian',
+                            ],
+                            [
+                                'quote' => '"Petify helped me create a poster of my dog in minutes! #SLAY"',
+                                'name' => 'Taylor Swift',
+                                'role' => 'Singer',
+                            ],
+                            [
+                                'quote' => '"Petify helped me find myself when I feel lost."',
+                                'name' => 'Koda',
+                                'role' => 'Dog',
+                            ],
+                            [
+                                'quote' => '"YOU TELL ME!! I love PETIFY for my posters!"',
+                                'name' => 'Yanna',
+                                'role' => 'Vlogger',
+                            ],
+                            [
+                                'quote' => '"Mi mi mi mi mi~ Mi love PETIFY! Solid! 10/10."',
+                                'name' => 'Ms. Ballerina Capuccina',
+                                'role' => 'Vlogger',
+                            ],
+                        ];
+                    @endphp
+
+                    @foreach ($testimonials as $testimonial)
+                        <div class="card flex-shrink-0" style="border: 2px solid #C50565; width: 28rem; border-radius: 30px">
+                            <div class="card-body">
+                                <div class="card-top">
+                                    <img src="{{ asset('images/card/taylorshesh.webp') }}"
+                                        class="rounded-circle img-fluid"
+                                        style="border: 2px solid #C50565; width: 75px; height: 75px; margin-bottom: 4px; object-fit: cover;">
+                                </div>
+                                <p class="card-text mt-2">{{ $testimonial['quote'] }}</p>
+                                <div class="card-profile">
+                                    <img src="{{ asset('images/icons/quotation_mark.png') }}" width="30px" alt="Quotation mark">
+                                    <p class="card-title mb-0">{{ $testimonial['name'] }}</p>
+                                    <p class="card-title mb-0" style="font-size: 16px; margin-top: 4px">{{ $testimonial['role'] }}</p>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    @endforeach
 
-                    {{-- card 3--}}
-                    <div class="card flex-shrink-0" style="border: 2px solid #C50565; width: 28rem; border-radius: 30px">
-                        <div class="card-body">
-                            <div class="card-top">
-                                <img src="{{ asset('images/card/taylorshesh.webp') }}" class="rounded-circle img-fluid" style="border: 2px solid #C50565; width: 75px; height: 75px; margin-bottom: 4px; object-fit: cover;">
-                            </div>
-                            <p class="card-text mt-2">"I am Tung Tung Sahur, and I love PETIFY!"</p>
-                            <div class="card-profile">
-                                <!-- <hr class="card-divider"> -->
-                                <!-- <p class="card-title mb-0" style="font-size: 44px; font-family: 'Oleo Script Swash Caps', sans-serif; margin-top: 4px">"</p> -->
-                                <img src="{{ asset('images/icons/quotation_mark.png') }}" width=30px alt="Quotation mark">
-                                <p class="card-title mb-0">Mr. Tung Sahur</p>
-                                <p class="card-title mb-0" style="font-size: 16px; margin-top: 4px">Comedian</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    {{-- card 1--}}
-                    <div class="card flex-shrink-0" style="border: 2px solid #C50565; width: 28rem; border-radius: 30px">
-                        <div class="card-body">
-                            <div class="card-top">
-                                <img src="{{ asset('images/card/taylorshesh.webp') }}" class="rounded-circle img-fluid" style="border: 2px solid #C50565; width: 75px; height: 75px; margin-bottom: 4px; object-fit: cover;">
-                            </div>
-                            <p class="card-text mt-2">"Petify helped me create a poster of my dog in minutes! #SLAY"</p>
-                            <!-- #SwiftieApproved #Slay!  -->
-                            <div class="card-profile">
-                                <!-- <hr class="card-divider"> -->
-                                <!-- <p class="card-title mb-0" style="font-size: 44px; font-family: 'Oleo Script Swash Caps', sans-serif; margin-top: 4px">"</p> -->
-                                <!-- <img src="https://img.icons8.com/?size=100&id=38970&format=png&color=C50565" width=30px alt="Quotation mark"> -->
-                                <img src="{{ asset('images/icons/quotation_mark.png') }}" width=30px alt="Quotation mark">
-                                <p class="card-title mb-0">Taylor Swift</p>
-                                <p class="card-title mb-0" style="font-size: 16px; margin-top: 4px">Singer</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    {{-- card 4--}}
-                    <div class="card flex-shrink-0" style="border: 2px solid #C50565; width: 28rem; border-radius: 30px">
-                        <div class="card-body">
-                            <div class="card-top">
-                                <img src="{{ asset('images/card/taylorshesh.webp') }}" class="rounded-circle img-fluid" style="border: 2px solid #C50565; width: 75px; height: 75px; margin-bottom: 4px; object-fit: cover;">
-                            </div>
-                            <p class="card-text mt-2">"Petify helped me find myself when I feel lost."</p>
-                            <div class="card-profile">
-                                <!-- <hr class="card-divider"> -->
-                                <!-- <p class="card-title mb-0" style="font-size: 44px; font-family: 'Oleo Script Swash Caps', sans-serif; margin-top: 4px">"</p> -->
-                                <img src="{{ asset('images/icons/quotation_mark.png') }}" width=30px alt="Quotation mark">
-                                <p class="card-title mb-0">Koda</p>
-                                <p class="card-title mb-0" style="font-size: 16px; margin-top: 4px">Dog</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    {{-- card 5--}}
-                    <div class="card flex-shrink-0" style="border: 2px solid #C50565; width: 28rem; border-radius: 30px">
-                        <div class="card-body">
-                            <div class="card-top">
-                                <img src="{{ asset('images/card/taylorshesh.webp') }}" class="rounded-circle img-fluid" style="border: 2px solid #C50565; width: 75px; height: 75px; margin-bottom: 4px; object-fit: cover;">
-                            </div>
-                            <p class="card-text mt-2">"YOU TELL ME!! I love PETIFY for my posters!"</p>
-                            <div class="card-profile">
-                                <!-- <hr class="card-divider"> -->
-                                <!-- <p class="card-title mb-0" style="font-size: 44px; font-family: 'Oleo Script Swash Caps', sans-serif; margin-top: 4px">"</p> -->
-                                <img src="{{ asset('images/icons/quotation_mark.png') }}" width=30px alt="Quotation mark">
-                                <p class="card-title mb-0">Yanna</p>
-                                <p class="card-title mb-0" style="font-size: 16px; margin-top: 4px">Vlogger</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    {{-- card 6--}}
-                    <div class="card flex-shrink-0" style="border: 2px solid #C50565; width: 28rem; border-radius: 30px">
-                        <div class="card-body">
-                            <div class="card-top">
-                                <img src="{{ asset('images/card/taylorshesh.webp') }}" class="rounded-circle img-fluid" style="border: 2px solid #C50565; width: 75px; height: 75px; margin-bottom: 4px; object-fit: cover;">
-                            </div>
-                            <p class="card-text mt-2">"Mi mi mi mi mi~ Mi love PETIFY! Solid! 10/10."</p>
-                            <div class="card-profile">
-                                <!-- <hr class="card-divider"> -->
-                                <!-- <p class="card-title mb-0" style="font-size: 44px; font-family: 'Oleo Script Swash Caps', sans-serif; margin-top: 4px">"</p> -->
-                                <img src="{{ asset('images/icons/quotation_mark.png') }}" width=30px alt="Quotation mark">
-                                <p class="card-title mb-0">Ms. Ballerina Capuccina</p>
-                                <p class="card-title mb-0" style="font-size: 16px; margin-top: 4px">Vlogger</p>
-                            </div>
-                        </div>
-                    </div>
-                    @endfor
                 </div>
             </div>
         </section>
@@ -317,7 +255,7 @@
     </div>
 </div>
 
-    <!-- JS Assets -->
+    <!-- JS assets -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="{{ asset('js/jquery.min.js') }}"></script>
     <script src="{{ asset('js/jquery.magnific-popup.min.js') }}"></script>

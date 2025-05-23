@@ -14,18 +14,13 @@
          object-fit: cover;
          z-index: 5;">
     @else
-        <!-- Placeholder or default image if no image is available -->
+        <!-- placeholder na pic if waray pa pet image -->
         <img crossorigin="anonymous" src="{{ asset('images/default-placeholder.jpg') }}"
             style="
             position: absolute;
-            {{-- top: 996px;
-            left: 170px;
-            width: 685px;
-            height: 757px;  --}}
-            top: 540px;
-            left: 380px;
-            width: 825px;
-            height: 810px;
+            top: 210px;
+            left: 230px;
+            width: 1140px;
             object-fit: cover;
             z-index: 5;">
     @endif
@@ -33,7 +28,7 @@
     <!-- pet name -->
     <div style="
         position: absolute;
-        top: 1630px;
+        top: 1610px;
         left: 244px;
         width: 1130px;
         {{-- height: 142px; --}}
@@ -58,25 +53,6 @@
         overflow: hidden;
         z-index: 20;
     ">
-        <!-- {{ $petName ?? 'Pet Name' }} -->
         {{ Illuminate\Support\Str::limit( $petName ?? 'Pet name', 14) }}
     </div>
-
-    <!-- Age -->
-    <!-- <div style="
-        position: absolute;
-        top: 1573px;
-        left: 242px;
-        width: 93px;
-        height: 48px;
-        font-size: 40px;
-        color: #9f582b;
-        font-family: 'Pridi', sans-serif;
-        text-align: center;
-        line-height: 48px;
-        overflow: hidden;
-        z-index: 20;
-    ">
-        {{ $petAge ?? 'Age' }}
-    </div> -->
 </div>

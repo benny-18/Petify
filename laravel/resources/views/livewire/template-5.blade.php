@@ -15,7 +15,7 @@
          object-fit: cover;
          z-index: 5;">
     @else
-        <!-- Placeholder or default image if no image is available -->
+        <!-- placeholder if waray pa image -->
         <img src="{{ asset('images/default-placeholder.jpg') }}"
             style="
             overflow: scroll;
@@ -45,7 +45,6 @@
         overflow: hidden;
         z-index: 20;
     ">
-        <!-- {{ $petName ?? 'Pet Name' }} -->
         • {{ Illuminate\Support\Str::limit( $petName ?? 'Pet name', 12) }} •
     </div>
 
@@ -69,7 +68,6 @@
     ">
         {{ $petSex ?? 'Sex' }} • {{ $petAge ?? 'Age' }} year(s) old • {{ $petBreed ?? 'Breed' }}<br>
         {{ Illuminate\Support\Str::limit( $petDescription ?? 'Pet description goes here.', 150) }}
-        <!-- {{ $petDescription ?? 'Pet description goes here.' }} -->
     </div>
 
     <!-- contact person -->

@@ -14,15 +14,9 @@ const projectId = document.body.dataset.projectId;
 
 toggleZoomBtn.addEventListener("click", () => {
     if (isZoomed) {
-      // fit chuchu
-      //   previewSection.style.alignItems = "initial";
-      //   previewSection.style.padding = "0px";
       posterImage.style.transform = "scale(0.656)";
       toggleZoomBtn.textContent = "Zoom Image";
     } else {
-      // zoom to fit
-      //   previewSection.style.alignItems = "start";
-      //   previewSection.style.padding = "50px";
       posterImage.style.transform = "none";
       toggleZoomBtn.textContent = "Fit to Panel";
     }
@@ -34,7 +28,6 @@ toggleZoomBtn.addEventListener("click", () => {
 function toggleSidebar() {
 
   sidebarOpen = !sidebarOpen;
-
   const sidebar = document.querySelector('.sidebar');
   sidebar.classList.toggle('hidden');
 
@@ -51,36 +44,6 @@ function toggleSidebar() {
   }
 
 }
-
-function inlineImages(node) {
-    const imgs = node.querySelectorAll('img');
-    const promises = [];
-
-    imgs.forEach((img) => {
-        const src = img.src;
-        if (src.startsWith('data:')) return;
-
-        const promise = fetch(src, { mode: 'cors' })
-            .then((res) => res.blob())
-            .then((blob) => new Promise((resolve) => {
-                const reader = new FileReader();
-                reader.onloadend = () => {
-                    img.src = reader.result;
-                    resolve();
-                };
-                reader.readAsDataURL(blob);
-            }))
-            .catch((err) => {
-                console.warn(`Image could not be inlined: ${src}`, err);
-            });
-
-        promises.push(promise);
-    });
-
-    return Promise.all(promises);
-}
-
-
 
 function validateRequiredFields() {
     const pet_name = document.querySelector("input[name='pet_name']");
@@ -113,44 +76,10 @@ function cleanFilename() {
   const titleInput = document.querySelector("input[name='title']");
   let filename = titleInput?.value?.trim() || "poster";
 
-  // Remove illegal filename characters and limit length
+  // clean illegal filenames characters symbols tas length limit
   filename = filename.replace(/[\\/:*?"<>|]/g, "").substring(0, 50);
 
   return filename;
-}
-
-function exportAsSVG(previewElement) {
-    domtoimage.toSvg(previewElement)
-        .then(dataUrl => {
-            const link = document.createElement('a');
-            const filename = cleanFilename();
-            link.download = `${filename}.png`;
-            link.href = dataUrl;
-            link.click();
-
-            Swal.fire({
-                icon: 'success',
-                title: 'Poster exported as SVG!',
-                confirmButtonText: 'Close',
-                customClass: {
-                    popup: 'swal2-custom-popup swal2-custom-font',
-                    confirmButton: 'swal2-confirm-custom'
-                }
-            });
-        })
-        .catch(error => {
-            console.error('SVG export failed:', error);
-            Swal.fire({
-                icon: 'error',
-                title: 'Export Failed',
-                text: error.message || 'An error occurred while exporting SVG.',
-                confirmButtonText: 'Close',
-                customClass: {
-                    popup: 'swal2-custom-popup swal2-custom-font',
-                    confirmButton: 'swal2-confirm-custom'
-                }
-            });
-        });
 }
 
 function exportAsPNG(previewElement) {
@@ -172,9 +101,6 @@ function exportAsPNG(previewElement) {
                 }
             });
         })
-        .catch(error => {
-            console.error('PNG export failed:', error);
-        });
 }
 
 function exportAsPDF(previewElement) {
@@ -198,9 +124,7 @@ function exportAsPDF(previewElement) {
                 confirmButton: 'swal2-confirm-custom'
             }
         });
-    }).catch(error => {
-        console.error("PDF export failed:", error);
-    });
+    })
 }
 
 function generateProjectThumbnail(projectId) {
@@ -230,21 +154,12 @@ function generateProjectThumbnail(projectId) {
                         },
                         body: formData
                     })
-                        .then(res => res.json())
-                        .then(res => {
-                            console.log('Thumbnail saved:', res.path);
-                        })
-                        .catch(err => {
-                            console.error('Thumbnail upload failed:', err);
-                        });
+                        .then(res => res.json());
                 }, 'image/png');
             };
 
             img.src = originalDataUrl;
         })
-        .catch(error => {
-            console.error('Thumbnail generation failed:', error);
-        });
 }
 
 document.getElementById("back-to-dashboard-btn").addEventListener("click", function (e) {
@@ -330,14 +245,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     let autosaveTimer;
 
-    // setTimeout(function () {
-    //   const loader = document.getElementById('loader');
-    //   loader.classList.add('fade-out');
-    //   setTimeout(() => {
-    //     loader.style.display = 'none';
-    //   }, 500);
-    // }, 1000);
-
     document.querySelectorAll('#editorForm input, #editorForm select, #editorForm textarea').forEach(field => {
         field.addEventListener('input', () => {
             clearTimeout(autosaveTimer);
@@ -367,14 +274,11 @@ document.addEventListener('DOMContentLoaded', function () {
             body: JSON.stringify({ template_id: templateId })
           })
           .then(response => {
-            if (!response.ok) throw new Error('Failed to update template.');
             return response.json();
           })
           .then(data => {
             window.location.reload();
           })
-          .catch(error => console.error(error));
-          generateProjectThumbnail(projectId);
         });
       });
 
@@ -394,16 +298,9 @@ document.addEventListener('DOMContentLoaded', function () {
             if (response.ok) {
                 showSaved();
             } else {
-                return response.json().then(err => {
-                    console.error("Autosave failed", err);
-                    showSaving(false);
-                });
+                showSaving(false);
             }
         })
-        .catch(error => {
-            console.error("Autosave failed", error);
-            showSaving(false);
-        });
         generateProjectThumbnail(projectId);
     }
 
@@ -470,7 +367,7 @@ function handleImageImport(event) {
 function handleImageUpload() {
   setTimeout(() => {
       location.reload();
-  }, 1500);
+  }, 1000);
   showSaved();
 }
 

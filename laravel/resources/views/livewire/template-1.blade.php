@@ -7,7 +7,7 @@
     <img src="{{ asset('storage/' . $petImage) }}"
          style="position: absolute; top: 996px; left: 170px; width: 685px; height: 757px; object-fit: cover; z-index: 5;">
     @else
-        <!-- Placeholder or default image if no image is available -->
+        <!-- placeholder na pic if waray pa pet image -->
         <img src="{{ asset('images/default-placeholder.jpg') }}"
             style="position: absolute; top: 996px; left: 170px; width: 685px; height: 757px; object-fit: cover; z-index: 5;">
     @endif
@@ -65,7 +65,6 @@
     ">
         {{ $petAge ?? 'Age' }}
     </div>
-
 
     <!-- sex -->
     <div style="
@@ -143,28 +142,6 @@
         {{ Illuminate\Support\Str::limit( $petDescription ?? 'Pet description goes here.', 155) }}
     </div>
 
-    <!-- reward -->
-    <!-- <div style="
-        border: 1px solid #C50565;
-        background: #086c87;
-        border-radius: 20px;
-        font-family: 'Pridi', sans-serif;
-        font-weight: 400;
-        position: absolute;
-        top: 1575px;
-        left: 903px;
-        width: 517px;
-        height: 180px;
-        font-size: 64px;
-        font-weight: 600;
-        color: white;
-        text-align: center;
-        z-index: 20;
-        overflow: hidden;
-    ">
-        {{ $reward ?? '₱0.00' }}
-    </div> -->
-
     <!-- contact person -->
     <div style="
         position: absolute;
@@ -183,7 +160,6 @@
     ">
         {{ $contactPerson ?? 'Jane Doe' }}
     </div>
-
 
     <!-- contact number -->
     <div style="
