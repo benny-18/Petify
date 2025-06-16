@@ -24,7 +24,7 @@
 1. **Clone the repository**
     
     ```bash
-    git clone https://github.com/yourusername/petify.git
+    git clone https://github.com/benny-18/Petify.git
     cd petify
     
     ```
