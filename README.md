@@ -91,16 +91,10 @@
 ## 🛠️ Technology Stack
 
 - **Backend**: Laravel 10, Livewire
-- **Frontend**: Blade, Tailwind CSS (minimal), Vanilla JavaScript
-- **Image Export**: dom-to-image-more, jsPDF, SweetAlert2
+- **Frontend**: Blade, Vanilla JavaScript, SweetAlert2
+- **Image Export**: dom-to-image-more, jsPDF
 - **Containerization**: Docker, docker-compose
 - **Database**: MySQL (via Docker)
-
----
-
-## 📄 License
-
-MIT © [Your Name]
 
 ---
 
