@@ -1,6 +1,6 @@
 # Petify - Lost & Found Pet Poster Creator
 
-**Petify** is a Laravel web application that allows users to create, edit, and export professional lost & found pet posters using a variety of templates. It features a live preview powered by Livewire, automatic thumbnail generation, and export to SVG, PNG, or PDF.
+**Petify** is a Laravel web application that allows users to create, edit, and export professional lost & found pet posters using a variety of templates. It features a live preview powered by Livewire, automatic thumbnail generation, and export to PNG or PDF.
 
 ---
 
